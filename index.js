@@ -5,12 +5,10 @@ const axios = require("axios");
 const app = express();
 app.use(express.json());
 
-// test route
 app.get("/", (req, res) => {
   res.send("Server dela");
 });
 
-// webhook route
 app.post("/webhook", async (req, res) => {
   try {
     const data = req.body;
@@ -25,7 +23,7 @@ app.post("/webhook", async (req, res) => {
         messages: [
           {
             role: "user",
-            content: `Naredi personaliziran meal plan na podlagi teh podatkov: ${JSON.stringify(data)}`
+            content: `Naredi meal plan: ${JSON.stringify(data)}`
           }
         ]
       },
