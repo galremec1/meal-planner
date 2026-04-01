@@ -18,7 +18,7 @@ app.post("/webhook", async (req, res) => {
     const response = await axios.post(
       "https://api.anthropic.com/v1/messages",
       {
-        model: "claude-3-haiku",
+        model: "model: "claude-3-5-haiku-latest",
         max_tokens: 1000,
         messages: [
           {
