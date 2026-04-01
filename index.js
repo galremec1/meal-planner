@@ -5,10 +5,12 @@ const axios = require("axios");
 const app = express();
 app.use(express.json());
 
+// test route
 app.get("/", (req, res) => {
   res.send("Server dela");
 });
 
+// webhook route
 app.post("/webhook", async (req, res) => {
   try {
     const data = req.body;
@@ -18,7 +20,7 @@ app.post("/webhook", async (req, res) => {
     const response = await axios.post(
       "https://api.anthropic.com/v1/messages",
       {
-        model: "model: "claude-3-5-haiku-latest",
+        model: "claude-3-5-haiku-latest",
         max_tokens: 1000,
         messages: [
           {
@@ -43,7 +45,7 @@ app.post("/webhook", async (req, res) => {
     res.send("OK");
 
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error("ERROR:", err.response?.data || err.message);
     res.status(500).send("error");
   }
 });
