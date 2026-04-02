@@ -262,7 +262,8 @@ PRAVILA:
 - Kardio dnevi = workout z 2-3 kardio napravami (naprava, cas, kcal, intenzivnost)
 - Hoja na tekoci stezi: naklon VEDNO min 10%, nikoli manj
 - Pocitek med serijami: 3-5 minut za VSE vaje
-- Prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi)
+- OPREMA - STROGO PRAVILO: Sestavi program IZKLJUCNO iz opreme ki jo je stranka eksplicitno navedla. Ne predpostavljaj NICESAR kar ni omenjeno. Ce stranka napise samo "dumbbell" ali "utezi" ali "utez" - program vsebuje SAMO vaje z dumbbelli/utezmi. Brez pull-up bara, brez kablov, brez naprav, brez klopi, brez vrat - razen ce je eksplicitno napisano. Dvomis? Izpusti vajo.
+- Prilagodi lokaciji (doma=brez naprav razen kar je navedeno, fitnes=naprave+utezi)
 - NE vkljuci: ${userData.exDislikes}
 - Prilagodi poskodbe: ${userData.injuries}
 - Za kardio dneve v schedule napisi "Kardio"
