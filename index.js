@@ -41,7 +41,7 @@ async function downloadFonts() {
   }
 }
 
-// ── Food Database (kcal in beljakovine na 100g) ───────────────────────────────
+// ── Food Database ─────────────────────────────────────────────────────────────
 const FOOD_DB = `
 MESO IN PERUTNINA (na 100g surovo):
 Piščančja prsa: 110kcal, 23g B | Piščančja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Svinjski zrezek: 145kcal, 21g B | Teletina: 110kcal, 20g B | Jagnjetina pusto: 200kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B | Raca prsa brez kože: 130kcal, 20g B
@@ -318,19 +318,19 @@ function generatePDF(userData, plan) {
     doc.fontSize(52).fillColor(WHITE).font(BD)
        .text("PLAN", M, y, { align: "center", width: CW });
 
-    y += 50;
+    y += 70;
     const displayName = userData.name !== "ni podatka" ? userData.name.toUpperCase() : "";
     if (displayName) {
       doc.fontSize(16).fillColor(RED).font(BD)
          .text(displayName, M, y, { align: "center", width: CW, characterSpacing: 2 });
-      y += 28;
+      y += 32;
     }
 
     const planType = `${plan.summary.plan_type} · ${plan.summary.meals_per_day}x OBROK`;
     doc.fontSize(11).fillColor(GRAY).font(RB)
        .text(planType, M, y, { align: "center", width: CW, characterSpacing: 2 });
 
-    y += 25;
+    y += 30;
     doc.rect(M, y, CW, 2).fill(RED);
 
     y += 18;
