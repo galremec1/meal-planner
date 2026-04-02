@@ -110,13 +110,24 @@ INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Raz
 NACELA: 1-2 seriji do odpovedi zadoscata. 6-10 reps vecje vaje, 10-15 izolacijske. Tehnika > teza.
 SPLITI: 3x=PPL, 4x=UPPER/LOWER, 5x=UPPER/LOWER/ARMS+SHOULDERS.`;
 
+// Normalizira sumniki: ce -> c, se -> s, ze -> z itd.
+function norm(str) {
+  return (str || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 function parseCombinedTallyData(body) {
   const fields = body?.data?.fields ?? [];
-  const get = (label) =>
-    fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
+
+  const get = (label) => {
+    const f = fields.find((f) => norm(f.label || "").includes(norm(label)));
+    return f?.value ?? "ni podatka";
+  };
 
   const getChoice = (label) => {
-    const field = fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()));
+    const field = fields.find((f) => norm(f.label || "").includes(norm(label)));
     if (!field) return "ni podatka";
     const options = field.options ?? [];
     const selected = Array.isArray(field.value) ? field.value : [field.value];
@@ -124,25 +135,28 @@ function parseCombinedTallyData(body) {
     return matched.length > 0 ? matched.join(", ") : "ni podatka";
   };
 
-  return {
+  const data = {
     name:          get("ime in priimek") || get("ime"),
     age:           get("starost"),
-    weight:        get("teza") || get("tea"),
-    height:        get("visina") || get("ina"),
+    weight:        get("teza"),
+    height:        get("visina"),
     goal:          get("cilj"),
     activity:      getChoice("korakov") || get("korakov") || get("aktivnost"),
     likes:         get("kaj rad") || get("jedilnik na podlagi"),
-    dislikes:      get("hrane ne") || get("ne maras"),
+    dislikes:      get("hrane ne maras") || get("ne maras"),
     meals:         get("koliko obrokov"),
     allergies:     get("alergije") || get("jedilnika"),
-    location:      get("kje ") || get("trenirati (doma"),
-    equipment:     get("od doma napi") || get("opremo ima"),
-    exDislikes:    get("katerih vaj") || get("vaj ne"),
-    exLikes:       get("vaje ima") || get("vaje rad"),
+    location:      get("kje zelis trenirati") || get("kje"),
+    equipment:     get("od doma napisi") || get("opremo imas"),
+    exDislikes:    get("katerih vaj ne maras") || get("vaj ne"),
+    exLikes:       get("vaje imas rad") || get("vaje rad"),
     frequency:     get("kolikokrat"),
-    injuries:      get("zdravjem") || get("po"),
+    injuries:      get("poskodbe") || get("zdravjem"),
     trainingNotes: get("sestave treninga"),
   };
+
+  console.log("Parsed:", JSON.stringify(data));
+  return data;
 }
 
 async function generateMealPlan(userData) {
@@ -155,7 +169,7 @@ async function generateMealPlan(userData) {
   const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
 
   let activityMultiplier = 1.375;
-  const act = userData.activity.toLowerCase();
+  const act = norm(userData.activity);
   if (act.includes("0-3k") || act.includes("malo")) activityMultiplier = 1.2;
   else if (act.includes("3-5k")) activityMultiplier = 1.375;
   else if (act.includes("5-7k") || act.includes("srednje")) activityMultiplier = 1.375;
@@ -165,7 +179,7 @@ async function generateMealPlan(userData) {
 
   const tdee = Math.round(bmr * activityMultiplier);
 
-  const goalLower = userData.goal.toLowerCase();
+  const goalLower = norm(userData.goal);
   let targetCalories, planType;
   if (goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub")) {
     targetCalories = tdee - 500; planType = "CUT";
@@ -236,7 +250,7 @@ JSON struktura:
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
 
-PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav, fitnes=naprave+uteži), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
+PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
 
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
     model: MODEL, max_tokens: 4096,
@@ -471,7 +485,7 @@ async function sendCombinedEmail(userData, mealPDF, trainingPDF) {
     from: "Plan Generator <onboarding@resend.dev>",
     to: NOTIFY_EMAIL,
     subject: name + " - jedilnik + trening program",
-    html: "<div style='font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;'><h2 style='color:#CC1F1F;'>GAL REMEC COACHING</h2><p>Jedilnik in trening program za <strong>" + name + "</strong> sta pripravljena. Oba PDFja sta v priponki.</p><table style='margin-top:16px;'><tr><td style='color:#888;padding:4px 12px 4px 0'>Ime:</td><td>" + name + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Cilj:</td><td>" + userData.goal + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Teza:</td><td>" + userData.weight + " kg</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Treningi:</td><td>" + userData.frequency + "x na teden | " + userData.location + "</td></tr></table></div>",
+    html: "<div style='font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;'><h2 style='color:#CC1F1F;'>GAL REMEC COACHING</h2><p>Jedilnik in trening program za <strong>" + name + "</strong> sta pripravljena.</p><table style='margin-top:16px;'><tr><td style='color:#888;padding:4px 12px 4px 0'>Ime:</td><td>" + name + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Cilj:</td><td>" + userData.goal + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Teza:</td><td>" + userData.weight + " kg</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Lokacija:</td><td>" + userData.location + "</td></tr></table></div>",
     attachments: [
       { filename: "jedilnik-" + name.replace(/ /g, "-") + ".pdf", content: mealPDF.toString("base64") },
       { filename: "trening-" + name.replace(/ /g, "-") + ".pdf", content: trainingPDF.toString("base64") },
@@ -487,7 +501,6 @@ app.post("/webhook-combined", async (req, res) => {
   console.log("Webhook combined received");
   res.status(200).json({ received: true });
   const userData = parseCombinedTallyData(req.body);
-  console.log("User:", userData.name, "| Cilj:", userData.goal, "| Lokacija:", userData.location, "| Frequency:", userData.frequency);
   try {
     console.log("Generating meal plan...");
     const mealPlan = await generateMealPlan(userData);
