@@ -250,7 +250,8 @@ JSON struktura:
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
 
-PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
+POZOR: Ce stranka v opombah specificira tocno strukturo treninga (npr. "2x noge, 3x kardio", "samo kardio", "samo noge"), IGNORIRAJ standardni split in naredi TOCNO to kar stranka zahteva v opombah.
+PRAVILA: 4-6 vaj/dan (samo za trening dneve, ne za kardio dneve), prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. Za kardio dneve v schedule napisi samo "Kardio". SAMO JSON.`;
 
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
     model: MODEL, max_tokens: 4096,
