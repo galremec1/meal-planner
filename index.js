@@ -14,7 +14,7 @@ const MODEL = "claude-sonnet-4-6";
 const PORT = process.env.PORT || 3000;
 
 if (!ANTHROPIC_API_KEY) {
-  console.error("❌ ANTHROPIC_API_KEY is not set.");
+  console.error("ANTHROPIC_API_KEY is not set.");
   process.exit(1);
 }
 
@@ -34,7 +34,7 @@ async function downloadFonts() {
     if (!fs.existsSync(FONTS[key])) {
       const res = await axios.get(url, { responseType: "arraybuffer" });
       fs.writeFileSync(FONTS[key], Buffer.from(res.data));
-      console.log(`✅ Font saved: ${key}`);
+      console.log("Font saved: " + key);
     }
   }
 }
@@ -73,7 +73,7 @@ SADJE (na 100g):
 Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Avokado: 160kcal, 2g B | Pomaranca: 47kcal, 0.9g B | Kivi: 61kcal, 1.1g B
 
 ZITA (na 100g suho):
-Beli riz: 360kcal, 7g B | Basmati riz: 345kcal, 8.5g B | Ovseni kosmicci: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kasa: 343kcal, 13g B
+Beli riz: 360kcal, 7g B | Basmati riz: 345kcal, 8.5g B | Ovseni kosmici: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kasa: 343kcal, 13g B
 
 KRUH (na 100g):
 Polnozrnati kruh: 250kcal, 9.7g B | Toast polnozrnat: 260kcal, 9g B | Toast beli: 285kcal, 8.3g B | Tortilja psenicna: 310kcal, 8g B
@@ -127,20 +127,20 @@ function parseCombinedTallyData(body) {
   return {
     name:          get("ime in priimek") || get("ime"),
     age:           get("starost"),
-    weight:        get("teza") || get("teža"),
-    height:        get("visina") || get("višina"),
+    weight:        get("teza") || get("tea"),
+    height:        get("visina") || get("ina"),
     goal:          get("cilj"),
     activity:      getChoice("korakov") || get("korakov") || get("aktivnost"),
     likes:         get("kaj rad") || get("jedilnik na podlagi"),
-    dislikes:      get("hrane ne maras") || get("katere hrane"),
+    dislikes:      get("hrane ne") || get("ne maras"),
     meals:         get("koliko obrokov"),
-    allergies:     get("alergije") || get("preference glede jedilnika") || get("dodaj se karkoli drugega kar zelis dodat glede"),
-    location:      get("kje zelis trenirati") || get("kje"),
-    equipment:     get("opremo imas") || get("oprema"),
-    exDislikes:    get("katerih vaj ne maras") || get("vaj ne maras"),
-    exLikes:       get("katere vaje imas rad") || get("vaje imas rad"),
-    frequency:     get("kolikokrat") || get("dni"),
-    injuries:      get("poskodbe") || get("zdravje"),
+    allergies:     get("alergije") || get("jedilnika"),
+    location:      get("kje ") || get("trenirati (doma"),
+    equipment:     get("od doma napi") || get("opremo ima"),
+    exDislikes:    get("katerih vaj") || get("vaj ne"),
+    exLikes:       get("vaje ima") || get("vaje rad"),
+    frequency:     get("kolikokrat"),
+    injuries:      get("zdravjem") || get("po"),
     trainingNotes: get("sestave treninga"),
   };
 }
@@ -232,11 +232,11 @@ JSON struktura:
 {
   "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
   "intro": "8-12 povedi, knjizna slovenscina, sumniki, brez emojijev. Zacni z 'Ta trening program je pripravljen glede na...'",
-  "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Poccitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Cetrtek", "workout": "Poccitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Poccitek" }, { "day": "Nedelja", "workout": "Poccitek" }],
+  "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Pocitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Cetrtek", "workout": "Pocitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Pocitek" }, { "day": "Nedelja", "workout": "Pocitek" }],
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
 
-PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
+PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav, fitnes=naprave+uteži), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
 
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
     model: MODEL, max_tokens: 4096,
@@ -281,7 +281,7 @@ function generateMealPDF(userData, plan) {
       y += 32;
     }
 
-    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.plan_type} - ${plan.summary.meals_per_day}x OBROK`, M, y, { align: "center", width: CW, characterSpacing: 2 });
+    doc.fontSize(11).fillColor(GRAY).font(RB).text(plan.summary.plan_type + " - " + plan.summary.meals_per_day + "x OBROK", M, y, { align: "center", width: CW, characterSpacing: 2 });
     y += 30;
     doc.rect(M, y, CW, 2).fill(RED);
     y += 18;
@@ -293,7 +293,7 @@ function generateMealPDF(userData, plan) {
 
     const box2X = M + boxW + 15;
     doc.rect(box2X, y, boxW, 75).fill(DARK_CARD);
-    doc.fontSize(34).fillColor(WHITE).font(BD).text(`${plan.summary.protein_per_day} g`, box2X, y + 10, { width: boxW, align: "center" });
+    doc.fontSize(34).fillColor(WHITE).font(BD).text(plan.summary.protein_per_day + " g", box2X, y + 10, { width: boxW, align: "center" });
     doc.fontSize(9).fillColor(GRAY).font(RB).text("BELJAKOVIN NA DAN", box2X, y + 52, { width: boxW, align: "center", characterSpacing: 1 });
 
     y += 93;
@@ -311,7 +311,7 @@ function generateMealPDF(userData, plan) {
 
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
-    doc.fontSize(10).fillColor(WHITE).font(BD).text(`${plan.days.length} DNI  -  ${plan.days.length * plan.summary.meals_per_day} OBROKOV  -  POPOLN JEDILNIK`, M, y, { align: "center", width: CW, characterSpacing: 1 });
+    doc.fontSize(10).fillColor(WHITE).font(BD).text(plan.days.length + " DNI  -  " + (plan.days.length * plan.summary.meals_per_day) + " OBROKOV  -  POPOLN JEDILNIK", M, y, { align: "center", width: CW, characterSpacing: 1 });
     doc.rect(0, H - 6, W, 6).fill(RED);
 
     plan.days.forEach((day) => {
@@ -321,8 +321,8 @@ function generateMealPDF(userData, plan) {
 
       let dy = 25;
       doc.rect(M, dy, CW, 42).fill(RED);
-      doc.fontSize(13).fillColor(WHITE).font(BD).text(`DAN ${day.day}`, M + 12, dy + 8);
-      doc.fontSize(10).fillColor(WHITE).font(RB).text(`${day.calories} kcal  -  ${day.protein} g beljakovin  -  ${day.meals.length} obroki`, M + 12, dy + 26);
+      doc.fontSize(13).fillColor(WHITE).font(BD).text("DAN " + day.day, M + 12, dy + 8);
+      doc.fontSize(10).fillColor(WHITE).font(RB).text(day.calories + " kcal  -  " + day.protein + " g beljakovin  -  " + day.meals.length + " obroki", M + 12, dy + 26);
       doc.fontSize(9).fillColor(WHITE).font(BD).text("STRENGTH AND HONOR", M, dy + 17, { width: CW - 12, align: "right", characterSpacing: 1 });
       dy += 52;
 
@@ -338,11 +338,11 @@ function generateMealPDF(userData, plan) {
         doc.rect(M, dy, 4, mealH).fill(RED);
         doc.fontSize(20).fillColor(RED).font(BD).text(String(meal.number).padStart(2, "0"), M + 14, dy + 8);
         doc.fontSize(10).fillColor(WHITE).font(BD).text(meal.name, M + 14, dy + 34);
-        doc.fontSize(9).fillColor(GRAY).font(RB).text(`${meal.calories} kcal  |  ${meal.protein} g beljakovin`, M + 14, dy + 50);
+        doc.fontSize(9).fillColor(GRAY).font(RB).text(meal.calories + " kcal  |  " + meal.protein + " g beljakovin", M + 14, dy + 50);
         const divX = M + 140;
         doc.rect(divX, dy + 10, 1, mealH - 20).fill(RED);
         meal.ingredients.forEach((ing, idx) => {
-          doc.fontSize(10).fillColor(LIGHT).font(RB).text(`- ${ing}`, divX + 14, dy + 12 + idx * 18, { width: CW - 160 });
+          doc.fontSize(10).fillColor(LIGHT).font(RB).text("- " + ing, divX + 14, dy + 12 + idx * 18, { width: CW - 160 });
         });
         dy += mealH + 6;
       });
@@ -381,7 +381,7 @@ function generateTrainingPDF(userData, plan) {
       y += 32;
     }
 
-    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.split}  -  ${plan.summary.split_desc.toUpperCase()}`, M, y, { align: "center", width: CW, characterSpacing: 2 });
+    doc.fontSize(11).fillColor(GRAY).font(RB).text(plan.summary.split + "  -  " + plan.summary.split_desc.toUpperCase(), M, y, { align: "center", width: CW, characterSpacing: 2 });
     y += 30;
     doc.rect(M, y, CW, 2).fill(RED);
     y += 18;
@@ -470,24 +470,24 @@ async function sendCombinedEmail(userData, mealPDF, trainingPDF) {
   await axios.post("https://api.resend.com/emails", {
     from: "Plan Generator <onboarding@resend.dev>",
     to: NOTIFY_EMAIL,
-    subject: `${name} - jedilnik + trening program`,
-    html: `<div style="font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;"><h2 style="color:#CC1F1F;">GAL REMEC COACHING</h2><p>Jedilnik in trening program za <strong>${name}</strong> sta pripravljena. Oba PDFja sta v priponki.</p><table style="margin-top:16px;"><tr><td style="color:#888;padding:4px 12px 4px 0">Ime:</td><td>${name}</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Cilj:</td><td>${userData.goal}</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Teza:</td><td>${userData.weight} kg</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Treningi:</td><td>${userData.frequency}x na teden | ${userData.location}</td></tr></table></div>`,
+    subject: name + " - jedilnik + trening program",
+    html: "<div style='font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;'><h2 style='color:#CC1F1F;'>GAL REMEC COACHING</h2><p>Jedilnik in trening program za <strong>" + name + "</strong> sta pripravljena. Oba PDFja sta v priponki.</p><table style='margin-top:16px;'><tr><td style='color:#888;padding:4px 12px 4px 0'>Ime:</td><td>" + name + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Cilj:</td><td>" + userData.goal + "</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Teza:</td><td>" + userData.weight + " kg</td></tr><tr><td style='color:#888;padding:4px 12px 4px 0'>Treningi:</td><td>" + userData.frequency + "x na teden | " + userData.location + "</td></tr></table></div>",
     attachments: [
-      { filename: `jedilnik-${name.replace(/ /g, "-")}.pdf`, content: mealPDF.toString("base64") },
-      { filename: `trening-${name.replace(/ /g, "-")}.pdf`, content: trainingPDF.toString("base64") },
+      { filename: "jedilnik-" + name.replace(/ /g, "-") + ".pdf", content: mealPDF.toString("base64") },
+      { filename: "trening-" + name.replace(/ /g, "-") + ".pdf", content: trainingPDF.toString("base64") },
     ],
-  }, { headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" } });
+  }, { headers: { Authorization: "Bearer " + RESEND_API_KEY, "Content-Type": "application/json" } });
 }
 
 app.get("/health", (req, res) => {
-  res.json({ status: "ok", model: MODEL, endpoints: ["/webhook-combined"] });
+  res.json({ status: "ok", model: MODEL });
 });
 
 app.post("/webhook-combined", async (req, res) => {
   console.log("Webhook combined received");
   res.status(200).json({ received: true });
   const userData = parseCombinedTallyData(req.body);
-  console.log("User:", userData.name, userData.goal);
+  console.log("User:", userData.name, "| Cilj:", userData.goal, "| Lokacija:", userData.location, "| Frequency:", userData.frequency);
   try {
     console.log("Generating meal plan...");
     const mealPlan = await generateMealPlan(userData);
@@ -508,9 +508,10 @@ app.post("/webhook-combined", async (req, res) => {
 
 downloadFonts().then(() => {
   app.listen(PORT, () => {
-    console.log(`Port ${PORT} | Model: ${MODEL} | API key: ${ANTHROPIC_API_KEY ? "OK" : "MISSING"}`);
+    console.log("Port " + PORT + " | Model: " + MODEL + " | API key: " + (ANTHROPIC_API_KEY ? "OK" : "MISSING"));
   });
 }).catch((err) => {
   console.error("Font download failed:", err.message);
   process.exit(1);
 });
+
