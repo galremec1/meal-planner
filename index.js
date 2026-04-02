@@ -18,6 +18,16 @@ function parseTallyData(body) {
   const get = (label) =>
     fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
 
+  // Za multiple choice polja Tally vrne izbrane opcije kot text
+  const getChoice = (label) => {
+    const field = fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()));
+    if (!field) return "ni podatka";
+    const options = field.options ?? [];
+    const selected = Array.isArray(field.value) ? field.value : [field.value];
+    const matched = options.filter((o) => selected.includes(o.id)).map((o) => o.text);
+    return matched.length > 0 ? matched.join(", ") : "ni podatka";
+  };
+
   return {
     age:       get("starost"),
     weight:    get("teža"),
@@ -27,7 +37,7 @@ function parseTallyData(body) {
     dislikes:  get("ne maraš"),
     meals:     get("koliko obrokov"),
     allergies: get("alergije") || get("dodaj še"),
-    activity:  get("korakov"),
+    activity:  getChoice("korakov"),
   };
 }
 
