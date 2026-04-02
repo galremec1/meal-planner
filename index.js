@@ -17,37 +17,36 @@ function parseTallyData(body) {
   const fields = body?.data?.fields ?? [];
   const get = (label) =>
     fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
+
   return {
-    name:      get("ime") || get("name"),
-    goal:      get("cilj") || get("goal"),
-    calories:  get("kalorij") || get("calorie"),
-    meals:     get("obrokov") || get("meal"),
-    allergies: get("alergij") || get("allerg"),
-    diet:      get("dieta") || get("diet"),
-    weight:    get("teža") || get("weight"),
-    height:    get("višina") || get("height"),
-    age:       get("starost") || get("age"),
-    activity:  get("aktivnost") || get("activity"),
+    age:       get("starost"),
+    weight:    get("teža"),
+    height:    get("višina"),
+    goal:      get("cilj"),
+    likes:     get("kaj rad"),
+    dislikes:  get("ne maraš"),
+    meals:     get("koliko obrokov"),
+    allergies: get("alergije") || get("dodaj še"),
+    activity:  get("korakov"),
   };
 }
 
 async function generateMealPlan(userData) {
   const prompt = `
-Si strokovni nutricionistični asistent znamke Gal Remec Coaching.
+Si strokovni nutricionistični asistent znamke Gal Remec Coaching (Strength and Honor).
 Ustvari personaliziran tedenski načrt prehrane za stranko.
 
-Ime: ${userData.name}
-Cilj: ${userData.goal}
-Kalorije: ${userData.calories} kcal
-Obroki: ${userData.meals}
-Alergije: ${userData.allergies}
-Dieta: ${userData.diet}
+Starost: ${userData.age} let
 Teža: ${userData.weight} kg
 Višina: ${userData.height} cm
-Starost: ${userData.age} let
-Aktivnost: ${userData.activity}
+Cilj: ${userData.goal}
+Hrana ki jo rad/a je: ${userData.likes}
+Hrana ki je ne mara: ${userData.dislikes}
+Število obrokov na dan: ${userData.meals}
+Alergije/preference: ${userData.allergies}
+Dnevna aktivnost (koraki): ${userData.activity}
 
-Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci in 3 nasveti. Piši v slovenščini.
+Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci (beljakovine, OH, maščobe) in 3 ključnimi nasveti za ta profil. Piši v slovenščini, v motivacijskem tonu.
 `.trim();
 
   const response = await axios.post(
@@ -73,7 +72,7 @@ Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci i
 }
 
 function fallbackMealPlan(userData) {
-  return `Pozdravljeni, ${userData.name}! Prišlo je do tehnične težave. Naša ekipa vas bo kontaktirala v 24 urah z vašim personaliziranim načrtom. — Gal Remec Coaching 💪`;
+  return `Pozdravljeni! Prišlo je do tehnične težave. Naša ekipa vas bo kontaktirala v 24 urah z vašim personaliziranim načrtom. — Gal Remec Coaching 💪`;
 }
 
 app.get("/health", (req, res) => {
@@ -90,6 +89,7 @@ app.post("/webhook", async (req, res) => {
   try {
     const mealPlan = await generateMealPlan(userData);
     console.log("✅ Meal plan generated:", mealPlan.slice(0, 300));
+    // TODO: pošlji mealPlan po emailu ali WhatsApp
   } catch (err) {
     console.error("❌ AI error:", err.response?.data || err.message);
     console.log("⚠️ Fallback:", fallbackMealPlan(userData));
