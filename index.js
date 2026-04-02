@@ -18,7 +18,6 @@ function parseTallyData(body) {
   const get = (label) =>
     fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
 
-  // Za multiple choice polja Tally vrne izbrane opcije kot text
   const getChoice = (label) => {
     const field = fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()));
     if (!field) return "ni podatka";
@@ -43,27 +42,21 @@ function parseTallyData(body) {
 
 async function generateMealPlan(userData) {
   const prompt = `
-Si strokovni nutricionistični asistent znamke Gal Remec Coaching (Strength and Honor).
-Ustvari personaliziran tedenski načrt prehrane za stranko.
+Si nutricionistični asistent Gal Remec Coaching. Ustvari 3-dnevni načrt prehrane.
 
-Starost: ${userData.age} let
-Teža: ${userData.weight} kg
-Višina: ${userData.height} cm
-Cilj: ${userData.goal}
-Hrana ki jo rad/a je: ${userData.likes}
-Hrana ki je ne mara: ${userData.dislikes}
-Število obrokov na dan: ${userData.meals}
-Alergije/preference: ${userData.allergies}
-Dnevna aktivnost (koraki): ${userData.activity}
+Starost: ${userData.age} let | Teža: ${userData.weight} kg | Višina: ${userData.height} cm
+Cilj: ${userData.goal} | Obroki/dan: ${userData.meals}
+Rad je: ${userData.likes} | Ne mara: ${userData.dislikes}
+Alergije: ${userData.allergies} | Aktivnost: ${userData.activity} korakov/dan
 
-Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci (beljakovine, OH, maščobe) in 3 ključnimi nasveti za ta profil. Piši v slovenščini, v motivacijskem tonu.
+Napiši konkreten 3-dnevni načrt z gramažo, dnevnimi makri in 2 nasveta. Slovenščina, motivacijski ton.
 `.trim();
 
   const response = await axios.post(
     "https://api.anthropic.com/v1/messages",
     {
       model: MODEL,
-      max_tokens: 4096,
+      max_tokens: 2048,
       messages: [{ role: "user", content: prompt }],
     },
     {
@@ -72,7 +65,7 @@ Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci (
         "anthropic-version": "2023-06-01",
         "content-type":      "application/json",
       },
-      timeout: 60000,
+      timeout: 120000,
     }
   );
 
@@ -81,7 +74,7 @@ Napiši praktičen tedenski načrt z gramažo sestavin, dnevnimi makrohranilci (
   return textBlock.text;
 }
 
-function fallbackMealPlan(userData) {
+function fallbackMealPlan() {
   return `Pozdravljeni! Prišlo je do tehnične težave. Naša ekipa vas bo kontaktirala v 24 urah z vašim personaliziranim načrtom. — Gal Remec Coaching 💪`;
 }
 
@@ -99,10 +92,9 @@ app.post("/webhook", async (req, res) => {
   try {
     const mealPlan = await generateMealPlan(userData);
     console.log("✅ Meal plan generated:", mealPlan.slice(0, 300));
-    // TODO: pošlji mealPlan po emailu ali WhatsApp
   } catch (err) {
     console.error("❌ AI error:", err.response?.data || err.message);
-    console.log("⚠️ Fallback:", fallbackMealPlan(userData));
+    console.log("⚠️ Fallback:", fallbackMealPlan());
   }
 });
 
