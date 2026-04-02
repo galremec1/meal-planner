@@ -84,45 +84,54 @@ Med: 304kcal, 0.3g B | Gorčica: 66kcal, 4g B | Sojina omaka: 53kcal, 8g B | Whe
 `;
 
 // ── Gal System Prompt ─────────────────────────────────────────────────────────
-const GAL_SYSTEM_PROMPT = `Si Gal Remec — slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike TOČNO v svojem stilu.
+const GAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener. Pišeš uvodni del personalnega prehranskega načrta za stranko.
 
-=== OSEBNOST ===
-- Absolutno direkten, ne toleriraš izgovorov, a si na strani stranke
-- Mešaš slovenščino brez šumnikov z normalnimi besedami kadar pišeš sproščeno
-- Emoji zmerno: 💪🏻 😄 🙂 — točno tam kjer je naravno
-- Kratke direktne povedi, kot WhatsApp
+=== SLOG PISANJA — STROGA PRAVILA ===
 
-=== KLJUČNA STALIŠČA ===
-HUJŠANJE:
-- Edini razlog za debelost so preveč kalorij — točka, brez izgovorov
-- 500 kcal deficit na dan = ~0.5 kg na teden = optimalen tempo
-- Štetje kalorij je #1 orodje — vzame 3 minute na dan
-- Keto, fat burnerji, voda z limono zjutraj = miti
+JEZIK:
+- Piši izključno v knjižni slovenščini s pravilnimi šumniki (č, š, ž, ć itd.)
+- Brez anglicizmov, brez pogovornih izrazov, brez slenga
+- Pravilna ločila: vejice, pike, pomišljaji
+- Številke: "114 g" (s presledkom), "0,5 kg" (z vejico), "10–15 tisoč korakov" (z dolgim pomišljajem)
+- Brez emojijev — nikoli, nobenih
 
-BULK:
-- Lean bulk = MAKS 200-300 kcal nad maintenanceom
-- Dirty bulk = napaka — uničiš inzulinsko občutljivost
-- Če >17% telesne maščobe: najprej hujšaj
+TON:
+- Strokoven, direkten, oseben
+- Naslavljaj stranko z imenom in z "ti" (ne "vi")
+- Brez pretiranega hvaljenja, brez marketinškega jezika
+- Povedi so polne in slovnično pravilne
 
-=== PREHRANA — PRINCIPI ===
-- Kalorijski deficit = EDINI dokazani mehanizem izgube maščobe
-- Proteini #1 makrohranilo: 1.8-2.2g × kg — ohranitev mišic + sitost
-- Vlaknine v vsakem obroku — zelenjava, sitost brez kalorij
-- NEAT (koraki) bolj pomemben od vadbe za dnevno porabo
-- Proteini enakomerno čez dan: 25-40g na obrok
-- Ne vključuj živil ki jih stranka ne mara ali nanje alergična
+STRUKTURA "adaptations" (3–5 povedi):
+- Razloži na podlagi katerih podatkov je plan sestavljen: telesna masa, višina, starost, aktivnost
+- Omeni izračunane kalorije, TDEE in deficit
+- Omeni ciljni vnos beljakovin in zakaj
+- Omeni upoštevane preference in omejitve
 
-=== KALORIJE IN BELJAKOVINE ===
-Vedno uporabi podatke iz baze živil ki je podana. Za vsako živilo izračunaj točne kalorije glede na gramažo:
-kalorije = (gramaza / 100) × kcal_na_100g
-beljakovine = (gramaza / 100) × beljakovine_na_100g
+STRUKTURA "intro" (4–6 povedi):
+- Pojasni strategijo in pristop
+- Omeni pomen beljakovin in kalorijskega deficita
+- Postavi realna pričakovanja (npr. 0,5 kg na teden)
+- Zaključi z navodilom o sledenju in doslednosti
 
-=== FORMAT ===
-Ko pišeš "adaptations" in "intro" za PDF:
-- Naslavljaj stranko z imenom, direktno
-- Omeni konkretne številke (kalorije, proteine, deficit)
-- Ton: motivacijski ampak realen, brez olepševanja
-- Jezik: slovenščina, sproščena`;
+PRIMERI PRAVILNEGA SLOGA:
+✅ "Ta prehranski načrt je pripravljen glede na tvojo starost, telesno maso, višino in trenutno stopnjo aktivnosti."
+✅ "Kalorični okvir ${1800} kcal ustvarja zmeren energijski primanjkljaj, ki ti bo omogočil postopno izgubo telesne maščobe."
+✅ "Beljakovine so pri tvojem cilju ključne — pomagajo ohranjati mišično maso med kaloričnim deficitom in povečujejo občutek sitosti."
+✅ "Na koncu je najpomembnejša doslednost."
+
+PRIMERI NAPAČNEGA SLOGA:
+❌ "Larisa, tvojemu telesu zmanjkuje 500 kcal na dan"
+❌ "best friendsi", "top živila", "cel recept"
+❌ "114g" (brez presledka), "10-15k koraki"
+❌ Kateri koli emoji
+❌ "~0.5 kg" → pravilno: "približno 0,5 kg"
+
+=== VSEBINSKA NAČELA ===
+- Kalorijski deficit = edini dokazani mehanizem izgube telesne maščobe
+- Optimalni deficit: 500 kcal/dan → približno 0,5 kg izgube na teden
+- Beljakovine: 1,8–2,2 g na kilogram telesne mase
+- Proteini enakomerno razporejeni čez dan: 25–40 g na obrok
+- Ne vključuj živil, ki jih stranka ne mara ali nanje ni alergična`;
 
 // ── Parse Tally ───────────────────────────────────────────────────────────────
 function parseTallyData(body) {
@@ -188,7 +197,7 @@ async function generateMealPlan(userData) {
 
   const targetProtein = Math.round(weight * 2.0);
 
-  const prompt = `Ustvari 3-dnevni načrt prehrane za stranko. Vrni SAMO čisti JSON brez kakršnegakoli besedila pred ali za njim.
+  const prompt = `Ustvari 3-dnevni prehranski načrt za stranko. Vrni SAMO čisti JSON brez kakršnegakoli besedila pred ali za njim.
 
 BAZA ŽIVIL — uporabi te vrednosti za izračun kalorij in beljakovin:
 ${FOOD_DB}
@@ -197,17 +206,17 @@ ${FOOD_DB}
 - BMR: ${Math.round(bmr)} kcal
 - TDEE: ${tdee} kcal
 - Cilj kalorije: ${targetCalories} kcal/dan (${planType}, deficit ${tdee - targetCalories} kcal)
-- Cilj proteini: ${targetProtein} g/dan (2.0g × ${weight}kg)
-- Obroki: ${mealsCount}x na dan
+- Cilj beljakovine: ${targetProtein} g/dan (2,0 g × ${weight} kg)
+- Število obrokov: ${mealsCount} na dan
 
 PODATKI STRANKE:
 - Ime: ${name}
 - Starost: ${age} let | Teža: ${weight} kg | Višina: ${height} cm
 - Cilj: ${userData.goal}
-- Rad je: ${userData.likes}
+- Rad/a je: ${userData.likes}
 - Ne mara: ${userData.dislikes}
 - Alergije/preference: ${userData.allergies}
-- Dnevna aktivnost: ${userData.activity} korakov/dan
+- Dnevna aktivnost: ${userData.activity} korakov na dan
 
 Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
 {
@@ -218,8 +227,8 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
     "goal": "${userData.goal}",
     "plan_type": "${planType}"
   },
-  "adaptations": "3-5 povedi v Gal Remec stilu za ${name}: omeni ${targetCalories} kcal, TDEE ${tdee} kcal, deficit, ${targetProtein}g proteinov, aktivnost, preference. Direktno, z imenom.",
-  "intro": "4-6 povedi motivacijski uvod v Gal Remec stilu za ${name}. Pomen proteinov, kalorijski deficit, realna pričakovanja. Direktno, brez olepševanja.",
+  "adaptations": "3–5 povedi v knjižni slovenščini s šumniki. Brez emojijev. Razloži na podlagi katerih podatkov je plan sestavljen (telesna masa, višina, starost, aktivnost). Omeni ${targetCalories} kcal, TDEE ${tdee} kcal, deficit ${tdee - targetCalories} kcal, ciljne beljakovine ${targetProtein} g. Omeni upoštevane preference in omejitve. Naslavljaj ${name} z imenom.",
+  "intro": "4–6 povedi v knjižni slovenščini s šumniki. Brez emojijev. Pojasni strategijo, pomen beljakovin, kalorijski deficit, realna pričakovanja (0,5 kg na teden). Zaključi z doslednostjo in sledenjem kalorij.",
   "days": [
     {
       "day": 1,
@@ -231,7 +240,7 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
           "name": "ZAJTRK",
           "calories": 500,
           "protein": 35,
-          "ingredients": ["100 g ovsenih kosmičev", "2 jajci (cela)", "200 ml ovsenega napitka"]
+          "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)", "2 jajci (171 kcal, 14,3 g B)", "200 ml ovsenega napitka (84 kcal, 2 g B)"]
         }
       ]
     }
@@ -241,10 +250,9 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
 PRAVILA:
 - Vsak dan TOČNO ${mealsCount} obrokov
 - Obroki po vrstnem redu: ZAJTRK, DOPOLDANSKA MALICA, KOSILO, POPOLDANSKA MALICA, VEČERJA, POZNA VEČERJA
-- 3-6 sestavin z gramažo na obrok
-- Izračunaj kalorije in beljakovine iz baze živil — naj bodo točne!
+- 3–6 sestavin z gramažo in izračunanimi kalorijami ter beljakovinami v oklepaju
 - Skupne kalorije na dan: ${targetCalories} kcal (±50)
-- Skupni proteini na dan: ${targetProtein} g (±10)
+- Skupne beljakovine na dan: ${targetProtein} g (±10)
 - NE vključuj: ${userData.dislikes} in ${userData.allergies}
 - Vrni SAMO JSON`;
 
@@ -442,7 +450,7 @@ async function sendEmail(userData, pdfBuffer) {
     {
       from: "Meal Planner <onboarding@resend.dev>",
       to: NOTIFY_EMAIL,
-      subject: `🥗 ${name} — nov načrt prehrane | ${userData.goal} | ${userData.weight}kg`,
+      subject: `🥗 ${name} — nov načrt prehrane | ${userData.goal} | ${userData.weight} kg`,
       html: `
         <div style="font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;">
           <h2 style="color:#CC1F1F;">GAL REMEC COACHING</h2>
