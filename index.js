@@ -141,7 +141,7 @@ function parseCombinedTallyData(body) {
     weight:        get("teza"),
     height:        get("visina"),
     goal:          get("cilj"),
-    activity:      getChoice("korakov") || get("korakov") || get("aktivnost"),
+    activity:      getChoice("korakov dela") || getChoice("korakov naredi") || get("korakov"),
     likes:         get("kaj rad") || get("jedilnik na podlagi"),
     dislikes:      get("hrane ne maras") || get("ne maras"),
     meals:         get("koliko obrokov"),
