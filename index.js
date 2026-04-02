@@ -1,10 +1,14 @@
 import express from "express";
 import axios from "axios";
+import nodemailer from "nodemailer";
 
 const app = express();
 app.use(express.json());
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const GMAIL_USER = process.env.GMAIL_USER;
+const GMAIL_PASS = process.env.GMAIL_PASS;
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL;
 const MODEL = "claude-sonnet-4-6";
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +16,14 @@ if (!ANTHROPIC_API_KEY) {
   console.error("❌ ANTHROPIC_API_KEY is not set.");
   process.exit(1);
 }
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: GMAIL_USER,
+    pass: GMAIL_PASS,
+  },
+});
 
 function parseTallyData(body) {
   const fields = body?.data?.fields ?? [];
@@ -74,8 +86,30 @@ Napiši konkreten 3-dnevni načrt z gramažo, dnevnimi makri in 2 nasveta. Slove
   return textBlock.text;
 }
 
-function fallbackMealPlan() {
-  return `Pozdravljeni! Prišlo je do tehnične težave. Naša ekipa vas bo kontaktirala v 24 urah z vašim personaliziranim načrtom. — Gal Remec Coaching 💪`;
+async function sendEmail(userData, mealPlan) {
+  await transporter.sendMail({
+    from: GMAIL_USER,
+    to: NOTIFY_EMAIL,
+    subject: `🥗 Nov načrt prehrane — ${userData.goal} | ${userData.weight}kg | ${userData.age}let`,
+    text: `
+PODATKI STRANKE:
+Starost: ${userData.age} let
+Teža: ${userData.weight} kg
+Višina: ${userData.height} cm
+Cilj: ${userData.goal}
+Rad je: ${userData.likes}
+Ne mara: ${userData.dislikes}
+Obroki/dan: ${userData.meals}
+Alergije: ${userData.allergies}
+Aktivnost: ${userData.activity} korakov/dan
+
+---
+
+NAČRT PREHRANE:
+
+${mealPlan}
+    `.trim(),
+  });
 }
 
 app.get("/health", (req, res) => {
@@ -92,9 +126,11 @@ app.post("/webhook", async (req, res) => {
   try {
     const mealPlan = await generateMealPlan(userData);
     console.log("✅ Meal plan generated:", mealPlan.slice(0, 300));
+
+    await sendEmail(userData, mealPlan);
+    console.log("📧 Email sent to:", NOTIFY_EMAIL);
   } catch (err) {
-    console.error("❌ AI error:", err.response?.data || err.message);
-    console.log("⚠️ Fallback:", fallbackMealPlan());
+    console.error("❌ Error:", err.response?.data || err.message);
   }
 });
 
