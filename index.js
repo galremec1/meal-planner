@@ -58,7 +58,7 @@ Napiši konkreten 3-dnevni načrt z gramažo, dnevnimi makri in 2 nasveta. Slove
     "https://api.anthropic.com/v1/messages",
     {
       model: MODEL,
-      max_tokens: 2048,
+      max_tokens: 4096,
       messages: [{ role: "user", content: prompt }],
     },
     {
