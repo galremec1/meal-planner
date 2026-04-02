@@ -1,6 +1,8 @@
 import express from "express";
 import axios from "axios";
 import PDFDocument from "pdfkit";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 app.use(express.json());
@@ -16,7 +18,30 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-// ── Parse Tally ──────────────────────────────────────────────────────────────
+// ── Fonts ─────────────────────────────────────────────────────────────────────
+const FONT_DIR = "/tmp/fonts";
+const FONTS = {
+  regular: path.join(FONT_DIR, "Roboto-Regular.ttf"),
+  bold:    path.join(FONT_DIR, "Roboto-Bold.ttf"),
+};
+
+async function downloadFonts() {
+  if (!fs.existsSync(FONT_DIR)) fs.mkdirSync(FONT_DIR, { recursive: true });
+  const urls = {
+    regular: "https://github.com/googlefonts/roboto/raw/main/src/hinted/Roboto-Regular.ttf",
+    bold:    "https://github.com/googlefonts/roboto/raw/main/src/hinted/Roboto-Bold.ttf",
+  };
+  for (const [key, url] of Object.entries(urls)) {
+    if (!fs.existsSync(FONTS[key])) {
+      console.log(`⬇️ Downloading font: ${key}`);
+      const res = await axios.get(url, { responseType: "arraybuffer" });
+      fs.writeFileSync(FONTS[key], Buffer.from(res.data));
+      console.log(`✅ Font saved: ${key}`);
+    }
+  }
+}
+
+// ── Parse Tally ───────────────────────────────────────────────────────────────
 function parseTallyData(body) {
   const fields = body?.data?.fields ?? [];
   const get = (label) =>
@@ -44,7 +69,7 @@ function parseTallyData(body) {
   };
 }
 
-// ── AI Generation ────────────────────────────────────────────────────────────
+// ── AI Generation ─────────────────────────────────────────────────────────────
 async function generateMealPlan(userData) {
   const mealsCount = parseInt(userData.meals) || 4;
 
@@ -120,12 +145,11 @@ PRAVILA:
 
   const textBlock = response.data?.content?.find((b) => b.type === "text");
   if (!textBlock?.text) throw new Error("Anthropic vrnil prazen odgovor.");
-
   const clean = textBlock.text.replace(/```json|```/g, "").trim();
   return JSON.parse(clean);
 }
 
-// ── PDF Generation ───────────────────────────────────────────────────────────
+// ── PDF Generation ────────────────────────────────────────────────────────────
 const DARK_BG   = "#111111";
 const DARK_CARD = "#1A1A1A";
 const DARK_ROW  = "#161616";
@@ -133,10 +157,6 @@ const RED       = "#CC1F1F";
 const WHITE     = "#FFFFFF";
 const GRAY      = "#888888";
 const LIGHT     = "#CCCCCC";
-
-function hex(color) {
-  return color;
-}
 
 function generatePDF(userData, plan) {
   return new Promise((resolve, reject) => {
@@ -151,90 +171,79 @@ function generatePDF(userData, plan) {
     doc.on("end", () => resolve(Buffer.concat(buffers)));
     doc.on("error", reject);
 
-    const W = doc.page.width;   // 595
-    const H = doc.page.height;  // 842
-    const M = 40;
-    const CW = W - M * 2;       // content width
+    const W  = doc.page.width;
+    const H  = doc.page.height;
+    const M  = 40;
+    const CW = W - M * 2;
 
     const fillBg = () => doc.rect(0, 0, W, H).fill(DARK_BG);
+    const RB = FONTS.regular;
+    const BD = FONTS.bold;
 
-    // ── PAGE 1: Cover ─────────────────────────────────────────────────────
+    // ── PAGE 1: Cover ──────────────────────────────────────────────────────
     fillBg();
-
-    // Top red bar
     doc.rect(0, 0, W, 6).fill(RED);
 
-    // GAL REMEC COACHING
     let y = 50;
-    doc.fontSize(11).fillColor(RED).font("Helvetica-Bold")
+    doc.fontSize(11).fillColor(RED).font(BD)
        .text("GAL REMEC COACHING", M, y, { align: "center", width: CW, characterSpacing: 3 });
 
-    // MEAL PLAN
     y += 28;
-    doc.fontSize(52).fillColor(WHITE).font("Helvetica-Bold")
+    doc.fontSize(52).fillColor(WHITE).font(BD)
        .text("MEAL", M, y, { align: "center", width: CW });
     y += 55;
-    doc.fontSize(52).fillColor(WHITE).font("Helvetica-Bold")
+    doc.fontSize(52).fillColor(WHITE).font(BD)
        .text("PLAN", M, y, { align: "center", width: CW });
 
-    // Plan type
     y += 58;
     const planType = `${plan.summary.plan_type} · ${plan.summary.meals_per_day}x OBROK`;
-    doc.fontSize(11).fillColor(GRAY).font("Helvetica")
+    doc.fontSize(11).fillColor(GRAY).font(RB)
        .text(planType, M, y, { align: "center", width: CW, characterSpacing: 2 });
 
-    // Red divider
     y += 25;
     doc.rect(M, y, CW, 2).fill(RED);
 
-    // Stats boxes
     y += 18;
     const boxW = (CW - 15) / 2;
 
-    // Calories
     doc.rect(M, y, boxW, 75).fill(DARK_CARD);
-    doc.fontSize(34).fillColor(WHITE).font("Helvetica-Bold")
+    doc.fontSize(34).fillColor(WHITE).font(BD)
        .text(String(plan.summary.calories_per_day), M, y + 10, { width: boxW, align: "center" });
-    doc.fontSize(9).fillColor(GRAY).font("Helvetica")
+    doc.fontSize(9).fillColor(GRAY).font(RB)
        .text("KALORIJ NA DAN", M, y + 52, { width: boxW, align: "center", characterSpacing: 1 });
 
-    // Protein
     const box2X = M + boxW + 15;
     doc.rect(box2X, y, boxW, 75).fill(DARK_CARD);
-    doc.fontSize(34).fillColor(WHITE).font("Helvetica-Bold")
+    doc.fontSize(34).fillColor(WHITE).font(BD)
        .text(`${plan.summary.protein_per_day} g`, box2X, y + 10, { width: boxW, align: "center" });
-    doc.fontSize(9).fillColor(GRAY).font("Helvetica")
+    doc.fontSize(9).fillColor(GRAY).font(RB)
        .text("BELJAKOVIN NA DAN", box2X, y + 52, { width: boxW, align: "center", characterSpacing: 1 });
 
-    // Adaptations section
     y += 93;
     doc.rect(M, y, CW, 1).fill(RED);
     y += 14;
-    doc.fontSize(10).fillColor(RED).font("Helvetica-Bold")
+    doc.fontSize(10).fillColor(RED).font(BD)
        .text("PRILAGODITVE JEDILNIKA", M, y, { characterSpacing: 1 });
     y += 18;
-    doc.fontSize(10).fillColor(LIGHT).font("Helvetica")
+    doc.fontSize(10).fillColor(LIGHT).font(RB)
        .text(plan.adaptations, M, y, { width: CW, lineGap: 4 });
     y += doc.heightOfString(plan.adaptations, { width: CW, lineGap: 4 }) + 18;
 
-    // Intro
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
-    doc.fontSize(10).fillColor(LIGHT).font("Helvetica")
+    doc.fontSize(10).fillColor(LIGHT).font(RB)
        .text(plan.intro, M, y, { width: CW, lineGap: 4 });
     y += doc.heightOfString(plan.intro, { width: CW, lineGap: 4 }) + 18;
 
-    // Days label
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
     const daysLabel = `${plan.days.length} DNI  ·  ${plan.days.length * plan.summary.meals_per_day} OBROKOV  ·  POPOLN JEDILNIK`;
-    doc.fontSize(10).fillColor(WHITE).font("Helvetica-Bold")
+    doc.fontSize(10).fillColor(WHITE).font(BD)
        .text(daysLabel, M, y, { align: "center", width: CW, characterSpacing: 1 });
 
-    // Bottom red bar
     doc.rect(0, H - 6, W, 6).fill(RED);
 
-    // ── PAGES 2+: Daily meals ─────────────────────────────────────────────
+    // ── PAGES 2+: Daily meals ──────────────────────────────────────────────
     plan.days.forEach((day) => {
       doc.addPage();
       fillBg();
@@ -243,23 +252,20 @@ function generatePDF(userData, plan) {
 
       let dy = 25;
 
-      // Day header bar
       doc.rect(M, dy, CW, 42).fill(RED);
-      doc.fontSize(13).fillColor(WHITE).font("Helvetica-Bold")
+      doc.fontSize(13).fillColor(WHITE).font(BD)
          .text(`DAN ${day.day}`, M + 12, dy + 8);
-      doc.fontSize(10).fillColor(WHITE).font("Helvetica")
+      doc.fontSize(10).fillColor(WHITE).font(RB)
          .text(`${day.calories} kcal  ·  ${day.protein} g beljakovin  ·  ${day.meals.length} obroki`, M + 12, dy + 26);
-      doc.fontSize(9).fillColor(WHITE).font("Helvetica-Bold")
+      doc.fontSize(9).fillColor(WHITE).font(BD)
          .text("STRENGTH AND HONOR", M, dy + 17, { width: CW - 12, align: "right", characterSpacing: 1 });
 
       dy += 52;
 
-      // Meals
       day.meals.forEach((meal, i) => {
         const ingLines = meal.ingredients.length;
-        const mealH = Math.max(80, 24 + ingLines * 17 + 16);
+        const mealH = Math.max(85, 28 + ingLines * 18 + 16);
 
-        // New page if needed
         if (dy + mealH > H - 50) {
           doc.addPage();
           fillBg();
@@ -270,32 +276,23 @@ function generatePDF(userData, plan) {
 
         const bg = i % 2 === 0 ? DARK_CARD : DARK_ROW;
         doc.rect(M, dy, CW, mealH).fill(bg);
-
-        // Left red accent bar
         doc.rect(M, dy, 4, mealH).fill(RED);
 
-        // Meal number
-        doc.fontSize(20).fillColor(RED).font("Helvetica-Bold")
+        doc.fontSize(20).fillColor(RED).font(BD)
            .text(String(meal.number).padStart(2, "0"), M + 14, dy + 8);
-
-        // Meal name
-        doc.fontSize(10).fillColor(WHITE).font("Helvetica-Bold")
+        doc.fontSize(10).fillColor(WHITE).font(BD)
            .text(meal.name, M + 14, dy + 34);
-
-        // Kcal + protein
-        doc.fontSize(9).fillColor(GRAY).font("Helvetica")
+        doc.fontSize(9).fillColor(GRAY).font(RB)
            .text(`${meal.calories} kcal  |  ${meal.protein} g beljakovin`, M + 14, dy + 50);
 
-        // Vertical divider
         const divX = M + 140;
         doc.rect(divX, dy + 10, 1, mealH - 20).fill(RED);
 
-        // Ingredients
         const ingX = divX + 14;
         const ingW = CW - 140 - 20;
         meal.ingredients.forEach((ing, idx) => {
-          doc.fontSize(10).fillColor(LIGHT).font("Helvetica")
-             .text(`• ${ing}`, ingX, dy + 12 + idx * 17, { width: ingW });
+          doc.fontSize(10).fillColor(LIGHT).font(RB)
+             .text(`• ${ing}`, ingX, dy + 12 + idx * 18, { width: ingW });
         });
 
         dy += mealH + 6;
@@ -306,7 +303,7 @@ function generatePDF(userData, plan) {
   });
 }
 
-// ── Send Email ───────────────────────────────────────────────────────────────
+// ── Send Email ────────────────────────────────────────────────────────────────
 async function sendEmail(userData, pdfBuffer) {
   const base64PDF = pdfBuffer.toString("base64");
   await axios.post(
@@ -345,7 +342,7 @@ async function sendEmail(userData, pdfBuffer) {
   );
 }
 
-// ── Routes ───────────────────────────────────────────────────────────────────
+// ── Routes ────────────────────────────────────────────────────────────────────
 app.get("/health", (req, res) => {
   res.json({ status: "ok", model: MODEL });
 });
@@ -373,6 +370,12 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Port ${PORT} | Model: ${MODEL} | API key: ${ANTHROPIC_API_KEY ? "✅" : "❌"}`);
+// ── Start ─────────────────────────────────────────────────────────────────────
+downloadFonts().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Port ${PORT} | Model: ${MODEL} | API key: ${ANTHROPIC_API_KEY ? "✅" : "❌"}`);
+  });
+}).catch((err) => {
+  console.error("❌ Font download failed:", err.message);
+  process.exit(1);
 });
