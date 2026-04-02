@@ -41,6 +41,89 @@ async function downloadFonts() {
   }
 }
 
+// ── Food Database (kcal in beljakovine na 100g) ───────────────────────────────
+const FOOD_DB = `
+MESO IN PERUTNINA (na 100g surovo):
+Piščančja prsa: 110kcal, 23g B | Piščančja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Svinjski zrezek: 145kcal, 21g B | Teletina: 110kcal, 20g B | Jagnjetina pusto: 200kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B | Raca prsa brez kože: 130kcal, 20g B
+
+MESNI IZDELKI (na 100g):
+Kuhan pršut/šunka: 110kcal, 18g B | Puranja šunka: 90kcal, 17g B | Piščančja prsa v ovitku: 85kcal, 16g B | Kraški pršut: 260kcal, 26g B | Hrenovka: 280kcal, 12g B | Piščančja hrenovka: 220kcal, 13g B | Čevapčiči surovi: 250kcal, 15g B | Pleskavica: 240kcal, 16g B
+
+RIBE IN MORSKI SADEŽI (na 100g):
+Losos svež: 208kcal, 20g B | Tuna svež: 130kcal, 29g B | Tuna v lastnem soku: 116kcal, 25g B | Tuna v olju odcejena: 198kcal, 24g B | Skuša sveža: 305kcal, 19g B | Oslić: 90kcal, 17g B | Postrv: 148kcal, 21g B | Brancin: 97kcal, 18g B | Sardine v olju: 208kcal, 24g B | Tilapija: 128kcal, 26g B | Trska: 82kcal, 18g B | Kozice: 99kcal, 24g B | Losos prekajen: 117kcal, 23g B
+
+MLEČNI IZDELKI (na 100g):
+Mleko 3.5%: 64kcal, 3.3g B | Mleko 1.5%: 47kcal, 3.4g B | Grški jogurt 0%: 59kcal, 10g B | Grški jogurt 2%: 75kcal, 9.5g B | Skyr: 65kcal, 11g B | Pusta skuta: 72kcal, 12g B | Sir Cottage light: 70kcal, 12g B | Sir Cottage: 98kcal, 11g B | Mozzarella light: 165kcal, 20g B | Mozzarella polnomastna: 280kcal, 20g B | Parmezan: 431kcal, 38g B | Feta: 264kcal, 14g B | Sojin jogurt: 50kcal, 4g B | Ovseni napitek: 42kcal, 1g B | Mandljev napitek: 13kcal, 0.4g B | Sojin napitek: 33kcal, 3.3g B | Kefir: 62kcal, 3.3g B
+
+JAJCA (na 100g):
+Kokošje jajce celo: 155kcal, 13g B | Jajčni beljak: 52kcal, 11g B | Jajčni rumenjak: 322kcal, 16g B
+
+ZELENJAVA (na 100g surovo):
+Brokoli: 34kcal, 2.8g B | Špinača: 23kcal, 2.9g B | Paprika rdeča: 31kcal, 1g B | Paprika zelena: 20kcal, 0.9g B | Kumara: 15kcal, 0.7g B | Paradižnik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Zelje belo: 25kcal, 1.3g B | Rukola: 25kcal, 2.6g B | Cvetača: 25kcal, 1.9g B | Bučka: 17kcal, 1.2g B | Stročji fižol: 31kcal, 1.8g B | Grah zelen: 81kcal, 5.4g B | Šparglji: 20kcal, 2.2g B | Šampinjoni: 22kcal, 3.1g B | Čebula: 40kcal, 1.1g B | Sladki krompir surovi: 86kcal, 1.6g B | Rdeča pesa: 43kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Ledenka solata: 14kcal, 0.9g B | Zelena solata: 14kcal, 1.2g B
+
+STROČNICE (na 100g):
+Fižol kuhan: 127kcal, 8.7g B | Čičerika kuhana: 164kcal, 8.9g B | Leča kuhana: 116kcal, 9g B | Tofu trd: 144kcal, 15g B | Tempeh: 192kcal, 19g B | Edamame kuhana: 121kcal, 11.9g B | Humus: 300kcal, 7g B | Sojini koščki: 330kcal, 50g B
+
+SADJE (na 100g):
+Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Hruška: 57kcal, 0.4g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Maline: 52kcal, 1.2g B | Pomaranča: 47kcal, 0.9g B | Avokado: 160kcal, 2g B | Mango: 60kcal, 0.8g B | Kivi: 61kcal, 1.1g B | Grozdje: 69kcal, 0.7g B | Breskev: 39kcal, 0.9g B | Lubenica: 30kcal, 0.6g B
+
+ŽITA IN OGLJIKOVI HIDRATI (na 100g suho/surovo):
+Beli riž: 360kcal, 7g B | Rjavi riž: 367kcal, 7.5g B | Basmati riž: 345kcal, 8.5g B | Ovseni kosmiči: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kaša: 343kcal, 13g B | Kuskus: 376kcal, 12.8g B | Bulgur: 342kcal, 12.3g B | Polenta: 362kcal, 7.5g B
+
+KRUH IN PECIVO (na 100g):
+Beli kruh: 266kcal, 8.8g B | Polnozrnati kruh: 250kcal, 9.7g B | Rženi kruh: 259kcal, 8.5g B | Toast beli: 285kcal, 8.3g B | Toast polnozrnat: 260kcal, 9g B | Tortilja pšenična: 310kcal, 8g B | Riževi vaflji: 385kcal, 8g B
+
+OREŠČKI IN SEMENA (na 100g):
+Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arašidi praženi: 587kcal, 26g B | Indijski oreščki: 553kcal, 18g B | Arašidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Lanena semena: 534kcal, 18g B | Sončnična semena: 584kcal, 21g B | Bučna semena: 559kcal, 30g B
+
+OLJA IN MAŠČOBE (na 100g):
+Oljčno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B | Kokosovo olje: 862kcal, 0g B
+
+DODATKI (na 100g):
+Med: 304kcal, 0.3g B | Gorčica: 66kcal, 4g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B | Kakav grenki: 380kcal, 20g B
+`;
+
+// ── Gal System Prompt ─────────────────────────────────────────────────────────
+const GAL_SYSTEM_PROMPT = `Si Gal Remec — slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike TOČNO v svojem stilu.
+
+=== OSEBNOST ===
+- Absolutno direkten, ne toleriraš izgovorov, a si na strani stranke
+- Mešaš slovenščino brez šumnikov z normalnimi besedami kadar pišeš sproščeno
+- Emoji zmerno: 💪🏻 😄 🙂 — točno tam kjer je naravno
+- Kratke direktne povedi, kot WhatsApp
+
+=== KLJUČNA STALIŠČA ===
+HUJŠANJE:
+- Edini razlog za debelost so preveč kalorij — točka, brez izgovorov
+- 500 kcal deficit na dan = ~0.5 kg na teden = optimalen tempo
+- Štetje kalorij je #1 orodje — vzame 3 minute na dan
+- Keto, fat burnerji, voda z limono zjutraj = miti
+
+BULK:
+- Lean bulk = MAKS 200-300 kcal nad maintenanceom
+- Dirty bulk = napaka — uničiš inzulinsko občutljivost
+- Če >17% telesne maščobe: najprej hujšaj
+
+=== PREHRANA — PRINCIPI ===
+- Kalorijski deficit = EDINI dokazani mehanizem izgube maščobe
+- Proteini #1 makrohranilo: 1.8-2.2g × kg — ohranitev mišic + sitost
+- Vlaknine v vsakem obroku — zelenjava, sitost brez kalorij
+- NEAT (koraki) bolj pomemben od vadbe za dnevno porabo
+- Proteini enakomerno čez dan: 25-40g na obrok
+- Ne vključuj živil ki jih stranka ne mara ali nanje alergična
+
+=== KALORIJE IN BELJAKOVINE ===
+Vedno uporabi podatke iz baze živil ki je podana. Za vsako živilo izračunaj točne kalorije glede na gramažo:
+kalorije = (gramaza / 100) × kcal_na_100g
+beljakovine = (gramaza / 100) × beljakovine_na_100g
+
+=== FORMAT ===
+Ko pišeš "adaptations" in "intro" za PDF:
+- Naslavljaj stranko z imenom, direktno
+- Omeni konkretne številke (kalorije, proteine, deficit)
+- Ton: motivacijski ampak realen, brez olepševanja
+- Jezik: slovenščina, sproščena`;
+
 // ── Parse Tally ───────────────────────────────────────────────────────────────
 function parseTallyData(body) {
   const fields = body?.data?.fields ?? [];
@@ -105,21 +188,10 @@ async function generateMealPlan(userData) {
 
   const targetProtein = Math.round(weight * 2.0);
 
-  const prompt = `
-Si strokovni nutricionistični asistent Gal Remec Coaching (Strength and Honor).
-Ustvari 3-dnevni načrt prehrane in vrni SAMO čisti JSON brez kakršnegakoli besedila pred ali za njim.
+  const prompt = `Ustvari 3-dnevni načrt prehrane za stranko. Vrni SAMO čisti JSON brez kakršnegakoli besedila pred ali za njim.
 
-ZNANJE IN PRINCIPI (Gal Remec metoda — na podlagi 500+ strank):
-- Kalorijski deficit je EDINI dokazani mehanizem izgube maščobe (Hall et al., 2012)
-- Formula Mifflin-St Jeor za TDEE — najtočnejša enačba za BMR
-- Proteini so #1 makrohranilo: 1.8-2.2g × kg telesne mase — ohranitev mišic + sitost + termični učinek 20-30%
-- Optimalni deficit za hujšanje: 500 kcal/dan → ~0.5 kg/teden izgube maščobe
-- NEAT (koraki, vsakdanje gibanje) = do 20% TDEE — bolj pomemben od vadbe (5%)
-- Vlaknine povečajo sitost brez kalorij — zelenjava v vsakem obroku
-- Proteini razdeljeni enakomerno: 25-40g na obrok za optimalno sintezo mišičnih beljakovin
-- Realna hitrost: 0.5-0.75 kg/teden je optimalno, ne ekstremni deficiti
-- Sledenje hrani (tehtanje) je #1 orodje za uspeh
-- Ne vključuj živil ki jih stranka ne mara ali nanje alergična — ključno za dolgoročno vzdržnost
+BAZA ŽIVIL — uporabi te vrednosti za izračun kalorij in beljakovin:
+${FOOD_DB}
 
 ŽE IZRAČUNANI PODATKI (Mifflin-St Jeor):
 - BMR: ${Math.round(bmr)} kcal
@@ -146,8 +218,8 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
     "goal": "${userData.goal}",
     "plan_type": "${planType}"
   },
-  "adaptations": "3-5 povedi — kaj si upošteval pri sestavi jedilnika za ${name}: omeni izračunane kalorije (${targetCalories} kcal), TDEE (${tdee} kcal), deficit, ciljne proteine (${targetProtein}g), aktivnost, preference in alergije. Piši direktno, naslavljaj stranko z imenom.",
-  "intro": "4-6 povedi — motivacijski uvod o pristopu za ${name}. Omeni pomen proteinov, kalorijskega deficita in realnih pričakovanj (0.5kg/teden). Piši v slovenščini, v Gal Remec stilu — direktno, brez olepševanja.",
+  "adaptations": "3-5 povedi v Gal Remec stilu za ${name}: omeni ${targetCalories} kcal, TDEE ${tdee} kcal, deficit, ${targetProtein}g proteinov, aktivnost, preference. Direktno, z imenom.",
+  "intro": "4-6 povedi motivacijski uvod v Gal Remec stilu za ${name}. Pomen proteinov, kalorijski deficit, realna pričakovanja. Direktno, brez olepševanja.",
   "days": [
     {
       "day": 1,
@@ -159,7 +231,7 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
           "name": "ZAJTRK",
           "calories": 500,
           "protein": 35,
-          "ingredients": ["100 g ovsenih kosmičev", "2 jajci", "200 ml rastlinskega mleka"]
+          "ingredients": ["100 g ovsenih kosmičev", "2 jajci (cela)", "200 ml ovsenega napitka"]
         }
       ]
     }
@@ -168,19 +240,20 @@ Vrni TOČNO to JSON strukturo (brez markdown, brez backtick, samo čisti JSON):
 
 PRAVILA:
 - Vsak dan TOČNO ${mealsCount} obrokov
-- Imena obrokov po vrstnem redu: ZAJTRK, DOPOLDANSKA MALICA, KOSILO, POPOLDANSKA MALICA, VEČERJA, POZNA VEČERJA
+- Obroki po vrstnem redu: ZAJTRK, DOPOLDANSKA MALICA, KOSILO, POPOLDANSKA MALICA, VEČERJA, POZNA VEČERJA
 - 3-6 sestavin z gramažo na obrok
+- Izračunaj kalorije in beljakovine iz baze živil — naj bodo točne!
 - Skupne kalorije na dan: ${targetCalories} kcal (±50)
 - Skupni proteini na dan: ${targetProtein} g (±10)
 - NE vključuj: ${userData.dislikes} in ${userData.allergies}
-- Vrni SAMO JSON, nič drugega
-`.trim();
+- Vrni SAMO JSON`;
 
   const response = await axios.post(
     "https://api.anthropic.com/v1/messages",
     {
       model: MODEL,
       max_tokens: 4096,
+      system: GAL_SYSTEM_PROMPT,
       messages: [{ role: "user", content: prompt }],
     },
     {
