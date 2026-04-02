@@ -18,7 +18,6 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-// ── Fonts ─────────────────────────────────────────────────────────────────────
 const FONT_DIR = "/tmp/fonts";
 const FONTS = {
   regular: path.join(FONT_DIR, "Roboto-Regular.ttf"),
@@ -33,7 +32,6 @@ async function downloadFonts() {
   };
   for (const [key, url] of Object.entries(urls)) {
     if (!fs.existsSync(FONTS[key])) {
-      console.log(`⬇️ Downloading font: ${key}`);
       const res = await axios.get(url, { responseType: "arraybuffer" });
       fs.writeFileSync(FONTS[key], Buffer.from(res.data));
       console.log(`✅ Font saved: ${key}`);
@@ -41,7 +39,6 @@ async function downloadFonts() {
   }
 }
 
-// ── Colors ────────────────────────────────────────────────────────────────────
 const DARK_BG   = "#111111";
 const DARK_CARD = "#1A1A1A";
 const DARK_ROW  = "#161616";
@@ -50,88 +47,70 @@ const WHITE     = "#FFFFFF";
 const GRAY      = "#888888";
 const LIGHT     = "#CCCCCC";
 
-// ══════════════════════════════════════════════════════════════════════════════
-// MEAL PLAN
-// ══════════════════════════════════════════════════════════════════════════════
-
 const FOOD_DB = `
 MESO IN PERUTNINA (na 100g surovo):
-Piščančja prsa: 110kcal, 23g B | Piščančja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Svinjski zrezek: 145kcal, 21g B | Teletina: 110kcal, 20g B | Jagnjetina pusto: 200kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B | Raca prsa brez kože: 130kcal, 20g B
+Piscancja prsa: 110kcal, 23g B | Piscancja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Teletina: 110kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B
 
 MESNI IZDELKI (na 100g):
-Kuhan pršut/šunka: 110kcal, 18g B | Puranja šunka: 90kcal, 17g B | Piščančja prsa v ovitku: 85kcal, 16g B | Kraški pršut: 260kcal, 26g B | Hrenovka: 280kcal, 12g B | Piščančja hrenovka: 220kcal, 13g B | Čevapčiči surovi: 250kcal, 15g B | Pleskavica: 240kcal, 16g B
+Kuhan prsut/sunka: 110kcal, 18g B | Puranja sunka: 90kcal, 17g B | Piscancja prsa v ovitku: 85kcal, 16g B | Kraski prsut: 260kcal, 26g B | Hrenovka: 280kcal, 12g B | Cevapci surovi: 250kcal, 15g B
 
-RIBE IN MORSKI SADEŽI (na 100g):
-Losos svež: 208kcal, 20g B | Tuna svež: 130kcal, 29g B | Tuna v lastnem soku: 116kcal, 25g B | Tuna v olju odcejena: 198kcal, 24g B | Skuša sveža: 305kcal, 19g B | Oslić: 90kcal, 17g B | Postrv: 148kcal, 21g B | Brancin: 97kcal, 18g B | Sardine v olju: 208kcal, 24g B | Tilapija: 128kcal, 26g B | Trska: 82kcal, 18g B | Kozice: 99kcal, 24g B | Losos prekajen: 117kcal, 23g B
+RIBE (na 100g):
+Losos svez: 208kcal, 20g B | Tuna v lastnem soku: 116kcal, 25g B | Tuna v olju: 198kcal, 24g B | Skusa sveza: 305kcal, 19g B | Oslic: 90kcal, 17g B | Postrv: 148kcal, 21g B | Sardine v olju: 208kcal, 24g B | Tilapija: 128kcal, 26g B | Trska: 82kcal, 18g B | Kozice: 99kcal, 24g B
 
-MLEČNI IZDELKI (na 100g):
-Mleko 3.5%: 64kcal, 3.3g B | Mleko 1.5%: 47kcal, 3.4g B | Grški jogurt 0%: 59kcal, 10g B | Grški jogurt 2%: 75kcal, 9.5g B | Skyr: 65kcal, 11g B | Pusta skuta: 72kcal, 12g B | Sir Cottage light: 70kcal, 12g B | Sir Cottage: 98kcal, 11g B | Mozzarella light: 165kcal, 20g B | Mozzarella polnomastna: 280kcal, 20g B | Parmezan: 431kcal, 38g B | Feta: 264kcal, 14g B | Sojin jogurt: 50kcal, 4g B | Ovseni napitek: 42kcal, 1g B | Mandljev napitek: 13kcal, 0.4g B | Sojin napitek: 33kcal, 3.3g B | Kefir: 62kcal, 3.3g B
+MLECNI IZDELKI (na 100g):
+Mleko 3.5%: 64kcal, 3.3g B | Grski jogurt 0%: 59kcal, 10g B | Grski jogurt 2%: 75kcal, 9.5g B | Skyr: 65kcal, 11g B | Pusta skuta: 72kcal, 12g B | Sir Cottage light: 70kcal, 12g B | Mozzarella light: 165kcal, 20g B | Parmezan: 431kcal, 38g B | Feta: 264kcal, 14g B | Ovseni napitek: 42kcal, 1g B | Mandljev napitek: 13kcal, 0.4g B | Kefir: 62kcal, 3.3g B
 
 JAJCA (na 100g):
-Kokošje jajce celo: 155kcal, 13g B | Jajčni beljak: 52kcal, 11g B | Jajčni rumenjak: 322kcal, 16g B
+Kokonje jajce celo: 155kcal, 13g B | Jajcni beljak: 52kcal, 11g B
 
 ZELENJAVA (na 100g surovo):
-Brokoli: 34kcal, 2.8g B | Špinača: 23kcal, 2.9g B | Paprika rdeča: 31kcal, 1g B | Paprika zelena: 20kcal, 0.9g B | Kumara: 15kcal, 0.7g B | Paradižnik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Zelje belo: 25kcal, 1.3g B | Rukola: 25kcal, 2.6g B | Cvetača: 25kcal, 1.9g B | Bučka: 17kcal, 1.2g B | Stročji fižol: 31kcal, 1.8g B | Grah zelen: 81kcal, 5.4g B | Šparglji: 20kcal, 2.2g B | Šampinjoni: 22kcal, 3.1g B | Čebula: 40kcal, 1.1g B | Sladki krompir surovi: 86kcal, 1.6g B | Rdeča pesa: 43kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Ledenka solata: 14kcal, 0.9g B | Zelena solata: 14kcal, 1.2g B
+Brokoli: 34kcal, 2.8g B | Spinaca: 23kcal, 2.9g B | Paprika rdeca: 31kcal, 1g B | Kumara: 15kcal, 0.7g B | Paradiznik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Rukola: 25kcal, 2.6g B | Cvetaca: 25kcal, 1.9g B | Bucka: 17kcal, 1.2g B | Sampinjoni: 22kcal, 3.1g B | Cebula: 40kcal, 1.1g B | Sladki krompir: 86kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Sparglji: 20kcal, 2.2g B
 
-STROČNICE (na 100g):
-Fižol kuhan: 127kcal, 8.7g B | Čičerika kuhana: 164kcal, 8.9g B | Leča kuhana: 116kcal, 9g B | Tofu trd: 144kcal, 15g B | Tempeh: 192kcal, 19g B | Edamame kuhana: 121kcal, 11.9g B | Humus: 300kcal, 7g B | Sojini koščki: 330kcal, 50g B
+STROCNICE (na 100g):
+Fizol kuhan: 127kcal, 8.7g B | Cicerika kuhana: 164kcal, 8.9g B | Leca kuhana: 116kcal, 9g B
 
 SADJE (na 100g):
-Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Hruška: 57kcal, 0.4g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Maline: 52kcal, 1.2g B | Pomaranča: 47kcal, 0.9g B | Avokado: 160kcal, 2g B | Mango: 60kcal, 0.8g B | Kivi: 61kcal, 1.1g B | Grozdje: 69kcal, 0.7g B | Breskev: 39kcal, 0.9g B | Lubenica: 30kcal, 0.6g B
+Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Avokado: 160kcal, 2g B | Pomaranca: 47kcal, 0.9g B | Kivi: 61kcal, 1.1g B
 
-ŽITA IN OGLJIKOVI HIDRATI (na 100g suho/surovo):
-Beli riž: 360kcal, 7g B | Rjavi riž: 367kcal, 7.5g B | Basmati riž: 345kcal, 8.5g B | Ovseni kosmiči: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kaša: 343kcal, 13g B | Kuskus: 376kcal, 12.8g B | Bulgur: 342kcal, 12.3g B | Polenta: 362kcal, 7.5g B
+ZITA (na 100g suho):
+Beli riz: 360kcal, 7g B | Basmati riz: 345kcal, 8.5g B | Ovseni kosmicci: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kasa: 343kcal, 13g B
 
-KRUH IN PECIVO (na 100g):
-Beli kruh: 266kcal, 8.8g B | Polnozrnati kruh: 250kcal, 9.7g B | Rženi kruh: 259kcal, 8.5g B | Toast beli: 285kcal, 8.3g B | Toast polnozrnat: 260kcal, 9g B | Tortilja pšenična: 310kcal, 8g B | Riževi vaflji: 385kcal, 8g B
+KRUH (na 100g):
+Polnozrnati kruh: 250kcal, 9.7g B | Toast polnozrnat: 260kcal, 9g B | Toast beli: 285kcal, 8.3g B | Tortilja psenicna: 310kcal, 8g B
 
-OREŠČKI IN SEMENA (na 100g):
-Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arašidi praženi: 587kcal, 26g B | Indijski oreščki: 553kcal, 18g B | Arašidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Lanena semena: 534kcal, 18g B | Sončnična semena: 584kcal, 21g B | Bučna semena: 559kcal, 30g B
+ORESKI (na 100g):
+Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arasidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Soncnicna semena: 584kcal, 21g B
 
-OLJA IN MAŠČOBE (na 100g):
-Oljčno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B | Kokosovo olje: 862kcal, 0g B
+OLJA (na 100g):
+Oljcno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B
 
 DODATKI (na 100g):
-Med: 304kcal, 0.3g B | Gorčica: 66kcal, 4g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B | Kakav grenki: 380kcal, 20g B
+Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B
 `;
 
-const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike TOČNO v svojem stilu.
+const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises jedilnike v svojem stilu.
 
-=== SLOG PISANJA — STROGA PRAVILA ===
+JEZIK: Knjizna slovenscina s sumniki. Brez emojijev. Pravilna locila. Stevilke s presledkom (114 g). Brez anglicizmov.
+TON: Strokoven, direkten, oseben. Naslavlja z imenom in "ti".
 
-JEZIK:
-- Piši izključno v knjižni slovenščini s pravilnimi šumniki (č, š, ž, ć itd.)
-- Brez anglicizmov, brez pogovornih izrazov, brez slenga
-- Pravilna ločila: vejice, pike, pomišljaji
-- Številke: "114 g" (s presledkom), "0,5 kg" (z vejico), "10–15 tisoč korakov" (z dolgim pomišljajem)
-- Brez emojijev — nikoli, nobenih
+ADAPTATIONS (3-5 povedi): Razlozi podatke, kalorije, TDEE, deficit, beljakovine, preference.
+INTRO (4-6 povedi): Strategija, pomen beljakovin, deficit, realna pricakovanja, doslednost.
 
-TON:
-- Strokoven, direkten, oseben
-- Naslavljaj stranko z imenom in z "ti"
-- Brez pretiranega hvaljenja, brez marketinškega jezika
-- Povedi so polne in slovnično pravilne
+NACELA: Deficit 500 kcal = 0,5 kg/teden. Beljakovine 1,8-2,2 g/kg. 25-40 g na obrok.
 
-STRUKTURA "adaptations" (3–5 povedi):
-- Razloži na podlagi katerih podatkov je plan sestavljen
-- Omeni izračunane kalorije, TDEE in deficit
-- Omeni ciljni vnos beljakovin in zakaj
-- Omeni upoštevane preference in omejitve
+PREPOVEDANA ZIVILA: Nikoli ne vkljuci humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koscki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
 
-STRUKTURA "intro" (4–6 povedi):
-- Pojasni strategijo in pristop
-- Omeni pomen beljakovin in kalorijskega deficita
-- Postavi realna pričakovanja
-- Zaključi z navodilom o sledenju in doslednosti
+const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises trening programe v svojem stilu.
 
-=== VSEBINSKA NAČELA ===
-- Kalorijski deficit = EDINI dokazani mehanizem izgube telesne maščobe
-- Optimalni deficit: 500 kcal/dan → približno 0,5 kg izgube na teden
-- Beljakovine: 1,8–2,2 g na kilogram telesne mase
-- Proteini enakomerno razporejeni čez dan: 25–40 g na obrok
-- Ne vključuj živil, ki jih stranka ne mara ali nanje ni alergična`;
+JEZIK: Knjizna slovenscina s sumniki. Nazivi vaj v anglescini. Brez emojijev.
+TON: Strokoven, direkten - naslavlja z imenom in "ti".
 
-function parseMealTallyData(body) {
+INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razlozi split, ogrevanje, intenzivnost (blizu tehnicne odpovedi), pocitek (2-3 min vecje vaje, 60-90 sek izolacijske), progresivno obremenitev, poskodbe. Zakljuci z doslednostjo.
+
+NACELA: 1-2 seriji do odpovedi zadoscata. 6-10 reps vecje vaje, 10-15 izolacijske. Tehnika > teza.
+SPLITI: 3x=PPL, 4x=UPPER/LOWER, 5x=UPPER/LOWER/ARMS+SHOULDERS.`;
+
+function parseCombinedTallyData(body) {
   const fields = body?.data?.fields ?? [];
   const get = (label) =>
     fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
@@ -146,16 +125,23 @@ function parseMealTallyData(body) {
   };
 
   return {
-    name:      get("ime in priimek") || get("ime"),
-    age:       get("starost"),
-    weight:    get("teža"),
-    height:    get("višina"),
-    goal:      get("cilj"),
-    likes:     get("kaj rad") || get("čim več podatkov, ker bo jedilnik"),
-    dislikes:  get("ne maraš") || get("katere hrane"),
-    meals:     get("koliko obrokov"),
-    allergies: get("alergije") || get("dodaj še"),
-    activity:  getChoice("korakov"),
+    name:          get("ime in priimek") || get("ime"),
+    age:           get("starost"),
+    weight:        get("teza") || get("teža"),
+    height:        get("visina") || get("višina"),
+    goal:          get("cilj"),
+    activity:      getChoice("korakov") || get("korakov") || get("aktivnost"),
+    likes:         get("kaj rad") || get("jedilnik na podlagi"),
+    dislikes:      get("hrane ne maras") || get("katere hrane"),
+    meals:         get("koliko obrokov"),
+    allergies:     get("alergije") || get("preference glede jedilnika") || get("dodaj se karkoli drugega kar zelis dodat glede"),
+    location:      get("kje zelis trenirati") || get("kje"),
+    equipment:     get("opremo imas") || get("oprema"),
+    exDislikes:    get("katerih vaj ne maras") || get("vaj ne maras"),
+    exLikes:       get("katere vaje imas rad") || get("vaje imas rad"),
+    frequency:     get("kolikokrat") || get("dni"),
+    injuries:      get("poskodbe") || get("zdravje"),
+    trainingNotes: get("sestave treninga"),
   };
 }
 
@@ -169,111 +155,101 @@ async function generateMealPlan(userData) {
   const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
 
   let activityMultiplier = 1.375;
-  if      (userData.activity.includes("0-3k"))   activityMultiplier = 1.2;
-  else if (userData.activity.includes("3-5k"))   activityMultiplier = 1.375;
-  else if (userData.activity.includes("5-7k"))   activityMultiplier = 1.375;
-  else if (userData.activity.includes("7-10k"))  activityMultiplier = 1.55;
-  else if (userData.activity.includes("10-15k")) activityMultiplier = 1.55;
-  else if (userData.activity.includes("20k"))    activityMultiplier = 1.725;
+  const act = userData.activity.toLowerCase();
+  if (act.includes("0-3k") || act.includes("malo")) activityMultiplier = 1.2;
+  else if (act.includes("3-5k")) activityMultiplier = 1.375;
+  else if (act.includes("5-7k") || act.includes("srednje")) activityMultiplier = 1.375;
+  else if (act.includes("7-10k") || act.includes("veliko")) activityMultiplier = 1.55;
+  else if (act.includes("10-15k") || act.includes("zelo veliko")) activityMultiplier = 1.55;
+  else if (act.includes("20k")) activityMultiplier = 1.725;
 
   const tdee = Math.round(bmr * activityMultiplier);
 
   const goalLower = userData.goal.toLowerCase();
   let targetCalories, planType;
   if (goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub")) {
-    targetCalories = tdee - 500;
-    planType = "CUT";
+    targetCalories = tdee - 500; planType = "CUT";
   } else if (goalLower.includes("masa") || goalLower.includes("bulk") || goalLower.includes("pridobi")) {
-    targetCalories = tdee + 300;
-    planType = "BULK";
+    targetCalories = tdee + 300; planType = "BULK";
   } else {
-    targetCalories = tdee;
-    planType = "MAINTAIN";
+    targetCalories = tdee; planType = "MAINTAIN";
   }
 
   const targetProtein = Math.round(weight * 2.0);
 
-  const prompt = `Ustvari 3-dnevni prehranski načrt za stranko. Vrni SAMO čisti JSON brez kakršnegakoli besedila pred ali za njim.
+  const prompt = `Ustvari 3-dnevni prehranski nacrt. Vrni SAMO cisti JSON.
 
-BAZA ŽIVIL — uporabi te vrednosti za izračun kalorij in beljakovin:
+BAZA ZIVIL:
 ${FOOD_DB}
 
-ŽE IZRAČUNANI PODATKI (Mifflin-St Jeor):
-- BMR: ${Math.round(bmr)} kcal
-- TDEE: ${tdee} kcal
-- Cilj kalorije: ${targetCalories} kcal/dan (${planType}, deficit ${tdee - targetCalories} kcal)
-- Cilj beljakovine: ${targetProtein} g/dan (2,0 g × ${weight} kg)
-- Število obrokov: ${mealsCount} na dan
+IZRACUNANI PODATKI:
+- BMR: ${Math.round(bmr)} kcal | TDEE: ${tdee} kcal | Cilj: ${targetCalories} kcal (${planType}) | Beljakovine: ${targetProtein} g
 
-PODATKI STRANKE:
-- Ime: ${name}
-- Starost: ${age} let | Teža: ${weight} kg | Višina: ${height} cm
-- Cilj: ${userData.goal}
-- Rad/a je: ${userData.likes}
-- Ne mara: ${userData.dislikes}
-- Alergije/preference: ${userData.allergies}
-- Dnevna aktivnost: ${userData.activity} korakov na dan
+STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}
+Rad je: ${userData.likes} | Ne mara: ${userData.dislikes} | Obroki: ${mealsCount} | Alergije: ${userData.allergies}
 
-Vrni TOČNO to JSON strukturo:
+JSON struktura:
 {
-  "summary": {
-    "calories_per_day": ${targetCalories},
-    "protein_per_day": ${targetProtein},
-    "meals_per_day": ${mealsCount},
-    "goal": "${userData.goal}",
-    "plan_type": "${planType}"
-  },
-  "adaptations": "3–5 povedi v knjižni slovenščini s šumniki. Brez emojijev. Omeni ${targetCalories} kcal, TDEE ${tdee} kcal, deficit, ${targetProtein} g beljakovin, aktivnost, preference. Naslavljaj ${name} z imenom.",
-  "intro": "4–6 povedi v knjižni slovenščini s šumniki. Brez emojijev. Pomen beljakovin, kalorijski deficit, realna pričakovanja (0,5 kg na teden), doslednost.",
-  "days": [
-    {
-      "day": 1,
-      "calories": ${targetCalories},
-      "protein": ${targetProtein},
-      "meals": [
-        {
-          "number": 1,
-          "name": "ZAJTRK",
-          "calories": 500,
-          "protein": 35,
-          "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)", "2 jajci (171 kcal, 14,3 g B)"]
-        }
-      ]
-    }
-  ]
+  "summary": { "calories_per_day": ${targetCalories}, "protein_per_day": ${targetProtein}, "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
+  "adaptations": "3-5 povedi, knjizna slovenscina, sumniki, brez emojijev, naslavlja ${name}",
+  "intro": "4-6 povedi, knjizna slovenscina, sumniki, brez emojijev",
+  "days": [{ "day": 1, "calories": ${targetCalories}, "protein": ${targetProtein}, "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmiccev (389 kcal, 13,5 g B)"] }] }]
 }
 
-PRAVILA:
-- Vsak dan TOČNO ${mealsCount} obrokov
-- Obroki: ZAJTRK, DOPOLDANSKA MALICA, KOSILO, POPOLDANSKA MALICA, VEČERJA, POZNA VEČERJA
-- 3–6 sestavin z gramažo in kalorijami v oklepaju
-- Skupne kalorije: ${targetCalories} kcal (±50)
-- Skupne beljakovine: ${targetProtein} g (±10)
-- NE vključuj: ${userData.dislikes} in ${userData.allergies}
-- Vrni SAMO JSON`;
+PRAVILA: ${mealsCount} obrokov/dan, 3-6 sestavin z gramayo in kcal v oklepaju, NE vkljuci: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame. SAMO JSON.`;
 
-  const response = await axios.post(
-    "https://api.anthropic.com/v1/messages",
-    {
-      model: MODEL,
-      max_tokens: 4096,
-      system: MEAL_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: prompt }],
-    },
-    {
-      headers: {
-        "x-api-key":         ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type":      "application/json",
-      },
-      timeout: 120000,
-    }
-  );
+  const response = await axios.post("https://api.anthropic.com/v1/messages", {
+    model: MODEL, max_tokens: 4096,
+    system: MEAL_SYSTEM_PROMPT,
+    messages: [{ role: "user", content: prompt }],
+  }, {
+    headers: { "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    timeout: 120000,
+  });
 
-  const textBlock = response.data?.content?.find((b) => b.type === "text");
-  if (!textBlock?.text) throw new Error("Anthropic vrnil prazen odgovor.");
-  const clean = textBlock.text.replace(/```json|```/g, "").trim();
-  return JSON.parse(clean);
+  const text = response.data?.content?.find((b) => b.type === "text")?.text;
+  if (!text) throw new Error("Prazen odgovor");
+  return JSON.parse(text.replace(/```json|```/g, "").trim());
+}
+
+async function generateTrainingPlan(userData) {
+  const name = userData.name !== "ni podatka" ? userData.name : "stranka";
+  const days = parseInt(userData.frequency) || 3;
+
+  let splitType, splitDesc;
+  if (days <= 3) { splitType = "PUSH / PULL / LEGS"; splitDesc = "3 dni na teden"; }
+  else if (days === 4) { splitType = "UPPER / LOWER"; splitDesc = "4 dni na teden"; }
+  else { splitType = "UPPER / LOWER / ARMS + SHOULDERS"; splitDesc = "5 dni na teden"; }
+
+  const prompt = `Ustvari personaliziran trening program. Vrni SAMO cisti JSON.
+
+STRANKA: ${name}, lokacija: ${userData.location}, oprema: ${userData.equipment}
+Ne mara vaj: ${userData.exDislikes} | Ima rad: ${userData.exLikes}
+Treningov/teden: ${days} | Poskodbe: ${userData.injuries} | Opombe: ${userData.trainingNotes}
+SPLIT: ${splitType}
+
+JSON struktura:
+{
+  "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
+  "intro": "8-12 povedi, knjizna slovenscina, sumniki, brez emojijev. Zacni z 'Ta trening program je pripravljen glede na...'",
+  "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Poccitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Cetrtek", "workout": "Poccitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Poccitek" }, { "day": "Nedelja", "workout": "Poccitek" }],
+  "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
+}
+
+PRAVILA: 4-6 vaj/dan, prilagodi lokaciji (doma=brez naprav), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. SAMO JSON.`;
+
+  const response = await axios.post("https://api.anthropic.com/v1/messages", {
+    model: MODEL, max_tokens: 4096,
+    system: TRAINING_SYSTEM_PROMPT,
+    messages: [{ role: "user", content: prompt }],
+  }, {
+    headers: { "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    timeout: 120000,
+  });
+
+  const text = response.data?.content?.find((b) => b.type === "text")?.text;
+  if (!text) throw new Error("Prazen odgovor");
+  return JSON.parse(text.replace(/```json|```/g, "").trim());
 }
 
 function generateMealPDF(userData, plan) {
@@ -305,7 +281,7 @@ function generateMealPDF(userData, plan) {
       y += 32;
     }
 
-    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.plan_type} · ${plan.summary.meals_per_day}x OBROK`, M, y, { align: "center", width: CW, characterSpacing: 2 });
+    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.plan_type} - ${plan.summary.meals_per_day}x OBROK`, M, y, { align: "center", width: CW, characterSpacing: 2 });
     y += 30;
     doc.rect(M, y, CW, 2).fill(RED);
     y += 18;
@@ -335,19 +311,18 @@ function generateMealPDF(userData, plan) {
 
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
-    doc.fontSize(10).fillColor(WHITE).font(BD).text(`${plan.days.length} DNI  ·  ${plan.days.length * plan.summary.meals_per_day} OBROKOV  ·  POPOLN JEDILNIK`, M, y, { align: "center", width: CW, characterSpacing: 1 });
+    doc.fontSize(10).fillColor(WHITE).font(BD).text(`${plan.days.length} DNI  -  ${plan.days.length * plan.summary.meals_per_day} OBROKOV  -  POPOLN JEDILNIK`, M, y, { align: "center", width: CW, characterSpacing: 1 });
     doc.rect(0, H - 6, W, 6).fill(RED);
 
     plan.days.forEach((day) => {
-      doc.addPage();
-      fillBg();
+      doc.addPage(); fillBg();
       doc.rect(0, 0, W, 6).fill(RED);
       doc.rect(0, H - 6, W, 6).fill(RED);
 
       let dy = 25;
       doc.rect(M, dy, CW, 42).fill(RED);
       doc.fontSize(13).fillColor(WHITE).font(BD).text(`DAN ${day.day}`, M + 12, dy + 8);
-      doc.fontSize(10).fillColor(WHITE).font(RB).text(`${day.calories} kcal  ·  ${day.protein} g beljakovin  ·  ${day.meals.length} obroki`, M + 12, dy + 26);
+      doc.fontSize(10).fillColor(WHITE).font(RB).text(`${day.calories} kcal  -  ${day.protein} g beljakovin  -  ${day.meals.length} obroki`, M + 12, dy + 26);
       doc.fontSize(9).fillColor(WHITE).font(BD).text("STRENGTH AND HONOR", M, dy + 17, { width: CW - 12, align: "right", characterSpacing: 1 });
       dy += 52;
 
@@ -359,8 +334,7 @@ function generateMealPDF(userData, plan) {
           doc.rect(0, H - 6, W, 6).fill(RED);
           dy = 30;
         }
-        const bg = i % 2 === 0 ? DARK_CARD : DARK_ROW;
-        doc.rect(M, dy, CW, mealH).fill(bg);
+        doc.rect(M, dy, CW, mealH).fill(i % 2 === 0 ? DARK_CARD : DARK_ROW);
         doc.rect(M, dy, 4, mealH).fill(RED);
         doc.fontSize(20).fillColor(RED).font(BD).text(String(meal.number).padStart(2, "0"), M + 14, dy + 8);
         doc.fontSize(10).fillColor(WHITE).font(BD).text(meal.name, M + 14, dy + 34);
@@ -368,7 +342,7 @@ function generateMealPDF(userData, plan) {
         const divX = M + 140;
         doc.rect(divX, dy + 10, 1, mealH - 20).fill(RED);
         meal.ingredients.forEach((ing, idx) => {
-          doc.fontSize(10).fillColor(LIGHT).font(RB).text(`• ${ing}`, divX + 14, dy + 12 + idx * 18, { width: CW - 160 });
+          doc.fontSize(10).fillColor(LIGHT).font(RB).text(`- ${ing}`, divX + 14, dy + 12 + idx * 18, { width: CW - 160 });
         });
         dy += mealH + 6;
       });
@@ -376,137 +350,6 @@ function generateMealPDF(userData, plan) {
 
     doc.end();
   });
-}
-
-async function sendMealEmail(userData, pdfBuffer) {
-  const name = userData.name !== "ni podatka" ? userData.name : "stranka";
-  await axios.post("https://api.resend.com/emails", {
-    from: "Meal Planner <onboarding@resend.dev>",
-    to: NOTIFY_EMAIL,
-    subject: `🥗 ${name} — nov načrt prehrane | ${userData.goal} | ${userData.weight} kg`,
-    html: `<div style="font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;"><h2 style="color:#CC1F1F;">GAL REMEC COACHING</h2><p>Nov načrt prehrane za <strong>${name}</strong> je pripravljen. PDF je v priponki.</p></div>`,
-    attachments: [{ filename: `meal-plan-${name.replace(/ /g, "-")}.pdf`, content: pdfBuffer.toString("base64") }],
-  }, { headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" } });
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// TRAINING PLAN
-// ══════════════════════════════════════════════════════════════════════════════
-
-const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš personaliziran trening program za stranko.
-
-=== SLOG PISANJA — STROGA PRAVILA ===
-- Piši izključno v knjižni slovenščini s pravilnimi šumniki (č, š, ž itd.)
-- Nazivi vaj so lahko v angleščini
-- Brez emojijev — nikoli, nobenih
-- Strokoven, direkten, oseben — naslavljaj z imenom in "ti"
-
-STRUKTURA "intro" (8–12 povedi) — POSNEMAJ TA SLOG:
-"Ta trening program je pripravljen glede na tvojo starost, telesno maso, trenutno stopnjo aktivnosti in cilje, ki si jih navedel."
-"Program je razdeljen na [X] ločene enote..."
-"Pred vsakim treningom si vzemi 5 do 10 minut za ogrevanje."
-"Vsaka delovna serija mora biti resna serija. Teža mora biti izbrana tako, da zadnjo ponovitev v predpisanem razponu dosežeš blizu tehnične odpovedi."
-"Počitek med serijami naj bo dovolj dolg..."
-"Progresivna obremenitev je edini način za dolgoročen napredek."
-"Na koncu je najpomembnejša doslednost."
-
-=== VSEBINSKO ZNANJE ===
-- 1–2 delovni seriji do čiste mišične odpovedi zadoščata
-- 6–10 ponovitev za večje vaje, 10–15 za izolacijske
-- Počitek 2–3 minute pri večjih vajah, 60–90 sekund pri izolacijskih
-- Progresivna obremenitev = edini način za napredek
-- Tehnika > teža vedno
-- 3x/teden: PUSH/PULL/LEGS | 4x: UPPER/LOWER | 5x: UPPER/LOWER/ARMS+SHOULDERS
-- Za dom: push-ups variacije, pull-ups, dips, pistol squats, Bulgarian split squats`;
-
-function parseTrainingTallyData(body) {
-  const fields = body?.data?.fields ?? [];
-  const get = (label) =>
-    fields.find((f) => f.label?.toLowerCase().includes(label.toLowerCase()))?.value ?? "ni podatka";
-
-  return {
-    name:      get("ime in priimek") || get("ime"),
-    location:  get("kje želiš trenirati") || get("kje"),
-    equipment: get("opremo imaš") || get("oprema"),
-    dislikes:  get("ne maraš") || get("katerih vaj"),
-    likes:     get("imaš rad") || get("katere vaje imaš"),
-    frequency: get("kolikokrat") || get("dni"),
-    injuries:  get("poškodbe") || get("zdravje"),
-  };
-}
-
-async function generateTrainingPlan(userData) {
-  const name = userData.name !== "ni podatka" ? userData.name : "stranka";
-  const days = parseInt(userData.frequency) || 3;
-
-  let splitType, splitDesc;
-  if (days <= 3) { splitType = "PUSH / PULL / LEGS"; splitDesc = "3 dni na teden"; }
-  else if (days === 4) { splitType = "UPPER / LOWER"; splitDesc = "4 dni na teden"; }
-  else { splitType = "UPPER / LOWER / ARMS + SHOULDERS"; splitDesc = "5 dni na teden"; }
-
-  const prompt = `Ustvari personaliziran trening program. Vrni SAMO čisti JSON brez besedila pred ali za njim.
-
-PODATKI STRANKE:
-- Ime: ${name}
-- Lokacija: ${userData.location}
-- Oprema: ${userData.equipment}
-- Ne mara vaj: ${userData.dislikes}
-- Ima rad/a vaje: ${userData.likes}
-- Treningov na teden: ${days}
-- Poškodbe: ${userData.injuries}
-
-SPLIT: ${splitType} (${splitDesc})
-
-Vrni TOČNO to JSON strukturo:
-{
-  "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
-  "intro": "8–12 povedi v knjižni slovenščini s šumniki. Brez emojijev. Začni z 'Ta trening program je pripravljen glede na...' Razloži split, ogrevanje, intenzivnost, počitek, progresijo, poškodbe če obstajajo. Zaključi z doslednostjo.",
-  "schedule": [
-    { "day": "Ponedeljek", "workout": "PUSH" },
-    { "day": "Torek", "workout": "Počitek" },
-    { "day": "Sreda", "workout": "PULL" },
-    { "day": "Četrtek", "workout": "Počitek" },
-    { "day": "Petek", "workout": "LEGS" },
-    { "day": "Sobota", "workout": "Počitek" },
-    { "day": "Nedelja", "workout": "Počitek" }
-  ],
-  "workouts": [
-    {
-      "name": "PUSH",
-      "exercises": [
-        { "name": "Smith machine bench press", "sets_reps": "2 × 6–10", "note": "Kontroliran spust, stabilna izvedba." }
-      ]
-    }
-  ]
-}
-
-PRAVILA:
-- Prilagodi glede na lokacijo: doma = brez naprav, fitnes = naprave + uteži
-- NE vključuj: ${userData.dislikes}
-- Vključi: ${userData.likes}
-- Prilagodi poškodbe: ${userData.injuries}
-- 4–6 vaj na trening dan
-- schedule vsebuje vseh 7 dni
-- Vrni SAMO JSON`;
-
-  const response = await axios.post(
-    "https://api.anthropic.com/v1/messages",
-    {
-      model: MODEL,
-      max_tokens: 4096,
-      system: TRAINING_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: prompt }],
-    },
-    {
-      headers: { "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-      timeout: 120000,
-    }
-  );
-
-  const textBlock = response.data?.content?.find((b) => b.type === "text");
-  if (!textBlock?.text) throw new Error("Anthropic vrnil prazen odgovor.");
-  const clean = textBlock.text.replace(/```json|```/g, "").trim();
-  return JSON.parse(clean);
 }
 
 function generateTrainingPDF(userData, plan) {
@@ -538,7 +381,7 @@ function generateTrainingPDF(userData, plan) {
       y += 32;
     }
 
-    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.split}  ·  ${plan.summary.split_desc.toUpperCase()}`, M, y, { align: "center", width: CW, characterSpacing: 2 });
+    doc.fontSize(11).fillColor(GRAY).font(RB).text(`${plan.summary.split}  -  ${plan.summary.split_desc.toUpperCase()}`, M, y, { align: "center", width: CW, characterSpacing: 2 });
     y += 30;
     doc.rect(M, y, CW, 2).fill(RED);
     y += 18;
@@ -572,7 +415,7 @@ function generateTrainingPDF(userData, plan) {
     y += 16;
 
     plan.schedule.forEach((item, i) => {
-      const isRest = item.workout.toLowerCase().includes("počitek");
+      const isRest = item.workout.toLowerCase().includes("poc");
       doc.rect(M, y, CW, 26).fill(i % 2 === 0 ? DARK_CARD : DARK_ROW);
       doc.rect(M, y, 4, 26).fill(isRest ? GRAY : RED);
       doc.fontSize(9).fillColor(WHITE).font(BD).text(item.day.toUpperCase(), M + 14, y + 8, { width: 100 });
@@ -598,14 +441,12 @@ function generateTrainingPDF(userData, plan) {
       workout.exercises.forEach((ex, i) => {
         const noteH = ex.note ? doc.heightOfString(ex.note, { width: CW - 175, lineGap: 3 }) + 8 : 0;
         const exH = Math.max(72, 44 + noteH);
-
         if (dy + exH > H - 50) {
           doc.addPage(); fillBg();
           doc.rect(0, 0, W, 6).fill(RED);
           doc.rect(0, H - 6, W, 6).fill(RED);
           dy = 30;
         }
-
         doc.rect(M, dy, CW, exH).fill(i % 2 === 0 ? DARK_CARD : DARK_ROW);
         doc.rect(M, dy, 4, exH).fill(RED);
         doc.fontSize(18).fillColor(RED).font(BD).text(String(i + 1).padStart(2, "0"), M + 12, dy + 8);
@@ -624,69 +465,52 @@ function generateTrainingPDF(userData, plan) {
   });
 }
 
-async function sendTrainingEmail(userData, pdfBuffer) {
+async function sendCombinedEmail(userData, mealPDF, trainingPDF) {
   const name = userData.name !== "ni podatka" ? userData.name : "stranka";
   await axios.post("https://api.resend.com/emails", {
-    from: "Training Planner <onboarding@resend.dev>",
+    from: "Plan Generator <onboarding@resend.dev>",
     to: NOTIFY_EMAIL,
-    subject: `💪 ${name} — nov trening program | ${userData.frequency}x na teden | ${userData.location}`,
-    html: `<div style="font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;"><h2 style="color:#CC1F1F;">GAL REMEC COACHING</h2><p>Nov trening program za <strong>${name}</strong> je pripravljen. PDF je v priponki.</p></div>`,
-    attachments: [{ filename: `trening-program-${name.replace(/ /g, "-")}.pdf`, content: pdfBuffer.toString("base64") }],
+    subject: `${name} - jedilnik + trening program`,
+    html: `<div style="font-family:Arial,sans-serif;background:#111;color:#fff;padding:30px;border-radius:8px;"><h2 style="color:#CC1F1F;">GAL REMEC COACHING</h2><p>Jedilnik in trening program za <strong>${name}</strong> sta pripravljena. Oba PDFja sta v priponki.</p><table style="margin-top:16px;"><tr><td style="color:#888;padding:4px 12px 4px 0">Ime:</td><td>${name}</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Cilj:</td><td>${userData.goal}</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Teza:</td><td>${userData.weight} kg</td></tr><tr><td style="color:#888;padding:4px 12px 4px 0">Treningi:</td><td>${userData.frequency}x na teden | ${userData.location}</td></tr></table></div>`,
+    attachments: [
+      { filename: `jedilnik-${name.replace(/ /g, "-")}.pdf`, content: mealPDF.toString("base64") },
+      { filename: `trening-${name.replace(/ /g, "-")}.pdf`, content: trainingPDF.toString("base64") },
+    ],
   }, { headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" } });
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ROUTES
-// ══════════════════════════════════════════════════════════════════════════════
-
 app.get("/health", (req, res) => {
-  res.json({ status: "ok", model: MODEL, endpoints: ["/webhook", "/webhook-training"] });
+  res.json({ status: "ok", model: MODEL, endpoints: ["/webhook-combined"] });
 });
 
-app.post("/webhook", async (req, res) => {
-  console.log("📥 Meal webhook received");
+app.post("/webhook-combined", async (req, res) => {
+  console.log("Webhook combined received");
   res.status(200).json({ received: true });
-  const userData = parseMealTallyData(req.body);
-  console.log("👤 Meal user data:", userData);
+  const userData = parseCombinedTallyData(req.body);
+  console.log("User:", userData.name, userData.goal);
   try {
-    const plan = await generateMealPlan(userData);
-    console.log("✅ Meal plan generated:", plan.summary);
-    const pdfBuffer = await generateMealPDF(userData, plan);
-    console.log("✅ Meal PDF generated:", pdfBuffer.length, "bytes");
-    await sendMealEmail(userData, pdfBuffer);
-    console.log("📧 Meal email sent to:", NOTIFY_EMAIL);
+    console.log("Generating meal plan...");
+    const mealPlan = await generateMealPlan(userData);
+    console.log("Meal plan done");
+    console.log("Generating training plan...");
+    const trainingPlan = await generateTrainingPlan(userData);
+    console.log("Training plan done");
+    console.log("Generating PDFs...");
+    const mealPDF = await generateMealPDF(userData, mealPlan);
+    const trainingPDF = await generateTrainingPDF(userData, trainingPlan);
+    console.log("PDFs done");
+    await sendCombinedEmail(userData, mealPDF, trainingPDF);
+    console.log("Email sent to:", NOTIFY_EMAIL);
   } catch (err) {
-    console.error("❌ Meal error:", err.response?.data || err.message);
+    console.error("Error:", err.response?.data || err.message);
   }
 });
-
-app.post("/webhook-training", async (req, res) => {
-  console.log("📥 Training webhook received");
-  res.status(200).json({ received: true });
-  const userData = parseTrainingTallyData(req.body);
-  console.log("👤 Training user data:", userData);
-  try {
-    const plan = await generateTrainingPlan(userData);
-    console.log("✅ Training plan generated:", plan.summary);
-    const pdfBuffer = await generateTrainingPDF(userData, plan);
-    console.log("✅ Training PDF generated:", pdfBuffer.length, "bytes");
-    await sendTrainingEmail(userData, pdfBuffer);
-    console.log("📧 Training email sent to:", NOTIFY_EMAIL);
-  } catch (err) {
-    console.error("❌ Training error:", err.response?.data || err.message);
-  }
-});
-
-// ══════════════════════════════════════════════════════════════════════════════
-// START
-// ══════════════════════════════════════════════════════════════════════════════
 
 downloadFonts().then(() => {
   app.listen(PORT, () => {
-    console.log(`🚀 Port ${PORT} | Model: ${MODEL} | API key: ${ANTHROPIC_API_KEY ? "✅" : "❌"}`);
-    console.log(`📍 Endpoints: /webhook (meal) | /webhook-training (trening)`);
+    console.log(`Port ${PORT} | Model: ${MODEL} | API key: ${ANTHROPIC_API_KEY ? "OK" : "MISSING"}`);
   });
 }).catch((err) => {
-  console.error("❌ Font download failed:", err.message);
+  console.error("Font download failed:", err.message);
   process.exit(1);
 });
