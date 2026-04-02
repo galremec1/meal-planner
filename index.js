@@ -211,8 +211,8 @@ Rad je: ${userData.likes} | Ne mara: ${userData.dislikes} | Obroki: ${mealsCount
 JSON struktura:
 {
   "summary": { "calories_per_day": ${targetCalories}, "protein_per_day": ${targetProtein}, "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
-  "adaptations": "3-5 povedi, knjizna slovenscina, sumniki, brez emojijev, naslavlja ${name}",
-  "intro": "4-6 povedi, knjizna slovenscina, sumniki, brez emojijev",
+  "adaptations": "DALJSI UVODNI DEL (8-12 povedi) v knjizni slovenscini s sumniki, brez emojijev. Naslavlja ${name}. Vsebuje: 1) Na podlagi katerih podatkov je plan sestavljen (starost, teza, visina, aktivnost, cilj). 2) Tocne kalorije (${targetCalories} kcal), TDEE (${tdee} kcal) in deficit (${tdee - targetCalories} kcal) - razlozi zakaj tak okvir. 3) Ciljne beljakovine (${targetProtein} g) in zakaj so kljucne - ohranitev misic, sitost, regeneracija. 4) Katere beljakovinske vire si vkljucil glede na preference stranke. 5) Ogljikovi hidrati - kateri viri so vkljuceni, timing pred/po treningu. 6) Upostevane preference, alergije in omejitve stranke. 7) Nasvet za sledenje kalorijam (MyFitnessPal). 8) Navodilo o zamenjavah zivil - pisc zamenjaj s puranjem, riz s krompirjem itd, dokler so kalorije in beljakovine znotraj okvirja.",
+  "intro": "ZAKLJUCNI DEL (4-6 povedi) v knjizni slovenscini s sumniki, brez emojijev. Vsebuje: 1) Napredek - kako ga meriti (telesna masa, obseg, pocutje, energija). Tehtnica lahko niha 1-2 kg na dan. 2) Doslednost - napredek ni rezultat enega dne ampak mesecev konsistentnega dela. 3) Motivacijski zakljucek.",
   "days": [{ "day": 1, "calories": ${targetCalories}, "protein": ${targetProtein}, "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmiccev (389 kcal, 13,5 g B)"] }] }]
 }
 
