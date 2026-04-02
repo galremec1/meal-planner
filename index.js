@@ -105,9 +105,15 @@ const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 5
 JEZIK: Knjizna slovenscina s sumniki. Nazivi vaj v anglescini. Brez emojijev.
 TON: Strokoven, direkten - naslavlja z imenom in "ti".
 
-INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razlozi split, ogrevanje, intenzivnost (blizu tehnicne odpovedi), pocitek (2-3 min vecje vaje, 60-90 sek izolacijske), progresivno obremenitev, poskodbe. Zakljuci z doslednostjo.
+INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razlozi split, ogrevanje, intenzivnost (blizu tehnicne odpovedi), pocitek 3-5 minut za VSE vaje brez izjeme, progresivno obremenitev, poskodbe. Zakljuci z doslednostjo.
 
 NACELA: 1-2 seriji do odpovedi zadoscata. 6-10 reps vecje vaje, 10-15 izolacijske. Tehnika > teza.
+POCITEK: 3-5 minut za VSE vaje - tako vecje kot izolacijske. Nikoli manj.
+KARDIO NAVODILA (za kardio dneve):
+- Kardio dan mora biti napisan kot workout z vajami (naprava, cas, kcal)
+- Opcije: Sobno kolo (30-45 min, 250-400 kcal, intenzivnost zmerna-visoka), Tek na tekoci stezi (25-40 min, 250-400 kcal, 8-11 km/h), Elipticni trenazjer (30-45 min, 280-400 kcal), Veslarski ergometer (20-30 min, 250-350 kcal), Stairmaster (25-35 min, 300-400 kcal), Hoja na nagnjeni tekoci stezi (35-50 min, 200-300 kcal, naklon MINIMALNO 10%, nikoli manj, hitrost 5-6 km/h)
+- Za kardio dan naredi workout z 2-3 napravami, vsaka ima: ime naprave, cas in priblizni kcal, navodila za intenzivnost
+- Hoja na tekoci stezi: naklon VEDNO minimalno 10%, nikoli manj
 SPLITI: 3x=PPL, 4x=UPPER/LOWER, 5x=UPPER/LOWER/ARMS+SHOULDERS.`;
 
 // Normalizira sumniki: ce -> c, se -> s, ze -> z itd.
@@ -251,7 +257,17 @@ JSON struktura:
 }
 
 POZOR: Ce stranka v opombah specificira tocno strukturo treninga (npr. "2x noge, 3x kardio", "samo kardio", "samo noge"), IGNORIRAJ standardni split in naredi TOCNO to kar stranka zahteva v opombah.
-PRAVILA: 4-6 vaj/dan (samo za trening dneve, ne za kardio dneve), prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi), NE vkljuci: ${userData.exDislikes}, prilagodi poskodbe: ${userData.injuries}. Za kardio dneve v schedule napisi samo "Kardio". SAMO JSON.`;
+PRAVILA:
+- 4-6 vaj/dan za trening dneve
+- Kardio dnevi = workout z 2-3 kardio napravami (naprava, cas, kcal, intenzivnost)
+- Hoja na tekoci stezi: naklon VEDNO min 10%, nikoli manj
+- Pocitek med serijami: 3-5 minut za VSE vaje
+- Prilagodi lokaciji (doma=brez naprav, fitnes=naprave+utezi)
+- NE vkljuci: ${userData.exDislikes}
+- Prilagodi poskodbe: ${userData.injuries}
+- Za kardio dneve v schedule napisi "Kardio"
+- workouts seznam mora vsebovati KARDIO kot workout dan z vajami
+- SAMO JSON`;
 
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
     model: MODEL, max_tokens: 4096,
