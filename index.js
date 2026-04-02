@@ -1,13 +1,11 @@
 import express from "express";
 import axios from "axios";
-import nodemailer from "nodemailer";
 
 const app = express();
 app.use(express.json());
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const GMAIL_USER = process.env.GMAIL_USER;
-const GMAIL_PASS = process.env.GMAIL_PASS;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL;
 const MODEL = "claude-sonnet-4-6";
 const PORT = process.env.PORT || 3000;
@@ -16,14 +14,6 @@ if (!ANTHROPIC_API_KEY) {
   console.error("❌ ANTHROPIC_API_KEY is not set.");
   process.exit(1);
 }
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: GMAIL_USER,
-    pass: GMAIL_PASS,
-  },
-});
 
 function parseTallyData(body) {
   const fields = body?.data?.fields ?? [];
@@ -87,11 +77,13 @@ Napiši konkreten 3-dnevni načrt z gramažo, dnevnimi makri in 2 nasveta. Slove
 }
 
 async function sendEmail(userData, mealPlan) {
-  await transporter.sendMail({
-    from: GMAIL_USER,
-    to: NOTIFY_EMAIL,
-    subject: `🥗 Nov načrt prehrane — ${userData.goal} | ${userData.weight}kg | ${userData.age}let`,
-    text: `
+  await axios.post(
+    "https://api.resend.com/emails",
+    {
+      from: "Meal Planner <onboarding@resend.dev>",
+      to: NOTIFY_EMAIL,
+      subject: `🥗 Nov načrt prehrane — ${userData.goal} | ${userData.weight}kg | ${userData.age}let`,
+      text: `
 PODATKI STRANKE:
 Starost: ${userData.age} let
 Teža: ${userData.weight} kg
@@ -108,8 +100,15 @@ Aktivnost: ${userData.activity} korakov/dan
 NAČRT PREHRANE:
 
 ${mealPlan}
-    `.trim(),
-  });
+      `.trim(),
+    },
+    {
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type":  "application/json",
+      },
+    }
+  );
 }
 
 app.get("/health", (req, res) => {
