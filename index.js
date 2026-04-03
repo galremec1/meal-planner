@@ -49,40 +49,40 @@ const LIGHT     = "#CCCCCC";
 
 const FOOD_DB = `
 MESO IN PERUTNINA (na 100g surovo):
-Piscancja prsa: 110kcal, 23g B | Piscancja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Teletina: 110kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B
+Piščančja prsa: 110kcal, 23g B | Piščančja stegna (brez kosti): 160kcal, 19g B | Puranja prsa: 114kcal, 24g B | Goveji zrezek (pusto): 150kcal, 22g B | Goveje meso mleto 5%: 135kcal, 21g B | Goveje meso mleto 20%: 250kcal, 17g B | Svinjski file: 143kcal, 21g B | Teletina: 110kcal, 20g B | Srna: 120kcal, 22g B | Jelenjad: 125kcal, 22g B
 
 MESNI IZDELKI (na 100g):
-Kuhan prsut/sunka: 110kcal, 18g B | Puranja sunka: 90kcal, 17g B | Piscancja prsa v ovitku: 85kcal, 16g B | Kraski prsut: 260kcal, 26g B | Hrenovka: 280kcal, 12g B | Cevapci surovi: 250kcal, 15g B
+Kuhan pršut/šunka: 110kcal, 18g B | Puranja šunka: 90kcal, 17g B | Piščančja prsa v ovitku: 85kcal, 16g B | Kraški pršut: 260kcal, 26g B | Hrenovka: 280kcal, 12g B | Čevapčiči surovi: 250kcal, 15g B
 
 RIBE (na 100g):
-Losos svez: 208kcal, 20g B | Tuna v lastnem soku: 116kcal, 25g B | Tuna v olju: 198kcal, 24g B | Skusa sveza: 305kcal, 19g B | Oslic: 90kcal, 17g B | Postrv: 148kcal, 21g B | Sardine v olju: 208kcal, 24g B | Tilapija: 128kcal, 26g B | Trska: 82kcal, 18g B | Kozice: 99kcal, 24g B
+Losos svež: 208kcal, 20g B | Tuna v lastnem soku: 116kcal, 25g B | Tuna v olju: 198kcal, 24g B | Skuša sveža: 305kcal, 19g B | Oslič: 90kcal, 17g B | Postrv: 148kcal, 21g B | Sardine v olju: 208kcal, 24g B | Tilapija: 128kcal, 26g B | Trska: 82kcal, 18g B | Kozice: 99kcal, 24g B
 
 MLECNI IZDELKI (na 100g):
-Mleko 3.5%: 64kcal, 3.3g B | Grski jogurt 0%: 59kcal, 10g B | Grski jogurt 2%: 75kcal, 9.5g B | Skyr: 65kcal, 11g B | Pusta skuta: 72kcal, 12g B | Sir Cottage light: 70kcal, 12g B | Mozzarella light: 165kcal, 20g B | Parmezan: 431kcal, 38g B | Feta: 264kcal, 14g B | Ovseni napitek: 42kcal, 1g B | Mandljev napitek: 13kcal, 0.4g B | Kefir: 62kcal, 3.3g B
+Mleko 3.5%: 64kcal, 3.3g B | Grški jogurt 0%: 59kcal, 10g B | Grški jogurt 2%: 75kcal, 9.5g B | Skyr: 65kcal, 11g B | Pusta skuta: 72kcal, 12g B | Sir Cottage light: 70kcal, 12g B | Mozzarella light: 165kcal, 20g B | Parmezan: 431kcal, 38g B | Feta: 264kcal, 14g B | Ovseni napitek: 42kcal, 1g B | Mandljev napitek: 13kcal, 0.4g B | Kefir: 62kcal, 3.3g B
 
 JAJCA (na 100g):
-Kokonje jajce celo: 155kcal, 13g B | Jajcni beljak: 52kcal, 11g B
+Kokošje jajce celo: 155kcal, 13g B | Jajčni beljak: 52kcal, 11g B
 
 ZELENJAVA (na 100g surovo):
-Brokoli: 34kcal, 2.8g B | Spinaca: 23kcal, 2.9g B | Paprika rdeca: 31kcal, 1g B | Kumara: 15kcal, 0.7g B | Paradiznik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Rukola: 25kcal, 2.6g B | Cvetaca: 25kcal, 1.9g B | Bucka: 17kcal, 1.2g B | Sampinjoni: 22kcal, 3.1g B | Cebula: 40kcal, 1.1g B | Sladki krompir: 86kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Sparglji: 20kcal, 2.2g B
+Brokoli: 34kcal, 2.8g B | Špinača: 23kcal, 2.9g B | Paprika rdeča: 31kcal, 1g B | Kumara: 15kcal, 0.7g B | Paradižnik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Rukola: 25kcal, 2.6g B | Cvetača: 25kcal, 1.9g B | Bučka: 17kcal, 1.2g B | Šampinjoni: 22kcal, 3.1g B | Čebula: 40kcal, 1.1g B | Sladki krompir: 86kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Šparglji: 20kcal, 2.2g B
 
 STROCNICE (na 100g):
-Fizol kuhan: 127kcal, 8.7g B | Cicerika kuhana: 164kcal, 8.9g B | Leca kuhana: 116kcal, 9g B
+Fižol kuhan: 127kcal, 8.7g B | Čičerika kuhana: 164kcal, 8.9g B | Leča kuhana: 116kcal, 9g B
 
 SADJE (na 100g):
-Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Avokado: 160kcal, 2g B | Pomaranca: 47kcal, 0.9g B | Kivi: 61kcal, 1.1g B
+Banana: 89kcal, 1.1g B | Jabolko: 52kcal, 0.3g B | Jagode: 32kcal, 0.7g B | Borovnice: 57kcal, 0.7g B | Avokado: 160kcal, 2g B | Pomaranča: 47kcal, 0.9g B | Kivi: 61kcal, 1.1g B
 
 ZITA (na 100g suho):
-Beli riz: 360kcal, 7g B | Basmati riz: 345kcal, 8.5g B | Ovseni kosmici: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kasa: 343kcal, 13g B
+Beli riz: 360kcal, 7g B | Basmati riz: 345kcal, 8.5g B | Ovseni kosmiči: 389kcal, 13.5g B | Testenine bele: 350kcal, 12g B | Polnozrnate testenine: 340kcal, 14g B | Krompir surovi: 77kcal, 2g B | Kvinoja: 368kcal, 14g B | Ajdova kaša: 343kcal, 13g B
 
 KRUH (na 100g):
-Polnozrnati kruh: 250kcal, 9.7g B | Toast polnozrnat: 260kcal, 9g B | Toast beli: 285kcal, 8.3g B | Tortilja psenicna: 310kcal, 8g B
+Polnozrnati kruh: 250kcal, 9.7g B | Toast polnozrnat: 260kcal, 9g B | Toast beli: 285kcal, 8.3g B | Tortilja pšenična: 310kcal, 8g B
 
 ORESKI (na 100g):
-Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arasidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Soncnicna semena: 584kcal, 21g B
+Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arašidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Sončnična semena: 584kcal, 21g B
 
 OLJA (na 100g):
-Oljcno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B
+Oljčno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B
 
 DODATKI (na 100g):
 Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B
@@ -90,28 +90,28 @@ Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B
 
 const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises jedilnike v svojem stilu.
 
-JEZIK: Knjizna slovenscina s sumniki. Brez emojijev. Pravilna locila. Stevilke s presledkom (114 g). Brez anglicizmov.
-TON: Strokoven, direkten, oseben. Naslavlja z imenom in "ti".
+JEZIK: Knjižna slovenščina s šumniki. Brez emojijev. Pravilna locila. Stevilke s presledkom (114 g). Brez anglicizmov.
+TON: Strokoven, direkten, oseben. Naslavljaj z imenom in "ti".
 
 ADAPTATIONS (3-5 povedi): Razlozi podatke, kalorije, TDEE, deficit, beljakovine, preference.
 INTRO (4-6 povedi): Strategija, pomen beljakovin, deficit, realna pricakovanja, doslednost.
 
-NACELA: Deficit 500 kcal = 0,5 kg/teden. Beljakovine 1,8-2,2 g/kg. 25-40 g na obrok.
+NAČELA: Deficit 500 kcal = 0,5 kg/teden. Beljakovine 1,8–2,2 g/kg. 25–40 g na obrok.
 
-PREPOVEDANA ZIVILA: Nikoli ne vkljuci humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koscki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
+PREPOVEDANA ŽIVILA: Nikoli ne vključi humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises trening programe v svojem stilu.
 
-JEZIK: Knjizna slovenscina s sumniki. Nazivi vaj v anglescini. Brez emojijev.
-TON: Strokoven, direkten - naslavlja z imenom in "ti".
+JEZIK: Knjižna slovenščina s šumniki. Nazivi vaj v anglescini. Brez emojijev.
+TON: Strokoven, direkten - naslavljaj z imenom in "ti".
 
-INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razlozi split, ogrevanje, intenzivnost (blizu tehnicne odpovedi), pocitek 3-5 minut za VSE vaje brez izjeme, progresivno obremenitev, poskodbe. Zakljuci z doslednostjo.
+INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razloži split, ogrevanje, intenzivnost (blizu tehnične odpovedi), počitek 3–5 minut za VSE vaje brez izjeme, progresivno obremenitev, poškodbe. Zaključi z doslednostjo.
 
-NACELA: 1-2 seriji do odpovedi zadoscata. 6-10 reps vecje vaje, 10-15 izolacijske. Tehnika > teza.
-POCITEK: 3-5 minut za VSE vaje - tako vecje kot izolacijske. Nikoli manj.
+NAČELA: 1–2 seriji do odpovedi zadoščata. 6–10 reps večje vaje, 10–15 izolacijske. Tehnika > teža.
+POČITEK: 3–5 minut za VSE vaje — tako večje kot izolacijske. Nikoli manj.
 KARDIO NAVODILA (za kardio dneve):
 - Kardio dan mora biti napisan kot workout z vajami (naprava, cas, kcal)
-- Opcije: Sobno kolo (30-45 min, 250-400 kcal, intenzivnost zmerna-visoka), Tek na tekoci stezi (25-40 min, 250-400 kcal, 8-11 km/h), Elipticni trenazjer (30-45 min, 280-400 kcal), Veslarski ergometer (20-30 min, 250-350 kcal), Stairmaster (25-35 min, 300-400 kcal), Hoja na nagnjeni tekoci stezi (35-50 min, 200-300 kcal, naklon MINIMALNO 10%, nikoli manj, hitrost 5-6 km/h)
+- Opcije: Sobno kolo (30-45 min, 250-400 kcal, intenzivnost zmerna-visoka), Tek na tekoci stezi (25-40 min, 250-400 kcal, 8-11 km/h), Elipticni trenazjer (30-45 min, 280-400 kcal), Veslarski ergometer (20-30 min, 250-350 kcal), Stairmaster (25-35 min, 300-400 kcal), Hoja na nagnjeni tekoci stezi (35-50 min, 200-300 kcal, naklon MINIMALNO 10%, nikoli manj, hitrost 5–6 km/h)
 - Za kardio dan naredi workout z 2-3 napravami, vsaka ima: ime naprave, cas in priblizni kcal, navodila za intenzivnost
 - Hoja na tekoci stezi: naklon VEDNO minimalno 10%, nikoli manj
 SPLITI: 3x=PPL, 4x=UPPER/LOWER, 5x=UPPER/LOWER/ARMS+SHOULDERS.`;
@@ -216,7 +216,7 @@ JSON struktura:
   "days": [{ "day": 1, "calories": ${targetCalories}, "protein": ${targetProtein}, "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmiccev (389 kcal, 13,5 g B)"] }] }]
 }
 
-PRAVILA: ${mealsCount} obrokov/dan, 3-6 sestavin z gramayo in kcal v oklepaju, NE vkljuci: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame. SAMO JSON.`;
+PRAVILA: ${mealsCount} obrokov/dan, 3-6 sestavin z gramažo in kcal v oklepaju, NE vključi: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame. SAMO JSON.`;
 
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
     model: MODEL, max_tokens: 4096,
@@ -256,16 +256,16 @@ JSON struktura:
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
 
-POZOR: Ce stranka v opombah specificira tocno strukturo treninga (npr. "2x noge, 3x kardio", "samo kardio", "samo noge"), IGNORIRAJ standardni split in naredi TOCNO to kar stranka zahteva v opombah.
+POZOR: Če stranka v opombah specificira točno strukturo treninga (npr. "2x noge, 3x kardio", "samo kardio", "samo noge"), IGNORIRAJ standardni split in naredi TOČNO to kar stranka zahteva v opombah.
 PRAVILA:
 - 4-6 vaj/dan za trening dneve
 - Kardio dnevi = workout z 2-3 kardio napravami (naprava, cas, kcal, intenzivnost)
 - Hoja na tekoci stezi: naklon VEDNO min 10%, nikoli manj
 - Pocitek med serijami: 3-5 minut za VSE vaje
-- OPREMA - STROGO PRAVILO: Sestavi program IZKLJUCNO iz opreme ki jo je stranka eksplicitno navedla. Ne predpostavljaj NICESAR kar ni omenjeno. Ce stranka napise samo "dumbbell" ali "utezi" ali "utez" - program vsebuje SAMO vaje z dumbbelli/utezmi. Brez pull-up bara, brez kablov, brez naprav, brez klopi, brez vrat - razen ce je eksplicitno napisano. Dvomis? Izpusti vajo.
-- Prilagodi lokaciji (doma=brez naprav razen kar je navedeno, fitnes=naprave+utezi)
-- NE vkljuci: ${userData.exDislikes}
-- Prilagodi poskodbe: ${userData.injuries}
+- OPREMA - STROGO PRAVILO: Sestavi program IZKLJUCNO iz opreme ki jo je stranka eksplicitno navedla. Ne predpostavljaj NICESAR kar ni omenjeno. Če stranka napiše samo "dumbbell" ali "utezi" ali "utez" - program vsebuje SAMO vaje z dumbbelli/utezmi. Brez pull-up bara, brez kablov, brez naprav, brez klopi, brez vrat - razen ce je eksplicitno napisano. Dvomis? Izpusti vajo.
+- Prilagodi lokaciji (doma=brez naprav razen kar je navedeno, fitnes=naprave+uteži)
+- NE vključi: ${userData.exDislikes}
+- Prilagodi poškodbe: ${userData.injuries}
 - Za kardio dneve v schedule napisi "Kardio"
 - workouts seznam mora vsebovati KARDIO kot workout dan z vajami
 - SAMO JSON`;
@@ -343,6 +343,11 @@ function generateMealPDF(userData, plan) {
 
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
+    if (y + 30 > H - 30) {
+      doc.addPage(); fillBg();
+      doc.rect(0, 0, W, 6).fill(RED);
+      y = 30;
+    }
     doc.fontSize(10).fillColor(WHITE).font(BD).text(plan.days.length + " DNI  -  " + (plan.days.length * plan.summary.meals_per_day) + " OBROKOV  -  POPOLN JEDILNIK", M, y, { align: "center", width: CW, characterSpacing: 1 });
     doc.rect(0, H - 6, W, 6).fill(RED);
 
