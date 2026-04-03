@@ -341,14 +341,6 @@ function generateMealPDF(userData, plan) {
     doc.fontSize(10).fillColor(LIGHT).font(RB).text(plan.intro, M, y, { width: CW, lineGap: 4 });
     y += doc.heightOfString(plan.intro, { width: CW, lineGap: 4 }) + 18;
 
-    doc.rect(M, y, CW, 1).fill(GRAY);
-    y += 14;
-    if (y + 30 > H - 30) {
-      doc.addPage(); fillBg();
-      doc.rect(0, 0, W, 6).fill(RED);
-      y = 30;
-    }
-    doc.fontSize(10).fillColor(WHITE).font(BD).text(plan.days.length + " DNI  -  " + (plan.days.length * plan.summary.meals_per_day) + " OBROKOV  -  POPOLN JEDILNIK", M, y, { align: "center", width: CW, characterSpacing: 1 });
     doc.rect(0, H - 6, W, 6).fill(RED);
 
     plan.days.forEach((day) => {
