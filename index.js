@@ -333,13 +333,62 @@ function generateMealPDF(userData, plan) {
     y += 14;
     doc.fontSize(10).fillColor(RED).font(BD).text("PRILAGODITVE JEDILNIKA", M, y, { characterSpacing: 1 });
     y += 18;
-    doc.fontSize(10).fillColor(LIGHT).font(RB).text(plan.adaptations, M, y, { width: CW, lineGap: 4 });
-    y += doc.heightOfString(plan.adaptations, { width: CW, lineGap: 4 }) + 18;
 
+    // Write adaptations with page overflow handling
+    const adaptLines = plan.adaptations.split('. ');
+    let adaptBuffer = '';
+    for (const line of adaptLines) {
+      const testBuffer = adaptBuffer + (adaptBuffer ? '. ' : '') + line;
+      const testH = doc.heightOfString(testBuffer + '.', { width: CW, lineGap: 4 });
+      if (y + testH > H - 40 && adaptBuffer) {
+        doc.fontSize(10).fillColor(LIGHT).font(RB).text(adaptBuffer + '.', M, y, { width: CW, lineGap: 4 });
+        doc.rect(0, H - 6, W, 6).fill(RED);
+        doc.addPage(); fillBg();
+        doc.rect(0, 0, W, 6).fill(RED);
+        doc.rect(0, H - 6, W, 6).fill(RED);
+        y = 30;
+        adaptBuffer = line;
+      } else {
+        adaptBuffer = testBuffer;
+      }
+    }
+    if (adaptBuffer) {
+      doc.fontSize(10).fillColor(LIGHT).font(RB).text(adaptBuffer, M, y, { width: CW, lineGap: 4 });
+      y += doc.heightOfString(adaptBuffer, { width: CW, lineGap: 4 }) + 18;
+    }
+
+    // Write intro with page overflow handling
+    if (y + 30 > H - 40) {
+      doc.rect(0, H - 6, W, 6).fill(RED);
+      doc.addPage(); fillBg();
+      doc.rect(0, 0, W, 6).fill(RED);
+      doc.rect(0, H - 6, W, 6).fill(RED);
+      y = 30;
+    }
     doc.rect(M, y, CW, 1).fill(GRAY);
     y += 14;
-    doc.fontSize(10).fillColor(LIGHT).font(RB).text(plan.intro, M, y, { width: CW, lineGap: 4 });
-    y += doc.heightOfString(plan.intro, { width: CW, lineGap: 4 }) + 18;
+
+    const introLines = plan.intro.split('. ');
+    let introBuffer = '';
+    for (const line of introLines) {
+      const testBuffer = introBuffer + (introBuffer ? '. ' : '') + line;
+      const testH = doc.heightOfString(testBuffer + '.', { width: CW, lineGap: 4 });
+      if (y + testH > H - 40 && introBuffer) {
+        doc.fontSize(10).fillColor(LIGHT).font(RB).text(introBuffer + '.', M, y, { width: CW, lineGap: 4 });
+        doc.rect(0, H - 6, W, 6).fill(RED);
+        doc.addPage(); fillBg();
+        doc.rect(0, 0, W, 6).fill(RED);
+        doc.rect(0, H - 6, W, 6).fill(RED);
+        y = 30;
+        introBuffer = line;
+      } else {
+        introBuffer = testBuffer;
+      }
+    }
+    if (introBuffer) {
+      doc.fontSize(10).fillColor(LIGHT).font(RB).text(introBuffer, M, y, { width: CW, lineGap: 4 });
+      y += doc.heightOfString(introBuffer, { width: CW, lineGap: 4 }) + 18;
+    }
 
     doc.rect(0, H - 6, W, 6).fill(RED);
 
