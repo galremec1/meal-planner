@@ -403,8 +403,6 @@ function splitIngredient(ing) {
 function mealCard(meal, idx) {
   const bg = idx % 2 === 0 ? DARK_CARD : DARK_ROW;
   const lW = 2800, rW = CW - lW;
-  // Tab stop for right-aligning kcal info: content width of right cell minus margins
-  const tabPos = rW - 400;
   return new Table({
     width: { size: CW, type: WidthType.DXA },
     columnWidths: [lW, rW],
@@ -427,16 +425,34 @@ function mealCard(meal, idx) {
             width: { size: rW, type: WidthType.DXA },
             shading: { fill: bg, type: ShadingType.CLEAR },
             borders: cellBorders,
-            margins: { top: 120, bottom: 120, left: 200, right: 200 },
+            margins: { top: 100, bottom: 100, left: 160, right: 160 },
             children: meal.ingredients.map((ing) => {
               const { name, info } = splitIngredient(ing);
-              return new Paragraph({
-                spacing: { before: 0, after: 80 },
-                tabStops: info ? [{ type: TabStopType.RIGHT, position: tabPos }] : [],
-                children: [
-                  new TextRun({ text: name, size: 20, color: LIGHT, font: "Arial" }),
-                  ...(info ? [new TextRun({ text: "\t" + info, size: 18, color: GRAY, font: "Arial" })] : []),
-                ],
+              const nameW = rW - 160 - 160 - 2400; // left cell: food name
+              const infoW = 2400;                   // right cell: kcal info, fixed width
+              return new Table({
+                width: { size: rW - 320, type: WidthType.DXA },
+                columnWidths: [nameW, infoW],
+                borders: tableBorders,
+                rows: [new TableRow({ children: [
+                  new TableCell({
+                    width: { size: nameW, type: WidthType.DXA },
+                    shading: { fill: bg, type: ShadingType.CLEAR },
+                    borders: cellBorders,
+                    margins: { top: 40, bottom: 40, left: 0, right: 80 },
+                    children: [new Paragraph({ children: [new TextRun({ text: name, size: 20, color: LIGHT, font: "Arial" })] })],
+                  }),
+                  new TableCell({
+                    width: { size: infoW, type: WidthType.DXA },
+                    shading: { fill: bg, type: ShadingType.CLEAR },
+                    borders: cellBorders,
+                    margins: { top: 40, bottom: 40, left: 80, right: 0 },
+                    children: [new Paragraph({
+                      alignment: AlignmentType.RIGHT,
+                      children: [new TextRun({ text: info, size: 18, color: GRAY, font: "Arial" })],
+                    })],
+                  }),
+                ]})],
               });
             }),
           }),
