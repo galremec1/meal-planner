@@ -4,7 +4,7 @@ import {
   Document, Packer, Paragraph, TextRun,
   Table, TableRow, TableCell,
   AlignmentType, BorderStyle, WidthType, ShadingType, VerticalAlign,
-  Header, Footer, PageBreak,
+  Header, Footer, PageBreak, TabStopType,
 } from "docx";
  
 const app = express();
@@ -81,18 +81,19 @@ Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B
 // ── System prompts (unchanged) ────────────────────────────────────────────────
 const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises jedilnike v svojem stilu.
 JEZIK: Knjižna slovenščina s šumniki. Brez emojijev. Pravilna locila. Stevilke s presledkom (114 g). Brez anglicizmov.
-TON: Strokoven, direkten, oseben. Naslavljaj z imenom in "ti".
-ADAPTATIONS (3-5 povedi): Razlozi podatke, kalorije, TDEE, deficit, beljakovine, preference.
-INTRO (4-6 povedi): Strategija, pomen beljakovin, deficit, realna pricakovanja, doslednost.
+TON: Strokoven, direkten, oseben, cloveški. Naslavljaj z imenom in "ti". Pisi tekoce, kot bi se pogovarjal z osebo — brez oklepajev, vezajev kot seznamov, dvopicij kot uvoda v podatke.
+ADAPTATIONS (5-7 povedi): Pisi clovesko in tekoce. Pojasni zakaj je kalorični okvir primeren za strankin cilj, zakaj so beljakovine postavljene na to raven in kaj ti bo prineslo. Omeni pristop k ogljikohidratom in maščobam. Brez navajanja TDEE, BMR ali deficita kot stevil. Brez ponavljanja podatkov iz vprasalnika. Brez oklepajev, vezajev in dvopicij kot seznamov.
+INTRO (3-4 povedi): Zakljucni motivacijski del. Kako meriti napredek, zakaj doslednost odloca. Clovesko, toplo, brez stevilk.
 NAČELA: Deficit 500 kcal = 0,5 kg/teden. Beljakovine 1,8–2,2 g/kg. 25–40 g na obrok.
 PREPOVEDANA ŽIVILA: Nikoli ne vključi humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
  
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspesnimi transformacijami. Pises trening programe v svojem stilu.
 JEZIK: Knjižna slovenščina s šumniki. Nazivi vaj v anglescini. Brez emojijev.
-TON: Strokoven, direkten - naslavljaj z imenom in "ti".
-INTRO (8-12 povedi): Zacni z "Ta trening program je pripravljen glede na..." Razloži split, ogrevanje, intenzivnost (blizu tehnične odpovedi), počitek 3–5 minut za VSE vaje brez izjeme, progresivno obremenitev, poškodbe. Zaključi z doslednostjo.
+TON: Strokoven, direkten, cloveški - naslavljaj z imenom in "ti". Pisi tekoce, brez oklepajev in vezajev.
+INTRO (12-16 povedi): Zacni z "Ta trening program je pripravljen glede na...". Pojasni split in zakaj je primeren. Ogrevanje: vsaj 5-10 minut dinamicnega ogrevanja pred vsakim treningom in 1-2 pripravljalni seriji z nizjo tezo za prvo vajo. Intenzivnost: delajte blizu tehnicne odpovedi — to pomeni, da se ustavi takrat, ko naslednje ponovitve ne bi mogel izvesti s cisto tehniko. Pocitek med serijami: tocno 3 do 5 minut za VSE vaje brez izjeme, tako za vecje kot izolacijske — to ni opcija, ampak pogoj za kakovostno delo. Progresivna obremenitev: vsak teden ali vsake 2 tedna povecaj tezo ali stevilo ponovitev, ko obvladas vse ponovitve v predpisanem obsegu — to je edini nacin za dolgorocni napredek. Fokus med serijo: mobitel stran, koncentracija na gib, zavedanje misice ki jo delaš. Pravilna izvedba: tehnika ima vedno prednost pred tezo, vsaka serija mora biti izvedena cisto. Poslušanje telesa: ce cutiš bolecino v sklepu, ne nelagodja v misici, se ustavi. Zakljuci z doslednostjo.
 NAČELA: 1–2 seriji do odpovedi zadoščata. 6–10 reps večje vaje, 10–15 izolacijske. Tehnika > teža.
 POČITEK: 3–5 minut za VSE vaje — tako večje kot izolacijske. Nikoli manj.
+SCHEDULE PRAVILO: V polju "workout" v razporedu napisi SAMO ime treninga brez oklepajev, razlag ali mišičnih skupin. Primer: "UPPER A" ne "UPPER A (prsi, ramena, triceps)". "Počitek" ne "Počitek (regeneracija)".
 KARDIO NAVODILA (za kardio dneve):
 - Kardio dan mora biti napisan kot workout z vajami (naprava, cas, kcal)
 - Opcije: Sobno kolo (30-45 min, 250-400 kcal, intenzivnost zmerna-visoka), Tek na tekoci stezi (25-40 min, 250-400 kcal, 8-11 km/h), Elipticni trenazjer (30-45 min, 280-400 kcal), Veslarski ergometer (20-30 min, 250-350 kcal), Stairmaster (25-35 min, 300-400 kcal), Hoja na nagnjeni tekoci stezi (35-50 min, 200-300 kcal, naklon MINIMALNO 10%, nikoli manj, hitrost 5–6 km/h)
@@ -253,13 +254,14 @@ function makeDocHeader() {
   });
 }
  
-// Shared footer: thin red line at bottom of every page
+// Shared footer: red line + brand name at bottom of every page
 function makeDocFooter() {
   return new Footer({
     children: [new Paragraph({
-      children: [],
-      spacing: { before: 0, after: 0 },
-      border: { top: { style: BorderStyle.SINGLE, size: 48, color: RED, space: 1 } },
+      alignment: AlignmentType.CENTER,
+      children: [new TextRun({ text: "© GAL REMEC COACHING", size: 16, color: GRAY, font: "Arial", characterSpacing: 40 })],
+      spacing: { before: 120, after: 0 },
+      border: { top: { style: BorderStyle.SINGLE, size: 48, color: RED, space: 6 } },
     })],
   });
 }
@@ -368,7 +370,7 @@ function headerBar(leftLines, rightText) {
             children: leftLines.map((line, i) =>
               new Paragraph({
                 spacing: { before: 0, after: i < leftLines.length - 1 ? 60 : 0 },
-                children: [new TextRun({ text: line.text, bold: line.bold !== false, size: line.size, color: WHITE, font: "Arial" })],
+                children: [new TextRun({ text: line.text, bold: line.bold !== false, size: line.size, color: line.color || WHITE, font: "Arial" })],
               })
             ),
           }),
@@ -391,10 +393,18 @@ function headerBar(leftLines, rightText) {
   });
 }
  
+// Split "80 g ovsenih kosmičev (311 kcal, 10,8 g B)" → { name, info }
+function splitIngredient(ing) {
+  const match = ing.match(/^(.*?)\s*(\([^)]+\))\s*$/);
+  return match ? { name: match[1], info: match[2] } : { name: ing, info: "" };
+}
+ 
 // Meal card: dark card with left red accent, number/name/kcal left, ingredients right
 function mealCard(meal, idx) {
   const bg = idx % 2 === 0 ? DARK_CARD : DARK_ROW;
   const lW = 2800, rW = CW - lW;
+  // Tab stop for right-aligning kcal info: content width of right cell minus margins
+  const tabPos = rW - 400;
   return new Table({
     width: { size: CW, type: WidthType.DXA },
     columnWidths: [lW, rW],
@@ -418,9 +428,17 @@ function mealCard(meal, idx) {
             shading: { fill: bg, type: ShadingType.CLEAR },
             borders: cellBorders,
             margins: { top: 120, bottom: 120, left: 200, right: 200 },
-            children: meal.ingredients.map((ing) =>
-              new Paragraph({ spacing: { before: 0, after: 80 }, children: [new TextRun({ text: "- " + ing, size: 20, color: LIGHT, font: "Arial" })] })
-            ),
+            children: meal.ingredients.map((ing) => {
+              const { name, info } = splitIngredient(ing);
+              return new Paragraph({
+                spacing: { before: 0, after: 80 },
+                tabStops: info ? [{ type: TabStopType.RIGHT, position: tabPos }] : [],
+                children: [
+                  new TextRun({ text: name, size: 20, color: LIGHT, font: "Arial" }),
+                  ...(info ? [new TextRun({ text: "\t" + info, size: 18, color: GRAY, font: "Arial" })] : []),
+                ],
+              });
+            }),
           }),
         ],
       }),
@@ -522,7 +540,7 @@ function generateMealDocx(userData, plan) {
     children.push(headerBar(
       [
         { text: "DAN " + day.day, bold: true, size: 26 },
-        { text: day.calories + " kcal - " + day.protein + " g beljakovin - " + day.meals.length + " obroki", bold: false, size: 20 },
+        { text: day.calories + " kcal  —  " + day.protein + " g beljakovin", bold: false, size: 20, color: "E8B8B8" },
       ],
       "STRENGTH AND HONOR"
     ));
