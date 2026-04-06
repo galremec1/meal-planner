@@ -113,6 +113,8 @@ Beljakovine: piščančje prsi, puranja prsa, govedina (pusta 5%), bele ribe (os
 Ogljikovi hidrati: ovseni kosmiči, basmati riž, beli riž, polnozrnate testenine, bele testenine, krompir, sladki krompir, polnozrnat kruh, beli kruh, sadje (banana, jabolko, hruška, jagode, borovnice, maline, mango itd.)
 Maščobe: oreščki (mandlji, orehi, arašidi itd.), avokado, olivno olje, maslo, arašidovo maslo, temna čokolada, losos, jajca
 
+JUNK FOOD PRAVILO: Če stranka v preferencah navede da želi imeti hitro hrano, junk food ali specifičen junk food izdelek (npr. Big Mac, pizza, čips, burger itd.), ga OBVEZNO vključi v jedilnik – to je njena preferenca in jo moraš spoštovati. STROGO PRAVILO: Junk food nikoli ne sme preseči 20% dnevnih kalorij. Preostalih 80% kalorij mora priti iz zdravih, polnovrednih virov. Junk food vključi v en obrok na dan (tipično večer ali popoldne), nikoli ne razporediti čez cel dan. V adaptations omeni da si upošteval to željo in poudariti 20% pravilo.
+
 PREPOVEDANA ŽIVILA: Nikoli ne vključi humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš trening programe v svojem stilu.
@@ -268,6 +270,7 @@ PRAVILA:
 - Vsa živila se tehtajo surova. Riž, testenine in krompir se tehtajo KUHANI (100 g surovega riža = 300 g kuhanega, 100 g surovih testenin = 250 g kuhanih)
 - Pri hujšanju dodajaj volumen z zelenjavo, ne z makrohranili
 - Enostavni, hitri za pripravo, smiselni, okusni obroki – brez eksotike in kompliciranja
+- Če stranka želi junk food (navedeno v preferencah), ga OBVEZNO vključi v en obrok na dan – MAKSIMALNO 20% dnevnih kalorij (= max ${Math.round(targetCalories * 0.2)} kcal) iz junk fooda, preostalih 80% iz zdravih virov
 - NE vključi: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame
 - SAMO JSON.`;
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
