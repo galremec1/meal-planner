@@ -241,6 +241,7 @@ function parseCombinedTallyData(body) {
     frequency: get("kolikokrat"),
     injuries: get("poskodbe") || get("zdravjem"),
     trainingNotes: get("sestave treninga"),
+    gender: getChoice("spol") || get("spol") || "moški",
   };
   console.log("Parsed:", JSON.stringify(data));
   return data;
@@ -280,13 +281,14 @@ IZRAČUNANI PODATKI (za interno izračunavanje obrokov):
 - Cilj: ${targetCalories} kcal (${planType}) | Beljakovine: ${targetProtein} g
 PRIKAZ V DOKUMENTU (uporabi te razpone v JSON poljih calories_per_day, protein_per_day in v vsakem dnevu):
 - Kalorije: "${calRange}" | Beljakovine: "${protRange} g"
-STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}
+STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}, spol: ${userData.gender}
 Rad je: ${userData.likes} | Ne mara: ${userData.dislikes} | Obroki: ${mealsCount} | Alergije: ${userData.allergies}
+JEZIK: Piši v ${userData.gender === "ženska" || userData.gender === "ženski" ? "ženski" : "moški"} slovnični obliki (glagoli, pridevniki, deležniki).
 JSON struktura:
 {
   "summary": { "calories_per_day": "${calRange}", "protein_per_day": "${protRange} g", "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
-  "adaptations": "UVODNI DEL (8-12 povedi) v knjižni slovenščini s šumniki, brez emojijev, v tekočih odstavkih brez alinej. Naslavljaj ${name} z 'ti'. Vsebuje: 1) Kontekst – na podlagi katerih podatkov je plan sestavljen (telesna masa, višina, aktivnost, cilj). 2) Razlaga kaloričnega okvirja – zakaj je tak nastav smiseln za strankin cilj, kaj to pomeni v praksi. Navedi kalorični razpon ${calRange} kcal. 3) Pomen beljakovin (${protRange} g) – ohranitev mišic, sitost, regeneracija. 4) Katere beljakovinske vire si vključil glede na preference stranke. 5) Ogljikovi hidrati – kateri viri, vloga glede na aktivnost, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno pri kalorično gostih živilih. 7) Prilagodljivost jedilnikov – niso toga pravila ampak okvir, zamenjave dovoljene dokler kalorije in beljakovine ostanejo znotraj okvirja. 8) Štetje kalorij – nujnost tehtanja in vnašanja v MyFitnessPal, fokus na kalorije in beljakovine. 9) Merila za kuhanje: riž 100 g surovega = 300 g kuhanega, testenine 100 g surovih = 250 g kuhanih, krompir 100 g surovega = 87 g kuhanega, vsa živila se tehtajo surova razen riž testenine in krompir ki se tehtajo kuhani. Brez navajanja TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
-  "intro": "ZAKLJUČNI DEL (4-6 povedi) v knjižni slovenščini s šumniki, brez emojijev. Vsebuje: 1) Napredek – kako ga meriti: tedensko povprečje telesne teže (ne dnevne meritve, tehtnica niha 1-2 kg na dan), ogledalo, performans na treningu. 2) Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. 3) Motivacijski zaključek. Brez oklepajev in vezajev.",
+  "adaptations": "UVODNI DEL (8-12 povedi) v Galovem osebnem slogu — direkten, sproščen, kot WhatsApp sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti'. SLOG: kratke direktne povedi, mešaj slovenščino z angleškimi izrazi kjer naravno pride (by the way, let's be real, straight up), brez formalnega knjižnega jezika, konkretne številke brez uvajanja, lahkoten emoji kjer je naravno 💪🏻. NE piši kot uradni dokument ali zdravnik. Piši kot Gal — direktno, s srcem, brez bullshita. Vsebuje (isto vsebino, drugačen ton): 1) Kontekst – na podlagi katerih podatkov je plan sestavljen (telesna masa, višina, aktivnost, cilj). 2) Razlaga kaloričnega okvirja – zakaj je tak nastav smiseln za strankin cilj, kaj to pomeni v praksi. Navedi kalorični razpon ${calRange} kcal. 3) Pomen beljakovin (${protRange} g) – ohranitev mišic, sitost, regeneracija. 4) Katere beljakovinske vire si vključil glede na preference stranke. 5) Ogljikovi hidrati – kateri viri, vloga glede na aktivnost, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno pri kalorično gostih živilih. 7) Prilagodljivost jedilnikov – niso toga pravila ampak okvir, zamenjave dovoljene dokler kalorije in beljakovine ostanejo znotraj okvirja. 8) Štetje kalorij – nujnost tehtanja in vnašanja v MyFitnessPal, fokus na kalorije in beljakovine. 9) Merila za kuhanje: riž 100 g surovega = 300 g kuhanega, testenine 100 g surovih = 250 g kuhanih, krompir 100 g surovega = 87 g kuhanega, vsa živila se tehtajo surova razen riž testenine in krompir ki se tehtajo kuhani. Brez navajanja TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
+  "intro": "ZAKLJUČNI DEL (4-6 povedi) v Galovem osebnem slogu — direkten, sproščen, kot WhatsApp. Kratke povedi, mešaj slovenščino in angleščino kjer naravno pride, lahkoten emoji 💪🏻. Vsebuje: 1) Napredek – kako ga meriti: tedensko povprečje telesne teže (ne dnevne meritve, tehtnica niha 1-2 kg na dan), ogledalo, performans na treningu. 2) Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. 3) Kratek motivacijski zaključek. Brez oklepajev in vezajev.",
   "days": [{ "day": 1, "calories": "${calRange}", "protein": "${protRange} g", "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)"] }] }]
 }
 PRAVILA:
@@ -324,14 +326,15 @@ async function generateTrainingPlan(userData) {
   else if (days === 5) { splitType = "UPPER / LOWER / ARMS + SHOULDERS"; splitDesc = "5 dni na teden"; }
   else { splitType = "PUSH / PULL / LEGS"; splitDesc = days + " dni na teden"; }
   const prompt = `Ustvari personaliziran trening program. Vrni SAMO čisti JSON.
-STRANKA: ${name}, ${userData.age} let, ${userData.weight} kg, aktivnost: ${userData.activity}, cilj: ${userData.goal}, lokacija: ${userData.location}, oprema: ${userData.equipment}
+STRANKA: ${name}, ${userData.age} let, ${userData.weight} kg, spol: ${userData.gender}, aktivnost: ${userData.activity}, cilj: ${userData.goal}, lokacija: ${userData.location}, oprema: ${userData.equipment}
+JEZIK: Piši v ${userData.gender === "ženska" || userData.gender === "ženski" ? "ženski" : "moški"} slovnični obliki (glagoli, pridevniki, deležniki).
 Ne mara vaj: ${userData.exDislikes} | Ima rad: ${userData.exLikes}
 Treningov/teden: ${days} | Poškodbe: ${userData.injuries} | Opombe: ${userData.trainingNotes}
 PREDLAGAN SPLIT: ${splitType} (prilagodi glede na cilj, nivo, opremo in opombe stranke po pravilih iz sistema)
 JSON struktura:
 {
   "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
-  "intro": "12-16 povedi v tekočih odstavkih, knjižna slovenščina, šumniki, brez emojijev, brez alinej ali bullet točk. Začni z 'Ta trening program je pripravljen glede na...'",
+  "intro": "12-16 povedi v Galovem osebnem slogu — direkten, sproščen, kot WhatsApp sporočilo fitnes trenerja. Kratke direktne povedi, mešaj slovenščino z angleškimi izrazi kjer naravno pride (by the way, let's be real, straight up), brez formalnega knjižnega jezika, lahkoten emoji kjer naravno pride 💪🏻. NE piši kot uradni dokument. Piši kot Gal — direktno, s srcem, brez bullshita. Brez alinej ali bullet točk. Začni z 'Ta trening program je sestavljen glede na...'",
   "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Počitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Četrtek", "workout": "Počitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Počitek" }, { "day": "Nedelja", "workout": "Počitek" }],
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
