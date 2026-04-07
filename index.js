@@ -1106,3 +1106,4 @@ app.listen(PORT, () =&gt; {
 console.log(&quot;Port &quot; + PORT + &quot; | Model: &quot; + MODEL + &quot; | API key: &quot; +
 (ANTHROPIC_API_KEY ? &quot;OK&quot; : &quot;MISSING&quot;));
 });
+
