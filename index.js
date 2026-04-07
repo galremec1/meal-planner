@@ -628,7 +628,7 @@ function generateMealDocx(userData, plan) {
   children.push(redRule(12, 280));
   children.push(statsTable(
     plan.summary.calories_per_day, "KALORIJ NA DAN",
-    plan.summary.protein_per_day + " g", "BELJAKOVIN NA DAN"
+    plan.summary.protein_per_day, "BELJAKOVIN NA DAN"
   ));
   children.push(sp(280));
   children.push(redRule(4, 200));
