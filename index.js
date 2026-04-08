@@ -80,7 +80,7 @@ Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B
 
 // -- System prompts -----------------------------------------------------------
 const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike v svojem stilu.
-JEZIK (STROGO): Naravna, pravilna, knjižna slovenščina s šumniki (č, š, ž). Brez emojijev, ikon, posebnih simbolov ali unicode znakov – NIKOLI 💪, 🔥, ✓, →, itd. Pravilna ločila. Številke s presledkom (114 g). Brez anglicizmov v uvodnih tekstih. NE izmišljaj besed – nobene besede "nastav" ali podobnih nenavadnih izrazov. Uporabi normalno besedišče: "okvir", "postavitev", "nastavitev kalorij". Vsaka poved mora biti slovnično pravilna.
+JEZIK (STROGO): Naravna, pravilna, knjižna slovenščina s šumniki (č, š, ž). Brez emojijev, ikon, posebnih simbolov ali unicode znakov – NIKOLI 💪, 🔥, ✓, →, itd. Pravilna ločila. Številke s presledkom (114 g). Brez anglicizmov v uvodnih tekstih. NE izmišljaj besed – nobene "nastav", "kardiokot" ali podobnih skovank. Pazi na pravilno sklanjatev pridevnikov in samostalnikov: "puranjih prsi" NE "puranih prsi", "piščančjih prsi" NE "piščančih prsi". Ne sestavljaj besed skupaj. Vsaka poved mora biti slovnično pravilna in naravno zveneti v slovenščini.
 SPOL: Piši v slovnični obliki spola, ki je naveden v user promptu. Če stranka je ženska – vse glagole, deležnike in pridevnike v ženski obliki ("pripravila sem ti", "boš se počutila", "si vključena"). Če je moški – v moški obliki. NIKOLI ne mešaj spolov v istem besedilu.
 TON: Strokoven, direkten, oseben, človeški. Naslavljaj z imenom in "ti". Piši tekoče, kot bi se pogovarjal z osebo – brez oklepajev, vezajev kot seznamov, dvopičij kot uvoda v podatke. Nikoli ne uporabi alinej ali bullet točk v uvodnih tekstih – samo tekoči odstavki.
 ODSTAVKI: Uvodna besedila OBVEZNO razdeli na več ločenih odstavkov (vsaj 4 odstavke za adaptations), ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši celega uvoda kot enega velikega bloka.
@@ -139,7 +139,7 @@ JUNK FOOD PRAVILO: Če stranka v preferencah navede da želi imeti hitro hrano, 
 PREPOVEDANA ŽIVILA: Nikoli ne vključi humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš trening programe v svojem stilu.
-JEZIK (STROGO): Naravna, pravilna, knjižna slovenščina s šumniki (č, š, ž). Nazivi vaj v angleščini. Brez emojijev, ikon ali posebnih simbolov – NIKOLI 💪, 🔥, ✓, →, itd. Ne izmišljaj besed – nobene "nastav" ali podobnih izrazov. Uporabi "okvir", "postavitev", "nastavitev". Vsaka poved mora biti slovnično pravilna.
+JEZIK (STROGO): Naravna, pravilna, knjižna slovenščina s šumniki (č, š, ž). Nazivi vaj v angleščini. Brez emojijev, ikon ali posebnih simbolov – NIKOLI 💪, 🔥, ✓, →, itd. Ne izmišljaj besed – nobene "nastav", "kardiokot" ali podobnih skovank. Pazi na pravilno sklanjatev pridevnikov: "puranjih prsi" NE "puranih prsi", "zadnjih mišic" NE "zadnih mišic". Vsaka poved mora biti slovnično pravilna in naravno zveneti v slovenščini. Ne sestavljaj besed skupaj (kardio kot, ne "kardiokot").
 SPOL: Piši v slovnični obliki spola, ki je naveden v user promptu. Ženska → vse glagole in deležnike v ženski obliki ("sestavila sem", "boš občutila"). Moški → v moški obliki. NIKOLI ne mešaj.
 TON: Strokoven, direkten, človeški – naslavljaj z imenom in "ti". Piši tekoče, brez oklepajev in vezajev. Nikoli ne uporabi alinej ali bullet točk v uvodnem tekstu – samo tekoči odstavki.
 ODSTAVKI: Uvodni tekst OBVEZNO razdeli na 4 ali več ločenih odstavkov, ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši enega velikega bloka.
@@ -148,7 +148,7 @@ INTRO (12–16 povedi v tekočih odstavkih): Začni z "Ta trening program je pri
 - Kontekst: starost, telesna masa, aktivnost, cilj
 - Opis strukture programa (koliko dni, kakšne enote, zakaj ta razporeditev)
 - Ogrevanje: specifično za vsak tip dneva (upper/lower/itd.), 5–10 minut dinamičnega ogrevanja, 1–2 pripravljalni seriji z nižjo težo za prvo vajo
-- Intenzivnost: vsaka delovna serija je resna serija, blizu odpovedi, 1–2 ponovitvi v rezervi
+- Intenzivnost: vsaka delovna serija mora biti izvedena do tehnične mišične odpovedi – zadnja ponovitev mora biti zadnja možna ponovitev s čisto tehniko
 - Tehnika: absolutna prioriteta, kontroliran spust, poln obseg giba, brez sunkov – specifični nasveti za ključne vaje programa
 - Počitek med serijami: 2–3 minute pri compound vajah, 60–90 sekund pri izolacijah – ne štopaj, poslušaj telo
 - Progresivna obremenitev: ko v obeh delovnih serijah dosežeš zgornjo mejo razpona ponovitev s čisto izvedbo, naslednji trening rahlo povečaj težo ali dodaj ponovitev – to je edini način za dolgoročen napredek
@@ -162,7 +162,7 @@ NAČELA:
 - 2 delovni seriji na vajo. Nikoli več razen če je eksplicitno utemeljeno.
 - Maksimalno 6 vaj na trening.
 - Razpon ponovitev: Moč 4–6 ali 5–8, Hipertrofija 6–12 ali 8–12, Izolacija 12–15 ali 15–20.
-- Vsaka delovna serija blizu tehnične odpovedi – 1–2 ponovitvi v rezervi.
+- Vsaka delovna serija do tehnične mišične odpovedi – zadnja ponovitev mora biti zadnja možna s čisto tehniko.
 - Compound vaje VEDNO na začetku, izolacijske na koncu. Brez izjem.
 - Počitek: 2–3 minute za compound, 60–90 sekund za izolacije.
 
@@ -323,7 +323,10 @@ async function generateMealPlan(userData) {
   if (goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub")) { targetCalories = tdee - 500; planType = "CUT"; }
   else if (goalLower.includes("masa")|| goalLower.includes("bulk") || goalLower.includes("pridobi")){ targetCalories = tdee + 300; planType = "BULK"; }
   else { targetCalories = tdee; planType = "MAINTAIN"; }
-  const targetProtein = Math.round(weight * 2.0);
+  // Pri nizkem BMI (< 22) — oseba je suha, beljakovine bolj kritične → višji multiplikator
+  const bmi = weight / ((height / 100) * (height / 100));
+  const proteinMultiplier = bmi < 22 ? 2.4 : 2.0;
+  const targetProtein = Math.round(weight * proteinMultiplier);
   // Display ranges (rounded to nearest 50 kcal ±50, nearest 10g protein ±10)
   const calBase = Math.round(targetCalories / 50) * 50;
   const calRange = `${calBase - 50}–${calBase + 50}`;
@@ -403,11 +406,11 @@ PREDLAGAN SPLIT: ${splitType} (prilagodi glede na cilj, nivo, opremo in opombe s
 JSON struktura:
 {
   "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
-  "intro": "12-16 povedi v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 4 ALI VEČ LOČENIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n), da so odstavki vizualno ločeni in berljivi. Kratke direktne povedi, brez formalnega dolgoveznega jezika, brez izmišljenih besed. BREZ emojijev in posebnih znakov. NE piši kot uradni dokument. Brez alinej ali bullet točk. Začni z 'Ta trening program je sestavljen glede na...'. Vsebuje (razporedi po odstavkih): kontekst za koga je plan, kakšen je split in zakaj, kako izvajaš vaje (RPE, kadenca, odpoved), kako dodajaš težo (progressive overload), kardio in koraki, regeneracija in doslednost.",
+  "intro": "12-16 povedi v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 4 ALI VEČ LOČENIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n), da so odstavki vizualno ločeni in berljivi. Kratke direktne povedi, brez formalnega dolgoveznega jezika, brez izmišljenih besed. BREZ emojijev in posebnih znakov. NE piši kot uradni dokument. Brez alinej ali bullet točk. Začni z 'Ta trening program je sestavljen glede na...'. Vsebuje (razporedi po odstavkih): kontekst za koga je plan, kakšen je split in zakaj, kako izvajaš vaje (trening do tehnične odpovedi – zadnja ponovitev mora biti zadnja možna s čisto tehniko), kako dodajaš težo (progressive overload), kardio in koraki, regeneracija in doslednost.",
   "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Počitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Četrtek", "workout": "Počitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Počitek" }, { "day": "Nedelja", "workout": "Počitek" }],
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
-POZOR: Če stranka v opombah specificira točno strukturo treninga (npr. "2x noge, 3x kardio", "samo kardio", "samo noge"), IGNORIRAJ standardni split in naredi TOČNO to kar stranka zahteva v opombah.
+KRITIČNO PRAVILO – OPOMBE STRANKE IMAJO ABSOLUTNO PRIORITETO: Če stranka v polju "Opombe" ali "Sestava treninga" specificira strukturo (npr. "2x tedensko noge in rit, ostalo kardio", "samo kardio", "samo noge", "2x full body"), POPOLNOMA IGNORIRAJ predlagan split in vse standardne sheme. Naredi IZKLJUČNO in TOČNO to kar piše v opombah. Nobenih UPPER dni, nobenih PUSH/PULL dni, nobenih dodatnih tipov treningov ki niso eksplicitno navedeni. Opombe stranke = zakon, brez izjem, brez dodajanja.
 PRAVILA:
 - 2 delovni seriji na vajo (format "2 x 6-10"), maksimalno 6 vaj na trening dan
 - Compound vaje na začetku, izolacijske na koncu – vedno, brez izjem
@@ -712,11 +715,12 @@ function generateMealDocx(userData, plan) {
   }));
 
   // Adaptations (glavno uvodno besedilo) – razdeljeno na odstavke, font 12pt (size 24)
-  // Teče naravno od prve strani naprej (lahko na drugo stran)
+  // keepLines: true zagotovi, da se odstavek ne razpolovi čez stran
   const adaptationParagraphs = splitParagraphs(plan.adaptations);
   adaptationParagraphs.forEach((para, idx) => {
     children.push(new Paragraph({
       spacing: { before: idx === 0 ? 0 : 200, after: 200, line: 340 },
+      keepLines: true,
       children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
     }));
   });
@@ -751,6 +755,7 @@ function generateMealDocx(userData, plan) {
     closingParagraphs.forEach((para, idx) => {
       children.push(new Paragraph({
         spacing: { before: idx === 0 ? 0 : 200, after: 200, line: 340 },
+        keepLines: true,
         children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
       }));
     });
@@ -791,10 +796,12 @@ function generateTrainingDocx(userData, plan) {
   children.push(redRule(4, 200));
 
   // Intro text – razdeljen na odstavke, font 12pt (size 24), teče naravno na drugo stran
+  // keepLines: true zagotovi, da se noben odstavek ne razpolovi čez stran
   const trainingIntroParagraphs = splitParagraphs(plan.intro);
   trainingIntroParagraphs.forEach((para, idx) => {
     children.push(new Paragraph({
       spacing: { before: idx === 0 ? 200 : 200, after: 200, line: 340 },
+      keepLines: true,
       children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
     }));
   });
