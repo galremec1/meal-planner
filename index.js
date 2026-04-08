@@ -312,15 +312,19 @@ async function generateMealPlan(userData) {
   const height = parseFloat(userData.height) || 175;
   const age = parseFloat(userData.age) || 25;
   const name = userData.name !== "ni podatka" ? userData.name : "stranka";
-  const bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-  let activityMultiplier = 1.375;
+  // Mifflin-St Jeor — ločena formula za moške in ženske (calculator.net)
+  const genderOffset = (userData.gender === "ženska" || userData.gender === "ženski" || userData.gender === "zenska") ? -161 : 5;
+  const bmr = (10 * weight) + (6.25 * height) - (5 * age) + genderOffset;
+  // Activity multipliers po korakih (po calculator.net + tvoja korelacija)
+  // Sedentary 1.2 | Light 1.375 | Moderate 1.55 | Active 1.725 | Very Active 1.9 | Extra Active 1.95
+  let activityMultiplier = 1.55; // default: Moderate
   const act = norm(userData.activity);
-  if (act.includes("0-3k") || act.includes("malo")) activityMultiplier = 1.2;
-  else if (act.includes("3-5k")) activityMultiplier = 1.375;
-  else if (act.includes("5-7k") || act.includes("srednje")) activityMultiplier = 1.375;
-  else if (act.includes("7-10k") || act.includes("veliko")) activityMultiplier = 1.55;
-  else if (act.includes("10-15k")|| act.includes("zelo veliko")) activityMultiplier = 1.55;
-  else if (act.includes("20k")) activityMultiplier = 1.725;
+  if      (act.includes("0-3k")  || act.includes("0-5k"))                            activityMultiplier = 1.2;    // Sedentary
+  else if (act.includes("3-5k")  || act.includes("5-7k")  || act.includes("malo"))   activityMultiplier = 1.375;  // Light
+  else if (act.includes("7-10k") || act.includes("srednje"))                          activityMultiplier = 1.55;   // Moderate
+  else if (act.includes("10-15k")|| act.includes("veliko"))                           activityMultiplier = 1.725;  // Active
+  else if (act.includes("15-20k")|| act.includes("zelo veliko"))                      activityMultiplier = 1.9;    // Very Active
+  else if (act.includes("20k")   || act.includes("extra"))                            activityMultiplier = 1.95;   // Extra Active
   const tdee = Math.round(bmr * activityMultiplier);
   const goalLower = norm(userData.goal);
   let targetCalories, planType;
