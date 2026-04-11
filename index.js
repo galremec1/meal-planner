@@ -116,7 +116,14 @@ NAČELA:
 - Vsa živila se tehtajo surova. Riž, testenine in krompir se tehtajo kuhani (100 g surovega riža = 300 g kuhanega, 100 g surovih testenin = 250 g kuhanih, 100 g surovega krompirja = 87 g kuhanega). V adaptations omeni ta merila.
 - Personalizacija je absolutna prioriteta – strankine želje, preference in omejitve so zakon.
 
-RAZNOLIKOST MED DNEVI: Vsak dan mora imeti drugačne obroke kot ostala dva dni. Nikoli ne ponovi istega obroka (ali skoraj identičnega obroka) na isti poziciji v različnih dneh. Če je dan 1 zajtrk ovsena kaša z jogurtom, dan 2 in dan 3 ne smeta imeti ovsene kaše z jogurtom za zajtrk. Vsak obrok mora biti vsebinsko različen – različna živila, različna kombinacija, različen stil priprave. Isto živilo (npr. piščanec) je dovoljeno v različnih dneh, ampak v drugačni obliki ali kombinaciji (npr. dan 1 piščanec z rižem, dan 3 piščanec s kruhom/sendvič). Brez copy-paste obrokov med dnevi.
+RAZNOLIKOST MED DNEVI – STROGO PRAVILO:
+Vsak dan mora imeti popolnoma različne TIPE obrokov. Tip obroka je določen po konceptu, ne po sestavinah.
+PRIMERI TIPOV zajtrka: ovsena kaša | jajčna jed (jajca + toast/kruh) | jogurt bowl (jogurt/skyr + sadje + oreščki) | proteinski shake z osnovo | skuta z dodatki | sendvič/wrap z beljakovinami
+PRAVILO: En tip zajtrka se sme pojaviti NA VSEM JEDILNIKU (vsi 4 dnevi) SAMO ENKRAT. Isti tip = isti koncept ne glede na sestavine.
+NAPAČNO: Dan 1 ovseni kosmiči + skyr + sadje, Dan 3 ovseni kosmiči + whey + sadje → OBA STA "ovsena kaša", to je prepovedano.
+PRAVILNO: Dan 1 ovsena kaša, Dan 2 jajca + toast, Dan 3 jogurt bowl, Dan 4 skuta s sadjem → 4 različni tipi.
+Enako velja za kosila, malice, večerje. Vsak tip obroka (bowl s proteinom, sendvič, krožnik z mesom + prilogo, salata, juha) se med vsemi 4 dnevi ponovi NAJVEČ ENKRAT.
+Samo živilo (piščanec, riž) je dovoljeno v več dneh, ampak v drugačnem tipu obroka (dan 1 piščanec + riž na krožniku, dan 3 piščančji sendvič).
 
 LOGIKA SESTAVE OBROKOV: Vsak obrok mora biti kulinarično in praktično smiseln – takšen kot ga nekdo dejansko pripravi in poje v enem obroku. V vsakem obroku je EN jasen protein vir. Ne mešaj nekompatibilnih živil samo zato da ustrežeš makrotom.
 
@@ -401,14 +408,15 @@ JSON struktura:
 }
 PRAVILA:
 - GENERIRAJ TOČNO 4 DNEVE (dan 1, dan 2, dan 3, dan 4) v "days" seznamu
-- ${mealsCount} obrokov/dan, 3–6 sestavin – vsaka sestavina SAMO gramatura + ime, brez kcal, brez beljakovin, brez oklepajev, brez "– X g surovega" pripomb. Primer: "160 g piščančjih prsi", "300 g kuhanega basmati riža", "1 proteinski puding". NIC drugega.
+- ${mealsCount} obrokov/dan, 3–6 sestavin – vsaka sestavina SAMO gramatura + ime, brez kcal, brez beljakovin, brez oklepajev, brez "– X g surovega" pripomb. NIC drugega.
+- SLOVNICA sestavin – OBVEZNO pravilna slovenščina: po gramaturni enoti (g, ml) → RODILNIK (genitive): "160 g piščančjih prsi" NE "piščančje prsi"; "150 g puranjih prsi" NE "puranjem prsi"; "80 g ovsenih kosmičev" NE "ovseni kosmiči"; "200 g grškega jogurta"; "150 g skyra"; "300 g kuhanega riža"; "250 g kuhanih testenin"; "20 g arašidovega masla"; "2 rezini polnozrnatega kruha". Za KOSE/ENOTE → IMENOVALNIK: "1 proteinski puding", "1 proteinska čokoladica", "3 jajca", "1 banana". Vedno šumniki: č, š, ž.
 - Vsak obrok ima jasen vir beljakovin, ogljikovih hidratov in zdravih maščob
 - Zelenjava VEDNO kot "150 g zelenjave po izbiri" ali podobno – nikoli specifično določena zelenjava
 - Vsa živila se tehtajo surova. Riž, testenine in krompir se tehtajo KUHANI (100 g surovega riža = 300 g kuhanega, 100 g surovih testenin = 250 g kuhanih)
 - Pri hujšanju dodajaj volumen z zelenjavo, ne z makrohranili
 - Enostavni, hitri za pripravo, smiselni, okusni obroki – brez eksotike in kompliciranja
 - Vsak obrok ima EN protein vir. NE mešaj whey + jajca, NE mešaj piščanca z ovsenimi kosmiči – samo kulinarično logične kombinacije
-- RAZNOLIKOST: Vsi 4 dnevi morajo imeti popolnoma različne obroke. Ne ponavljaj istega obroka na isti poziciji v različnih dneh (npr. isti zajtrk dan 1 in dan 3 je prepovedano)
+- RAZNOLIKOST – KRITIČNO: Vsi 4 dnevi morajo imeti popolnoma različne TIPE obrokov. Tip je KONCEPT, ne sestavine. "Ovsena kaša" je isti tip ne glede na to kateri protein dodaš (skyr, whey, jogurt). Vsak TIP obroka (ovsena kaša / jajčna jed / jogurt bowl / sendvič / krožnik z mesom+prilogo / skuta) se sme na jedilniku pojaviti SAMO ENKRAT čez vse 4 dni. Napačno: Dan 1 ovseni kosmiči + skyr + sadje, Dan 3 ovseni kosmiči + whey + sadje. Oba sta ovsena kaša = PREPOVEDANO. Pravilno: 4 zajtrki, vsak drugačnega tipa.
 - Če stranka želi junk food (navedeno v preferencah), ga OBVEZNO vključi v en obrok na dan – MAKSIMALNO 20% dnevnih kalorij (= max ${Math.round(targetCalories * 0.2)} kcal) iz junk fooda, preostalih 80% iz zdravih virov
 - NE vključi: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame
 - BREZ EMOJIJEV IN POSEBNIH ZNAKOV V CELOTNEM JSON-u.
