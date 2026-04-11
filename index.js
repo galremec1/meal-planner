@@ -81,6 +81,7 @@ Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B
 // -- System prompts -----------------------------------------------------------
 const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike v svojem stilu.
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Brez emojijev. Številke s presledkom (114 g).
+ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "ženska" ne "zenska", "začetek" ne "zacetek", "prilagoditev" ne "prilagoditev". Brez izjeme, v vsaki besedi, v celotnem JSON-u.
 
 REFERENČNI SLOG (tvoje besedilo MORA zveneti tako kot ta primer):
 "Jedilnik sem ti sestavil na podlagi tvojih podatkov. Kalorije sem postavil na okvir med 1800 in 1900 na dan. To je dovolj nizko da boš hujšala, hkrati pa dovolj visoko da ne boš lačna in da bo trening še vedno kvaliteten. Če bi šli nižje, bi bila sitost slabša, prišlo bi do napadov lakote in težje bi držala konsistenco dolgoročno. Beljakovin sem ti dal med 130 in 140 gramov na dan. To je ključno zato, ker pri takem vnosu telo lažje ohranja mišično maso, sitost je bistveno boljša in regeneracija po treningu bo hitrejša. Kot glavne vire sem vključil piščančje prsi, jajca, skyr in grški jogurt, ker si navedla da ti to paše. Ogljikove hidrate sem pustil na normalni ravni. Če jih preveč omejuješ, boš na treningu prazna in performans bo padel. Pri maščobah samo pazi na količino, ker so kalorično goste in jih je hitro preveč če ne tehtaš. Jedilnik ni neko strogo pravilo ki se ga moraš držati na gram natančno. Je okvir. Dokler ostajaš znotraj kaloričnega razpona in poješ dovolj beljakovin, lahko sestavine med seboj zamenjaš. Piščanca zamenjaš s puranjim, riž s krompirjem, grški jogurt s skyrom. Hrano tehtaj in si zapisuj vnos v MyFitnessPal, fokusiraj se samo na kalorije in beljakovine. Riž in testenine tehtaš kuhane, vse ostalo surovo."
@@ -153,6 +154,7 @@ PREPOVEDANA ŽIVILA: Nikoli ne vključi za NOBENO stranko: humusa, soje in sojin
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš trening programe v svojem stilu.
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Nazivi vaj v angleščini. Brez emojijev.
+ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM slovenskem delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "začetek" ne "zacetek", "prilagoditev" ne "prilagoditev", "ogrevanje" ne "ogrevanje". Samo nazivi vaj so v angleščini – VSE OSTALO mora imeti pravilne šumnike. Brez izjeme.
 
 REFERENČNI SLOG (tvoje besedilo MORA zveneti tako kot ta primer):
 "Ta trening program sem ti sestavil glede na tvoje podatke in cilj. Program je razdeljen na 4 treninge na teden po principu upper lower, kar pomeni da dva dni treniraš zgornji del telesa, dva dni pa spodnjega. Vsako vajo narediš v dveh delovnih serijah, ampak vsaka serija mora biti narejena do konca. To pomeni da zadnja ponovitev mora biti res zadnja ki jo zmoreš s čisto tehniko. Če imaš občutek da bi zmogel še eno ponovitev, nisi šel dovolj daleč. Ko pri obeh serijah dosežeš zgornjo mejo ponovitev s čisto izvedbo, naslednjič dodaš kilogram ali dva. To je edini način da dolgoročno napreduješ. Spust pri vsaki vaji mora biti počasen in kontroliran, brez metanja uteži in brez pomoči z zamahom telesa. Med serijami počivaj kolikor rabiš, da se popolnoma regeneriraš. Trening ni tek na čas, ampak delo na kvaliteti. Telefon odloži in se fokusiraj na mišico ki jo treniraš. Če te kakšna vaja boli v sklepu, jo zamenjaj. Bolečina v mišici je čisto normalna, bolečina v sklepu ni. Prilagoditev ni korak nazaj, ampak pametna odločitev. Spanje in prehrana sta enako pomembna kot trening sam. Brez spanja in hrane telo nima iz česa graditi, in takrat tudi najboljši program ne bo deloval."
@@ -362,17 +364,26 @@ async function generateMealPlan(userData) {
   const targetWeightGoal = targetWeightMatch ? parseFloat(targetWeightMatch[1]) : null;
   const impliedCut = targetWeightGoal !== null && targetWeightGoal < weight;
 
+  // BMI — izračunan zgodaj, ker vpliva tako na kalorije kot beljakovine
+  const bmi = weight / ((height / 100) * (height / 100));
+  const isUnderweight = bmi < 18.5;
+
+  // Opcija C iz forme: "Enaka maščoba, več mišic" = recomp pri TDEE (ne bulk surplus)
+  const isRecomp = goalLower.includes("enaka") && (goalLower.includes("mascob") || goalLower.includes("masa"));
+
   let targetCalories, planType;
-  if (impliedCut || goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub") || goalLower.includes("manj") || goalLower.includes("mascob")) {
-    targetCalories = tdee - 500; planType = "CUT";
-  } else if (goalLower.includes("masa") || goalLower.includes("bulk") || goalLower.includes("pridobi") || goalLower.includes("vec misic") || goalLower.includes("vec mascob")) {
-    targetCalories = tdee + 300; planType = "BULK";
+  if (impliedCut || goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub") || goalLower.includes("manj")) {
+    // Opcija A: CUT — pri premajhni teži manjši deficit (zaščita mase)
+    const cutDeficit = isUnderweight ? 300 : 500;
+    targetCalories = tdee - cutDeficit; planType = "CUT";
+  } else if (!isRecomp && (goalLower.includes("masa") || goalLower.includes("bulk") || goalLower.includes("pridobi") || goalLower.includes("vec misic") || goalLower.includes("vec mascob"))) {
+    // Opcija B: BULK — pri premajhni teži večji surplus za hitrejše nabiranje mase
+    const bulkSurplus = isUnderweight ? 500 : 300;
+    targetCalories = tdee + bulkSurplus; planType = "BULK";
   } else {
+    // Opcija C: "Enaka maščoba, več mišic" = recomp → MAINTAIN
     targetCalories = tdee; planType = "MAINTAIN";
   }
-
-  // Beljakovine — prilagojene glede na BMI (protein sparing pri suhih, cap pri debelih)
-  const bmi = weight / ((height / 100) * (height / 100));
   let targetProtein;
   if (bmi < 22) {
     // Suha oseba: protein sparing efekt → več beljakovin za ohranitev mišic
