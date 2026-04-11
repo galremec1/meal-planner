@@ -279,22 +279,22 @@ function parseCombinedTallyData(body) {
     return matched.length > 0 ? matched.join(", ") : "ni podatka";
   };
   const data = {
-    name: get("ime in priimek") || get("ime"),
-    age: get("starost"),
-    weight: get("teza"),
-    height: get("visina"),
-    goal: get("cilj"),
-    activity: getChoice("korakov dela") || getChoice("korakov naredi") || get("korakov"),
-    likes: get("kaj rad") || get("jedilnik na podlagi"),
-    dislikes: get("hrane ne maras") || get("ne maras"),
-    meals: get("koliko obrokov"),
-    allergies: get("alergije") || get("jedilnika"),
-    location: get("kje zelis trenirati") || get("kje"),
-    equipment: get("od doma napisi") || get("opremo imas"),
-    exDislikes: get("katerih vaj ne maras") || get("vaj ne"),
-    exLikes: get("vaje imas rad") || get("vaje rad"),
-    frequency: get("kolikokrat"),
-    injuries: get("poskodbe") || get("zdravjem"),
+    name:          get("ime in priimek") || get("ime"),
+    age:           get("starost"),
+    weight:        get("koliko kg") || get("teza"),
+    height:        get("visok") || get("visina"),
+    goal:          getChoice("cilj") || get("cilj"),
+    activity:      getChoice("korakov") || get("korakov"),
+    likes:         get("kaj rad") || get("jedilnik na podlagi"),
+    dislikes:      get("hrane ne maras") || get("ne maras"),
+    meals:         getChoice("obrokov") || get("koliko obrokov"),
+    allergies:     get("alergije") || get("jedilnika"),
+    location:      getChoice("kje zelis") || getChoice("kje") || get("kje"),
+    equipment:     getChoice("od doma") || getChoice("opremo") || get("od doma"),
+    exDislikes:    get("katerih vaj ne maras") || get("vaj ne"),
+    exLikes:       get("vaje imas rad") || get("vaje rad"),
+    frequency:     getChoice("kolikokrat") || get("kolikokrat"),
+    injuries:      get("poskodbe") || get("zdravjem"),
     trainingNotes: get("sestave treninga"),
   };
   // Spol: prioriteta – eksplicitno polje v formi, nato avtomatska zaznava iz imena
@@ -319,22 +319,42 @@ async function generateMealPlan(userData) {
   // Sedentary 1.2 | Light 1.375 | Moderate 1.55 | Active 1.725 | Very Active 1.9 | Extra Active 1.95
   let activityMultiplier = 1.55; // default: Moderate
   const act = norm(userData.activity);
-  if      (act.includes("0-3k")  || act.includes("0-5k"))                            activityMultiplier = 1.2;    // Sedentary
-  else if (act.includes("3-5k")  || act.includes("5-7k")  || act.includes("malo"))   activityMultiplier = 1.375;  // Light
-  else if (act.includes("7-10k") || act.includes("srednje"))                          activityMultiplier = 1.55;   // Moderate
-  else if (act.includes("10-15k")|| act.includes("veliko"))                           activityMultiplier = 1.725;  // Active
-  else if (act.includes("15-20k")|| act.includes("zelo veliko"))                      activityMultiplier = 1.9;    // Very Active
-  else if (act.includes("20k")   || act.includes("extra"))                            activityMultiplier = 1.95;   // Extra Active
+  if      (act.includes("0-3k"))   activityMultiplier = 1.2;    // Sedentary    (0–3k korakov)
+  else if (act.includes("3-5k"))   activityMultiplier = 1.375;  // Light         (3–5k korakov)
+  else if (act.includes("5-7k"))   activityMultiplier = 1.375;  // Light         (5–7k korakov)
+  else if (act.includes("7-10k"))  activityMultiplier = 1.55;   // Moderate      (7–10k korakov)
+  else if (act.includes("10-15k")) activityMultiplier = 1.725;  // Active        (10–15k korakov)
+  else if (act.includes("20k"))    activityMultiplier = 1.95;   // Extra Active  (20k+ korakov)
   const tdee = Math.round(bmr * activityMultiplier);
   const goalLower = norm(userData.goal);
+
+  // Zaznaj CUT tudi ko stranka napiše ciljno težo manjšo od trenutne (npr. "iz 100 na 90")
+  const targetWeightMatch = (userData.goal || "").match(/na\s+(\d+)\s*kg/i);
+  const targetWeightGoal = targetWeightMatch ? parseFloat(targetWeightMatch[1]) : null;
+  const impliedCut = targetWeightGoal !== null && targetWeightGoal < weight;
+
   let targetCalories, planType;
-  if (goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub")) { targetCalories = tdee - 500; planType = "CUT"; }
-  else if (goalLower.includes("masa")|| goalLower.includes("bulk") || goalLower.includes("pridobi")){ targetCalories = tdee + 300; planType = "BULK"; }
-  else { targetCalories = tdee; planType = "MAINTAIN"; }
-  // Pri nizkem BMI (< 22) — oseba je suha, beljakovine bolj kritične → višji multiplikator
+  if (impliedCut || goalLower.includes("huj") || goalLower.includes("cut") || goalLower.includes("izgub") || goalLower.includes("manj") || goalLower.includes("mascob")) {
+    targetCalories = tdee - 500; planType = "CUT";
+  } else if (goalLower.includes("masa") || goalLower.includes("bulk") || goalLower.includes("pridobi") || goalLower.includes("vec misic") || goalLower.includes("vec mascob")) {
+    targetCalories = tdee + 300; planType = "BULK";
+  } else {
+    targetCalories = tdee; planType = "MAINTAIN";
+  }
+
+  // Beljakovine — prilagojene glede na BMI (protein sparing pri suhih, cap pri debelih)
   const bmi = weight / ((height / 100) * (height / 100));
-  const proteinMultiplier = bmi < 22 ? 2.4 : 2.0;
-  const targetProtein = Math.round(weight * proteinMultiplier);
+  let targetProtein;
+  if (bmi < 22) {
+    // Suha oseba: protein sparing efekt → več beljakovin za ohranitev mišic
+    targetProtein = Math.round(weight * 2.4);
+  } else if (bmi > 30) {
+    // Prekomerna teža: izračunaj po telesni teži ampak capaj na 300g
+    // (2g/kg na realni teži je pri veliki debelosti preveč)
+    targetProtein = Math.min(Math.round(weight * 2.0), 300);
+  } else {
+    targetProtein = Math.round(weight * 2.0);
+  }
   // Display ranges (rounded to nearest 50 kcal ±50, nearest 10g protein ±10)
   const calBase = Math.round(targetCalories / 50) * 50;
   const calRange = `${calBase - 50}–${calBase + 50}`;
@@ -342,6 +362,14 @@ async function generateMealPlan(userData) {
   const protRange = `${protBase - 10}–${protBase + 10}`;
   const isFemale = userData.gender === "ženska" || userData.gender === "ženski" || userData.gender === "zenska";
   const genderLabel = isFemale ? "ženski" : "moški";
+  // Aktivnost za prikaz v promptu (da Claude ne piše "nima podatkov")
+  const activityLabel = act.includes("0-3k") ? "0–3k korakov/dan (sedeč)" :
+                        act.includes("3-5k") ? "3–5k korakov/dan (malo aktiven)" :
+                        act.includes("5-7k") ? "5–7k korakov/dan (malo aktiven)" :
+                        act.includes("7-10k") ? "7–10k korakov/dan (zmerno aktiven)" :
+                        act.includes("10-15k") ? "10–15k korakov/dan (aktiven)" :
+                        act.includes("20k") ? "20k+ korakov/dan (zelo aktiven)" :
+                        "zmerno aktiven (privzeto)";
   const prompt = `Ustvari 4-dnevni prehranski načrt. Vrni SAMO čisti JSON.
 BAZA ŽIVIL:
 ${FOOD_DB}
@@ -349,7 +377,7 @@ IZRAČUNANI PODATKI (za interno izračunavanje obrokov):
 - Cilj: ${targetCalories} kcal (${planType}) | Beljakovine: ${targetProtein} g
 PRIKAZ V DOKUMENTU (uporabi te razpone v JSON poljih calories_per_day, protein_per_day in v vsakem dnevu):
 - Kalorije: "${calRange}" | Beljakovine: "${protRange} g"
-STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}, spol: ${isFemale ? "ženska" : "moški"}
+STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}, spol: ${isFemale ? "ženska" : "moški"}, aktivnost: ${activityLabel}
 Rad je: ${userData.likes} | Ne mara: ${userData.dislikes} | Obroki: ${mealsCount} | Alergije: ${userData.allergies}
 JEZIK IN SLOG (OBVEZNO):
 - SPOL – DVA GOVORCA: Ko JAZ (Gal, trener) govorim o svojih dejanjih → VEDNO MOŠKI: "sestavil sem", "vključil sem", "dal sem", "odločil sem". Ko govorim O STRANKI ali JO naslavljam → ${isFemale ? "ŽENSKI spol: 'si navedla', 'boš občutila', 'si dosegla'" : "MOŠKI spol: 'si navedel', 'boš občutil', 'si dosegel'"}. Primer: "Plan sem ti sestavil na podlagi podatkov, ki si jih ${isFemale ? "navedla" : "navedel"}."
