@@ -327,6 +327,7 @@ function parseCombinedTallyData(body) {
     frequency:     getChoice("kolikokrat") || get("kolikokrat"),
     injuries:      get("poskodbe") || get("zdravjem"),
     trainingNotes: get("sestave treninga"),
+    whey:          getChoice("whey") || get("whey"),
   };
   // Spol: prioriteta – eksplicitno polje v formi, nato avtomatska zaznava iz imena
   const genderFromForm = getChoice("spol") !== "ni podatka" ? getChoice("spol") : get("spol");
@@ -443,7 +444,7 @@ PRAVILA:
 - Vsak obrok ima EN protein vir. NE mešaj whey + jajca, NE mešaj piščanca z ovsenimi kosmiči – samo kulinarično logične kombinacije
 - RAZNOLIKOST – KRITIČNO: Vsi 4 dnevi morajo imeti popolnoma različne TIPE obrokov. Tip je KONCEPT, ne sestavine. "Ovsena kaša" je isti tip ne glede na to kateri protein dodaš (skyr, whey, jogurt). Vsak TIP obroka (ovsena kaša / jajčna jed / jogurt bowl / sendvič / krožnik z mesom+prilogo / skuta) se sme na jedilniku pojaviti SAMO ENKRAT čez vse 4 dni. Napačno: Dan 1 ovseni kosmiči + skyr + sadje, Dan 3 ovseni kosmiči + whey + sadje. Oba sta ovsena kaša = PREPOVEDANO. Pravilno: 4 zajtrki, vsak drugačnega tipa.
 - Če stranka želi junk food (navedeno v preferencah), ga OBVEZNO vključi v en obrok na dan – MAKSIMALNO 20% dnevnih kalorij (= max ${Math.round(targetCalories * 0.2)} kcal) iz junk fooda, preostalih 80% iz zdravih virov
-- NE vključi: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame
+- NE vključi: ${userData.dislikes}, ${userData.allergies}, humus, soja, sojini izdelki, tofu, tempeh, edamame${norm(userData.whey || "").includes("ne") ? ", whey protein, proteinski shake, proteinski prašek (stranka tega NE želi)" : ""}
 - BREZ EMOJIJEV IN POSEBNIH ZNAKOV V CELOTNEM JSON-u.
 - SAMO JSON.`;
   const response = await axios.post("https://api.anthropic.com/v1/messages", {
