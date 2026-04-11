@@ -149,7 +149,7 @@ Maščobe: oreščki (mandlji, orehi, arašidi itd.), avokado, olivno olje, masl
 
 JUNK FOOD PRAVILO: Če stranka v preferencah navede da želi imeti hitro hrano, junk food ali specifičen junk food izdelek (npr. Big Mac, pizza, čips, burger itd.), ga OBVEZNO vključi v jedilnik – to je njena preferenca in jo moraš spoštovati. STROGO PRAVILO: Junk food nikoli ne sme preseči 20% dnevnih kalorij. Preostalih 80% kalorij mora priti iz zdravih, polnovrednih virov. Junk food vključi v en obrok na dan (tipično večer ali popoldne), nikoli ne razporediti čez cel dan. V adaptations omeni da si upošteval to željo in poudariti 20% pravilo.
 
-PREPOVEDANA ŽIVILA: Nikoli ne vključi humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame). To velja za VSE stranke brez izjeme.`;
+PREPOVEDANA ŽIVILA: Nikoli ne vključi za NOBENO stranko: humusa, soje in sojinih izdelkov (sojin jogurt, sojin napitek, sojini koščki, tofu, tempeh, edamame), semen (chia semena, sončnična semena, bučna semena, lanena semena, konopljina semena), koruze. Izjema SAMO za semena in koruzo: če jih stranka sama eksplicitno navede v preferencah ali željah, jih smeš vključiti.`;
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš trening programe v svojem stilu.
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Nazivi vaj v angleščini. Brez emojijev.
@@ -252,10 +252,24 @@ function sanitizeText(str) {
 function splitParagraphs(text) {
   if (!text) return [];
   const cleaned = sanitizeText(text);
-  // Najprej poskusi razdeliti po dvojnih presledkih (\n\n), potem po enojnih
-  let parts = cleaned.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+  // Razdeli po dvojnih \n; enojna \n ZNOTRAJ odstavka zamenjaj s presledkom
+  // (prepreči da bi AI-jev \n sredi stavka ustvaril ločen Paragraph element)
+  let parts = cleaned.split(/\n\s*\n/).map(p => p.replace(/\n/g, ' ').trim()).filter(Boolean);
   if (parts.length < 2) {
-    parts = cleaned.split(/\n/).map((p) => p.trim()).filter(Boolean);
+    // Razdeli po enojnih \n, potem spoji dele ki so razrezani sredi stavka
+    const rawParts = cleaned.split(/\n/).map(p => p.trim()).filter(Boolean);
+    parts = [];
+    let current = '';
+    for (const part of rawParts) {
+      if (current && /[^.!?:]\s*$/.test(current)) {
+        // Prejšnji del se ne konča s ločilom → nadaljevanje istega stavka
+        current = current + ' ' + part;
+      } else {
+        if (current) parts.push(current);
+        current = part;
+      }
+    }
+    if (current) parts.push(current);
   }
   return parts.length > 0 ? parts : [cleaned];
 }
@@ -402,14 +416,14 @@ JEZIK IN SLOG (OBVEZNO):
 JSON struktura:
 {
   "summary": { "calories_per_day": "${calRange}", "protein_per_day": "${protRange} g", "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
-  "adaptations": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne. Piši naravno slovenščino z vsemi šumniki. BREZ emojijev. Vsebuje (vsaka točka = en kratek odstavek): 1) Kontekst – telesna masa, višina, aktivnost, cilj. 2) Kalorični okvir ${calRange} kcal – zakaj je smiseln za cilj. 3) Pomen beljakovin ${protRange} g – ohranitev mišic, sitost, regeneracija. 4) Kateri beljakovinski viri so vključeni glede na preference. 5) Ogljikovi hidrati – kateri viri, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno. 7) Prilagodljivost – zamenjave dovoljene, MyFitnessPal, fokus na kalorije in beljakovine. 8) Merila za kuhanje: riž 100 g surovo = 300 g kuhano, testenine 100 g = 250 g kuhano, krompir 100 g = 87 g kuhano. Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
+  "adaptations": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne. Piši naravno slovenščino z vsemi šumniki. BREZ emojijev. Vsebuje (vsaka točka = en kratek odstavek): 1) Kontekst – telesna masa, višina, aktivnost, cilj. 2) Kalorični okvir ${calRange} kcal – zakaj je smiseln za cilj. 3) Pomen beljakovin ${protRange} g – ohranitev mišic, sitost, regeneracija. 4) Kateri beljakovinski viri so vključeni glede na preference. 5) Ogljikovi hidrati – kateri viri, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno. 7) Prilagodljivost in hitra hrana – piši NATANKO v tem slogu (prilagodi le spol stranke): Jedilnik ni strogo pravilo, temveč strukturiran okvir. Piščanca lahko zamenjaš s puranjimi prsmi, skyr z grškim jogurtom, krompir z rižem. Dokler ostajaš znotraj kaloričnega razpona in zaužiješ dovolj beljakovin, so takšne zamenjave popolnoma dovoljene in celo priporočene. V jedilnik lahko brez težav vključiš tudi hitro hrano – ta ni prepovedana. Ključno je, da na koncu dneva ne presežeš svojega kaloričnega vnosa in da še vedno dosežeš zadosten vnos beljakovin. Upoštevaj pa, da je hitra hrana pogosto zelo kalorična, zato lahko hitro zapolni velik del dnevnih kalorij, ne da bi te zares nasitila. Hrano tehtaj ter jo beleži v aplikaciji MyFitnessPal, pri čemer se osredotoči predvsem na skupni vnos kalorij in beljakovin. 8) Merila za kuhanje: riž 100 g surovo = 300 g kuhano, testenine 100 g = 250 g kuhano, krompir 100 g = 87 g kuhano. Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
   "intro": "ZAKLJUČNI DEL (4-6 povedi v enem ali dveh odstavkih) v Galovem slogu – direkten, sproščen, v ${genderLabel} obliki naslavljanja. Kratke povedi. BREZ emojijev. Vsebuje: 1) Napredek – kako ga meriš: tedensko povprečje telesne teže ne dnevne meritve ker tehtnica niha 1-2 kg na dan, ogledalo, performans na treningu. 2) Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. 3) Kratek motivacijski zaključek. Brez oklepajev in vezajev.",
   "days": [{ "day": 1, "calories": "${calRange}", "protein": "${protRange} g", "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)"] }] }]
 }
 PRAVILA:
 - GENERIRAJ TOČNO 4 DNEVE (dan 1, dan 2, dan 3, dan 4) v "days" seznamu
 - ${mealsCount} obrokov/dan, 3–6 sestavin – vsaka sestavina SAMO gramatura + ime, brez kcal, brez beljakovin, brez oklepajev, brez "– X g surovega" pripomb. NIC drugega.
-- SLOVNICA sestavin – OBVEZNO pravilna slovenščina: po gramaturni enoti (g, ml) → RODILNIK (genitive): "160 g piščančjih prsi" NE "piščančje prsi"; "150 g puranjih prsi" NE "puranjem prsi"; "80 g ovsenih kosmičev" NE "ovseni kosmiči"; "200 g grškega jogurta"; "150 g skyra"; "300 g kuhanega riža"; "250 g kuhanih testenin"; "20 g arašidovega masla"; "2 rezini polnozrnatega kruha". Za KOSE/ENOTE → IMENOVALNIK: "1 proteinski puding", "1 proteinska čokoladica", "3 jajca", "1 banana". Vedno šumniki: č, š, ž.
+- SLOVNICA sestavin – OBVEZNO pravilna slovenščina: po gramaturni enoti (g, ml) → RODILNIK (genitive): "160 g piščančjih prsi" NE "piščančje prsi"; "150 g puranjih prsi" NE "puranjem prsi"; "80 g ovsenih kosmičev" NE "ovseni kosmiči"; "100 g tune v lastnem soku" NE "tunine"; "200 g grškega jogurta"; "150 g skyra"; "300 g kuhanega riža"; "250 g kuhanih testenin"; "20 g arašidovega masla"; "2 rezini polnozrnatega kruha". Za KOSE/ENOTE → IMENOVALNIK: "1 proteinski puding", "1 proteinska čokoladica", "3 jajca", "1 banana". Vedno šumniki: č, š, ž.
 - Vsak obrok ima jasen vir beljakovin, ogljikovih hidratov in zdravih maščob
 - Zelenjava VEDNO kot "150 g zelenjave po izbiri" ali podobno – nikoli specifično določena zelenjava
 - Vsa živila se tehtajo surova. Riž, testenine in krompir se tehtajo KUHANI (100 g surovega riža = 300 g kuhanega, 100 g surovih testenin = 250 g kuhanih)
