@@ -83,9 +83,17 @@ const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ 
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Brez emojijev. Številke s presledkom (114 g).
 ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "ženska" ne "zenska", "začetek" ne "zacetek", "približno" ne "priblizno". Brez izjeme, v vsaki besedi, v celotnem JSON-u.
 
-VEJICE – ABSOLUTNO PRAVILO: VEDNO postavi vejico pred podredne veznike: ki, ko, ker, da, če, čeprav, dokler, kadar, kjer, kot, česar. PRAVILNO: "To je ključno, ker pri takem vnosu telo lažje ohranja mišično maso." NAPAČNO: "To je ključno ker pri takem vnosu telo lažje ohranja mišično maso." Brez izjem – vsaka poved z vezniki ki/ko/ker/da/če MORA imeti vejico pred njimi.
+VEJICE – ABSOLUTNO PRAVILO: VEDNO postavi vejico pred VSAK podredni veznik: ki, ko, ker, da, če, čeprav, dokler, kadar, kjer, kot, česar. To velja tudi ZNOTRAJ stavka, ne samo na začetku. Preveri VSAK stavek – če vsebuje ki/ko/ker/da/če/kjer/kot, MORA biti vejica pred njim.
+PRAVILNO: "To je ključno, ker telo lažje ohranja mišično maso." | "Če imaš občutek, da bi zmogel še eno, nisi šel dovolj daleč." | "tam, kjer je" | "dodaj, ko gre 8"
+NAPAČNO: "To je ključno ker telo lažje ohranja mišično maso." | "Če imaš občutek da bi zmogel še eno" | "tam kjer je" | "dodaj ko gre 8"
 
 PRESLEDKI – ABSOLUTNO PRAVILO: Med VSAKO besedo MORA biti presledek. NIKOLI ne zlepljaj besed skupaj. NAPAČNO: "ohranišobstoječe", "gradišmišično", "daseboš". PRAVILNO: "ohraniš obstoječe", "gradiš mišično", "da se boš". Preveri VSAK stavek v celotnem JSON-u da nima zlepljenih besed.
+
+ENOTE – ABSOLUTNO PRAVILO: Enoto (g, kg, ml, kcal) napiši SAMO ENKRAT. NIKOLI "160 g g beljakovin" – PRAVILNO je "160 g beljakovin". Preveri, da se nobena enota ne podvoji.
+
+SLOVNICA – ABSOLUTNO PRAVILO:
+- SKLANJATEV: pravilna slovenska sklanjatev za vse besede. "250 g puste skute" NE "pustega skuta". "z obtežilnim jopičem" NE "z obtežilnim jopiče". "fokus na hrbtu, ne na bicepsu" NE "ne bicepsu" (ponovi predlog "na").
+- NIKOLI ne tvori novih besed z "ne-" ki ne obstajajo v slovenščini. "neresultatov" NE OBSTAJA – piši "brez rezultatov" ali "pomanjkanje rezultatov".
 
 REFERENČNI SLOG – TOČNO TAKO MORA ZVENETI VSAKO BESEDILO:
 "Jedilnik sem ti sestavil na podlagi tvojih podatkov. Kalorije sem postavil na okvir med 1800 in 1900 na dan. To je dovolj nizko da boš hujšala, hkrati pa dovolj visoko da ne boš lačna in da bo trening še vedno kvaliteten. Če bi šli nižje, bi sitost padla in težje bi držala konsistenco. To ni stvar volje, ampak biologije.
@@ -177,9 +185,15 @@ const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 5
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Nazivi vaj v angleščini. Brez emojijev.
 ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM slovenskem delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "začetek" ne "zacetek", "približno" ne "priblizno", "ogrevanje" ne "ogrevanje". Samo nazivi vaj so v angleščini – VSE OSTALO mora imeti pravilne šumnike. Brez izjeme.
 
-VEJICE – ABSOLUTNO PRAVILO: VEDNO postavi vejico pred podredne veznike: ki, ko, ker, da, če, čeprav, dokler, kadar, kjer, kot, česar. PRAVILNO: "Vedno poslušaj telo, če reče da je preveč, je preveč." NAPAČNO: "Vedno poslušaj telo če reče da je preveč je preveč." Brez izjem – vsaka poved z vezniki ki/ko/ker/da/če MORA imeti vejico pred njimi.
+VEJICE – ABSOLUTNO PRAVILO: VEDNO postavi vejico pred VSAK podredni veznik: ki, ko, ker, da, če, čeprav, dokler, kadar, kjer, kot, česar. To velja tudi ZNOTRAJ stavka, ne samo na začetku. Preveri VSAK stavek – če vsebuje ki/ko/ker/da/če/kjer/kot, MORA biti vejica pred njim.
+PRAVILNO: "Vedno poslušaj telo, če reče, da je preveč." | "Če imaš občutek, da bi zmogel še eno, nisi šel dovolj daleč." | "tam, kjer je" | "dodaj, ko gre 8"
+NAPAČNO: "Vedno poslušaj telo če reče da je preveč." | "Če imaš občutek da bi zmogel še eno" | "tam kjer je" | "dodaj ko gre 8"
 
 PRESLEDKI – ABSOLUTNO PRAVILO: Med VSAKO besedo MORA biti presledek. NIKOLI ne zlepljaj besed skupaj. NAPAČNO: "ohranišobstoječe", "gradišmišično", "daseboš". PRAVILNO: "ohraniš obstoječe", "gradiš mišično", "da se boš". Preveri VSAK stavek v celotnem JSON-u da nima zlepljenih besed.
+
+SLOVNICA – ABSOLUTNO PRAVILO:
+- SKLANJATEV: pravilna slovenska sklanjatev za vse besede. "z obtežilnim jopičem" NE "z obtežilnim jopiče". "fokus na hrbtu, ne na bicepsu" NE "ne bicepsu" (ponovi predlog "na").
+- NIKOLI ne tvori novih besed z "ne-" ki ne obstajajo v slovenščini. "neresultatov" NE OBSTAJA – piši "brez rezultatov" ali "pomanjkanje rezultatov".
 
 REFERENČNI SLOG – TOČNO TAK MORA ZVENETI VSAK TRENING INTRO. To so resnične besede ki jih folosim s strankami – piši v tem tonu, z enako direktnostjo in enako dolžino odstavkov:
 "Ta trening program sem ti sestavil glede na tvoje podatke in cilj. Gledal sem starost, težo, aktivnost in kar si navedla o ciljih, in na podlagi tega sem sestavil plan ki bo deloval dolgoročno, ne samo za en teden.
@@ -305,10 +319,50 @@ function sanitizeText(str) {
     .trim();
 }
 
+// Post-processing: popravi pogoste AI napake v slovenščini PREDEN gre tekst v docx
+function postProcessText(str) {
+  if (!str) return str;
+  let t = String(str);
+
+  // 1. Podvojene enote: "g g" → "g", "kg kg" → "kg", "ml ml" → "ml", "kcal kcal" → "kcal"
+  t = t.replace(/\b(g|kg|ml|kcal)\s+\1\b/gi, "$1");
+
+  // 2. Manjkajoče vejice pred podrednimi vezniki: ki, ko, ker, da, če, kjer, kot, kadar, dokler, čeprav, česar
+  //    Vstavi vejico če pred veznikom ni ločila (, . ! ? ; : –) ali začetka stavka
+  t = t.replace(/([a-zA-ZčšžČŠŽ])\s+(ki|ko|ker|da|če|kjer|kot|kadar|dokler|čeprav|česar)\s/g, (match, before, conjunction, offset) => {
+    return before + ", " + conjunction + " ";
+  });
+
+  // 3. Zlepljene besede: mala+velika sredi besede (npr. "ohranišObstoječe") → vstavi presledek
+  t = t.replace(/([a-zčšž])([A-ZČŠŽ])/g, "$1 $2");
+
+  // 4. Zlepljene besede: dva mala dela brez presledka po vzorcu glagol+pridevnik/samostalnik
+  //    Prepoznaj vzorec: beseda ki se konča na š/ž/m/n/t + naslednja beseda ki se začne na soglasnik
+  //    To je preveč agresivno za splošen regex, zato lovimo le znane vzorce:
+  t = t.replace(/š([bcdghjklmnprstvz])/g, (match, next, idx) => {
+    // Preveri ali je to sredi veljavne besede ali zlepljeno
+    // Poiščemo celotno besedo okrog te pozicije
+    const before = t.substring(Math.max(0, idx - 20), idx + 1);
+    const after = t.substring(idx + 1, idx + 21);
+    // Če je beseda daljša od 14 znakov, je verjetno zlepljena
+    const wordMatch = before.match(/\S+$/);
+    const wordAfter = after.match(/^\S+/);
+    if (wordMatch && wordAfter) {
+      const fullWord = wordMatch[0] + match[0] + (wordAfter ? wordAfter[0] : "");
+      if (fullWord.length > 14) {
+        return "š " + next;
+      }
+    }
+    return match;
+  });
+
+  return t;
+}
+
 // Razdeli besedilo na odstavke (po dveh novih vrsticah ali eni novi vrstici)
 function splitParagraphs(text) {
   if (!text) return [];
-  const cleaned = sanitizeText(text);
+  const cleaned = postProcessText(sanitizeText(text));
   // Razdeli po dvojnih \n; enojna \n ZNOTRAJ odstavka zamenjaj s presledkom
   // (prepreči da bi AI-jev \n sredi stavka ustvaril ločen Paragraph element)
   let parts = cleaned.split(/\n\s*\n/).map(p => p.replace(/\n/g, ' ').trim()).filter(Boolean);
@@ -478,14 +532,14 @@ JEZIK IN SLOG (OBVEZNO):
 JSON struktura:
 {
   "summary": { "calories_per_day": "${calRange}", "protein_per_day": "${protRange} g", "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
-  "adaptations": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne. Piši naravno slovenščino z vsemi šumniki. BREZ emojijev. Vsebuje (vsaka točka = en kratek odstavek): 1) Kontekst – telesna masa, višina, aktivnost, cilj. 2) Kalorični okvir ${calRange} kcal – zakaj je smiseln za cilj. 3) Pomen beljakovin ${protRange} g – ohranitev mišic, sitost, regeneracija. 4) Kateri beljakovinski viri so vključeni glede na preference. 5) Ogljikovi hidrati – kateri viri, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno. 7) Prilagodljivost in hitra hrana – piši NATANKO v tem slogu (prilagodi le spol stranke): Jedilnik ni strogo pravilo, temveč strukturiran okvir. Piščanca lahko zamenjaš s puranjimi prsmi, skyr z grškim jogurtom, krompir z rižem. Dokler ostajaš znotraj kaloričnega razpona in zaužiješ dovolj beljakovin, so takšne zamenjave popolnoma dovoljene in celo priporočene. V jedilnik lahko brez težav vključiš tudi hitro hrano – ta ni prepovedana. Ključno je, da na koncu dneva ne presežeš svojega kaloričnega vnosa in da še vedno dosežeš zadosten vnos beljakovin. Upoštevaj pa, da je hitra hrana pogosto zelo kalorična, zato lahko hitro zapolni velik del dnevnih kalorij, ne da bi te zares nasitila. Hrano tehtaj ter jo beleži v aplikaciji MyFitnessPal, pri čemer se osredotoči predvsem na skupni vnos kalorij in beljakovin. 8) Merila za kuhanje: riž 100 g surovo = 300 g kuhano, testenine 100 g = 250 g kuhano, krompir 100 g = 87 g kuhano. Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
+  "adaptations": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne. Piši naravno slovenščino z vsemi šumniki. BREZ emojijev. Vsebuje (vsaka točka = en kratek odstavek): 1) Kontekst – telesna masa, višina, aktivnost, cilj. 2) Kalorični okvir ${calRange} kcal – zakaj je smiseln za cilj. 3) Pomen beljakovin (med ${protBase - 10} in ${protBase + 10} gramov na dan) – ohranitev mišic, sitost, regeneracija. 4) Kateri beljakovinski viri so vključeni glede na preference. 5) Ogljikovi hidrati – kateri viri, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno. 7) Prilagodljivost in hitra hrana – piši NATANKO v tem slogu (prilagodi le spol stranke): Jedilnik ni strogo pravilo, temveč strukturiran okvir. Piščanca lahko zamenjaš s puranjimi prsmi, skyr z grškim jogurtom, krompir z rižem. Dokler ostajaš znotraj kaloričnega razpona in zaužiješ dovolj beljakovin, so takšne zamenjave popolnoma dovoljene in celo priporočene. V jedilnik lahko brez težav vključiš tudi hitro hrano – ta ni prepovedana. Ključno je, da na koncu dneva ne presežeš svojega kaloričnega vnosa in da še vedno dosežeš zadosten vnos beljakovin. Upoštevaj pa, da je hitra hrana pogosto zelo kalorična, zato lahko hitro zapolni velik del dnevnih kalorij, ne da bi te zares nasitila. Hrano tehtaj ter jo beleži v aplikaciji MyFitnessPal, pri čemer se osredotoči predvsem na skupni vnos kalorij in beljakovin. 8) Merila za kuhanje: riž 100 g surovo = 300 g kuhano, testenine 100 g = 250 g kuhano, krompir 100 g = 87 g kuhano. Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
   "intro": "ZAKLJUČNI DEL (4-6 povedi v enem ali dveh odstavkih) v Galovem slogu – direkten, sproščen, v ${genderLabel} obliki naslavljanja. Kratke povedi. BREZ emojijev. Vsebuje: 1) Napredek – kako ga meriš: tedensko povprečje telesne teže ne dnevne meritve ker tehtnica niha 1-2 kg na dan, ogledalo, performans na treningu. 2) Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. 3) Kratek motivacijski zaključek. Brez oklepajev in vezajev.",
   "days": [{ "day": 1, "calories": "${calRange}", "protein": "${protRange} g", "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)"] }] }]
 }
 PRAVILA:
 - GENERIRAJ TOČNO 4 DNEVE (dan 1, dan 2, dan 3, dan 4) v "days" seznamu
 - ${mealsCount} obrokov/dan, 3–6 sestavin – vsaka sestavina SAMO gramatura + ime, brez kcal, brez beljakovin, brez oklepajev, brez "– X g surovega" pripomb. NIC drugega.
-- SLOVNICA sestavin – OBVEZNO pravilna slovenščina: po gramaturni enoti (g, ml) → RODILNIK (genitive): "160 g piščančjih prsi" NE "piščančje prsi"; "150 g puranjih prsi" NE "puranjem prsi"; "80 g ovsenih kosmičev" NE "ovseni kosmiči"; "100 g tune v lastnem soku" NE "tunine"; "200 g grškega jogurta"; "150 g skyra"; "300 g kuhanega riža"; "250 g kuhanih testenin"; "20 g arašidovega masla"; "2 rezini polnozrnatega kruha". Za KOSE/ENOTE → IMENOVALNIK: "1 proteinski puding", "1 proteinska čokoladica", "3 jajca", "1 banana". Vedno šumniki: č, š, ž.
+- SLOVNICA sestavin – OBVEZNO pravilna slovenščina: po gramaturni enoti (g, ml) → RODILNIK (genitive): "160 g piščančjih prsi" NE "piščančje prsi"; "150 g puranjih prsi" NE "puranjem prsi"; "80 g ovsenih kosmičev" NE "ovseni kosmiči"; "100 g tune v lastnem soku" NE "tunine"; "200 g grškega jogurta"; "150 g skyra"; "300 g kuhanega riža"; "250 g kuhanih testenin"; "20 g arašidovega masla"; "2 rezini polnozrnatega kruha"; "250 g puste skute" NE "pustega skuta" (skuta je ženska!). Za KOSE/ENOTE → IMENOVALNIK: "1 proteinski puding", "1 proteinska čokoladica", "3 jajca", "1 banana". Vedno šumniki: č, š, ž. NIKOLI podvoji enoto – "160 g beljakovin" NE "160 g g beljakovin".
 - Vsak obrok ima jasen vir beljakovin, ogljikovih hidratov in zdravih maščob
 - Zelenjava VEDNO kot "150 g zelenjave po izbiri" ali podobno – nikoli specifično določena zelenjava
 - Vsa živila se tehtajo surova. Riž, testenine in krompir se tehtajo KUHANI (100 g surovega riža = 300 g kuhanega, 100 g surovih testenin = 250 g kuhanih)
@@ -761,7 +815,7 @@ function mealCard(meal, idx) {
             borders: cellBorders,
             margins: { top: 100, bottom: 100, left: 160, right: 160 },
             children: meal.ingredients.map((ing) => {
-              const { name } = splitIngredient(sanitizeText(ing));
+              const { name } = splitIngredient(postProcessText(sanitizeText(ing)));
               return new Paragraph({
                 spacing: { before: 40, after: 40 },
                 children: [new TextRun({ text: name, size: 20, color: LIGHT, font: "Arial" })],
@@ -782,7 +836,7 @@ function exerciseCard(ex, idx) {
     new Paragraph({ spacing: { before: 0, after: ex.note ? 80 : 0 }, children: [new TextRun({ text: sanitizeText(ex.sets_reps), bold: true, size: 34, color: WHITE, font: "Arial" })] }),
   ];
   if (ex.note) {
-    rightChildren.push(new Paragraph({ spacing: { before: 0, after: 0 }, children: [new TextRun({ text: sanitizeText(ex.note), size: 18, color: GRAY, font: "Arial" })] }));
+    rightChildren.push(new Paragraph({ spacing: { before: 0, after: 0 }, children: [new TextRun({ text: postProcessText(sanitizeText(ex.note)), size: 18, color: GRAY, font: "Arial" })] }));
   }
   return new Table({
     width: { size: CW, type: WidthType.DXA },
