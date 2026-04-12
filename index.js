@@ -61,7 +61,7 @@ Mleko 3.5%: 64kcal, 3.3g B | Grški jogurt 0%: 59kcal, 10g B | Grški jogurt 2%:
 JAJCA (na 100g):
 Kokošje jajce celo: 155kcal, 13g B | Jajčni beljak: 52kcal, 11g B
 ZELENJAVA (na 100g surovo):
-Brokoli: 34kcal, 2.8g B | Špinača: 23kcal, 2.9g B | Paprika rdeča: 31kcal, 1g B | Kumara: 15kcal, 0.7g B | Paradižnik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Rukola: 25kcal, 2.6g B | Cvetača: 25kcal, 1.9g B | Bučka: 17kcal, 1.2g B | Šampinjoni: 22kcal, 3.1g B | Čebula: 40kcal, 1.1g B | Sladki krompir: 86kcal, 1.6g B | Koruza sladka: 86kcal, 3.2g B | Šparglji: 20kcal, 2.2g B
+Brokoli: 34kcal, 2.8g B | Špinača: 23kcal, 2.9g B | Paprika rdeča: 31kcal, 1g B | Kumara: 15kcal, 0.7g B | Paradižnik: 18kcal, 0.9g B | Korenje: 41kcal, 0.9g B | Rukola: 25kcal, 2.6g B | Cvetača: 25kcal, 1.9g B | Bučka: 17kcal, 1.2g B | Šampinjoni: 22kcal, 3.1g B | Čebula: 40kcal, 1.1g B | Sladki krompir: 86kcal, 1.6g B | Šparglji: 20kcal, 2.2g B
 STROČNICE (na 100g):
 Fižol kuhan: 127kcal, 8.7g B | Čičerika kuhana: 164kcal, 8.9g B | Leča kuhana: 116kcal, 9g B
 SADJE (na 100g):
@@ -71,17 +71,17 @@ Beli riž: 360kcal, 7g B | Basmati riž: 345kcal, 8.5g B | Ovseni kosmiči: 389k
 KRUH (na 100g):
 Polnozrnati kruh: 250kcal, 9.7g B | Toast polnozrnat: 260kcal, 9g B | Toast beli: 285kcal, 8.3g B | Tortilja pšenična: 310kcal, 8g B
 OREŠKI (na 100g):
-Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arašidovo maslo: 588kcal, 25g B | Chia semena: 486kcal, 17g B | Sončnična semena: 584kcal, 21g B
+Mandlji: 579kcal, 21g B | Orehi: 654kcal, 15g B | Arašidovo maslo: 588kcal, 25g B
 OLJA (na 100g):
 Oljčno olje: 884kcal, 0g B | Maslo: 717kcal, 0.8g B
 DODATKI (na 100g):
-Med: 304kcal, 0.3g B | Sojina omaka: 53kcal, 8g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B
+Med: 304kcal, 0.3g B | Whey protein: 380kcal, 80g B | Veganski protein: 370kcal, 75g B
 `;
 
 // -- System prompts -----------------------------------------------------------
 const MEAL_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš jedilnike v svojem stilu.
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Brez emojijev. Številke s presledkom (114 g).
-ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "ženska" ne "zenska", "začetek" ne "zacetek", "prilagoditev" ne "prilagoditev". Brez izjeme, v vsaki besedi, v celotnem JSON-u.
+ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "ženska" ne "zenska", "začetek" ne "zacetek", "približno" ne "priblizno". Brez izjeme, v vsaki besedi, v celotnem JSON-u.
 
 REFERENČNI SLOG – TOČNO TAKO MORA ZVENETI VSAKO BESEDILO:
 "Jedilnik sem ti sestavil na podlagi tvojih podatkov. Kalorije sem postavil na okvir med 1800 in 1900 na dan. To je dovolj nizko da boš hujšala, hkrati pa dovolj visoko da ne boš lačna in da bo trening še vedno kvaliteten. Če bi šli nižje, bi sitost padla in težje bi držala konsistenco. To ni stvar volje, ampak biologije.
@@ -91,6 +91,7 @@ Beljakovine sem ti dal med 130 in 140 gramov na dan. To je ključno, ker pri tak
 Ogljikove hidrate sem pustil na normalni ravni. Ni jih pametno agresivno zmanjšati, ker direktno vplivajo na energijo na treningu. Pri maščobah samo pazi na količino, ker so kalorično goste in jih je hitro preveč, če ne tehtaš.
 
 Jedilnik ni strogo pravilo. Je okvir. Riž zamenjaj s krompirjem, piščanca s puranjim, grški jogurt s skyrom. Ni panike in ni se treba siliti z določenim živilom. Važno je da zadeneš kalorije in beljakovine, ne da je vsak obrok identičen. Hrano tehtaj in beleži v MyFitnessPal, fokus samo na kalorije in beljakovine. Riž in testenine tehtaš kuhane, vse ostalo surovo."
+OPOMBA: Zgornji primer je napisan za žensko stranko. Za moške stranke prilagodi VSE deležnike in glagole v moški spol – "si navedel" namesto "navedla", "boš hujšal" namesto "hujšala", "bi držal" namesto "držala" itd. Spol VEDNO določi iz imena stranke.
 PIŠI TOČNO V TEM SLOGU. Nobene besede ki je ne bi rekel v pogovoru. Nobenih prevodov iz angleščine. Razlage vedno z razlogom in posledico.
 
 PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
@@ -104,7 +105,7 @@ PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
 SPOL – KRITIČNO PRAVILO (DVA LOČENA GOVORCA):
 1. GAL (trener, jaz ki pišem) = VEDNO MOŠKI SPOL brez izjeme. Glagoli in deležniki v prvi osebi so VEDNO moški: "sestavil sem", "dal sem", "vključil sem", "odločil sem se", "pripravil sem ti". NIKOLI "sestavila", "dala", "vključila" – tudi če je stranka ženska.
 2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "si vključena", "se boš počutila". Moška stranka: "si navedel", "boš občutil". Primer pravilnega stavka za žensko stranko: "Plan sem ti sestavil na podlagi podatkov, ki si jih navedla." – "sestavil" je moški (jaz), "navedla" je ženski (ona).
-TON: Strokoven, direkten, oseben, človeški. Naslavljaj z imenom in "ti". Piši tekoče, kot bi se pogovarjal z osebo – brez oklepajev, vezajev kot seznamov, dvopičij kot uvoda v podatke. Nikoli ne uporabi alinej ali bullet točk v uvodnih tekstih – samo tekoči odstavki.
+TON: Strokoven, direkten, oseben, človeški. Naslavljaj z imenom in "ti". VEDNO TIKAJ, NIKOLI VIKAJ – piši "hodiš", "treniraš", "tehtaš", "ješ", NIKOLI "hodite", "trenirate", "tehtate", "jeste". VEDNO 2. OSEBA ko govoriš stranki – piši "delaš prav", "narediš", "zadeneš", NIKOLI 3. oseba "dela prav", "naredi", "zadene". Piši tekoče, kot bi se pogovarjal z osebo – brez oklepajev, vezajev kot seznamov, dvopičij kot uvoda v podatke. Nikoli ne uporabi alinej ali bullet točk v uvodnih tekstih – samo tekoči odstavki.
 ODSTAVKI: Uvodna besedila OBVEZNO razdeli na več ločenih odstavkov (vsaj 4 odstavke za adaptations), ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši celega uvoda kot enega velikega bloka.
 
 ADAPTATIONS (8–12 povedi v tekočih odstavkih): Piši človeško in tekoče. Obvezno vključi:
@@ -169,14 +170,14 @@ PREPOVEDANA ŽIVILA: Nikoli ne vključi za NOBENO stranko: humusa, soje in sojin
 
 const TRAINING_SYSTEM_PROMPT = `Si Gal Remec, slovenski online fitnes trener z 500+ uspešnimi transformacijami. Pišeš trening programe v svojem stilu.
 JEZIK: Piši IZKLJUČNO v naravni slovenščini. Nikoli ne prevajaj iz angleščine – razmišljaj in piši direktno v slovenščini. Pravilna sklanjatev. Nazivi vaj v angleščini. Brez emojijev.
-ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM slovenskem delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "začetek" ne "zacetek", "prilagoditev" ne "prilagoditev", "ogrevanje" ne "ogrevanje". Samo nazivi vaj so v angleščini – VSE OSTALO mora imeti pravilne šumnike. Brez izjeme.
+ŠUMNIKI – ABSOLUTNO PRAVILO: V VSAKEM slovenskem delu besedila VEDNO piši č, š, ž – nikoli c, s, z. "počitek" ne "pocitek", "število" ne "stevilo", "začetek" ne "zacetek", "približno" ne "priblizno", "ogrevanje" ne "ogrevanje". Samo nazivi vaj so v angleščini – VSE OSTALO mora imeti pravilne šumnike. Brez izjeme.
 
 REFERENČNI SLOG – TOČNO TAK MORA ZVENETI VSAK TRENING INTRO. To so resnične besede ki jih folosim s strankami – piši v tem tonu, z enako direktnostjo in enako dolžino odstavkov:
 "Ta trening program sem ti sestavil glede na tvoje podatke in cilj. Gledal sem starost, težo, aktivnost in kar si navedla o ciljih, in na podlagi tega sem sestavil plan ki bo deloval dolgoročno, ne samo za en teden.
 
 Program je razdeljen na 4 treninge na teden po upper/lower principu – dva dneva treniraš zgornji del telesa, dva dneva spodnjega. Vsak trening traja med 45 in 60 minut. Zakaj ta struktura? Ker vsaka mišična skupina dobi vsaj 48 ur za regeneracijo, hkrati pa treniraš dovolj pogosto da bo napredek viden.
 
-Vsaka delovna serija mora biti narejena do konca. Zadnja ponovitev mora biti res zadnja ki jo zmoreš s čisto tehniko. Če imaš občutek da bi zmogla še eno, nisi šla dovolj daleč. Ko pri obeh serijah zadeneš zgornjo mejo ponovitev s čisto izvedbo, naslednjič dodaš kilogram ali dva. To je edini način da dolgoročno napreduješ. Napredek na treningu je glavni signal da delava prav.
+Vsaka delovna serija mora biti narejena do konca. Zadnja ponovitev mora biti res zadnja ki jo zmoreš s čisto tehniko. Če imaš občutek da bi zmogla še eno, nisi šla dovolj daleč. Ko pri obeh serijah zadeneš zgornjo mejo ponovitev s čisto izvedbo, naslednjič dodaš kilogram ali dva. To je edini način da dolgoročno napreduješ. Napredek na treningu je glavni signal da delaš prav.
 
 Spust pri vsaki vaji mora biti počasen in kontroliran, brez metanja uteži in brez zamaha z boki. Telefon odloži in se fokusiraj na mišico ki jo treniraš.
 
@@ -185,6 +186,7 @@ Pred treningom raztezanje izpusti. Najprej naredi 5–10 minut dinamičnega ogre
 Kar se gibanja zunaj treninga tiče – deficit bova držala s prehrano in koraki, ne z dodatnim znojem. Samo potenje ni znak da si v deficitu, to je večinoma voda. Raje 30 minut hoje na dan kot forsiran kardio ki pobere regeneracijo za naslednji trening.
 
 Če te kakšna vaja boli v sklepu, jo zamenjaj. Bolečina v mišici po treningu je čisto normalno – to ni problem magnezija ali raztezanja, ampak adaptacije. Vedno poslušaj telo. Če reče da je preveč, je preveč. Če je telo utrujeno, je to signal, ne slabost. Pametna prilagoditev ni korak nazaj."
+OPOMBA: Zgornji primer je napisan za žensko stranko. Za moške stranke prilagodi VSE deležnike in glagole v moški spol – "si navedel" namesto "navedla", "bi zmogel" namesto "zmogla", "nisi šel" namesto "šla" itd. Spol VEDNO določi iz imena stranke.
 PIŠI TOČNO V TEM SLOGU. Kratke jasne povedi. Brez kompliciranja. Nobene besede ki je ne bi uporabil normalen Slovenec v pogovoru. Nobenih prevodov iz angleščine. Razlage vedno z razlogom in posledico – "če narediš X, bo Y".
 
 OPOMBE PRI VAJAH (note polje) – KRITIČNO PRAVILO:
@@ -205,10 +207,10 @@ PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
 SPOL – KRITIČNO PRAVILO (DVA LOČENA GOVORCA):
 1. GAL (trener, jaz ki pišem) = VEDNO MOŠKI SPOL brez izjeme. Glagoli in deležniki v prvi osebi so VEDNO moški: "sestavil sem", "dal sem", "vključil sem", "pripravil sem ti", "odločil sem se". NIKOLI "sestavila", "dala", "vključila" – tudi če je stranka ženska.
 2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "boš opazila". Moška stranka: "si navedel", "boš občutil". Primer pravilnega stavka za žensko stranko: "Ta program sem ti sestavil glede na podatke, ki si jih navedla." – "sestavil" je moški (jaz), "navedla" je ženski (ona).
-TON: Strokoven, direkten, človeški – naslavljaj z imenom in "ti". Piši tekoče, brez oklepajev in vezajev. Nikoli ne uporabi alinej ali bullet točk v uvodnem tekstu – samo tekoči odstavki.
+TON: Strokoven, direkten, človeški – naslavljaj z imenom in "ti". VEDNO TIKAJ, NIKOLI VIKAJ – piši "hodiš", "treniraš", "tehtaš", NIKOLI "hodite", "trenirate", "tehtate". VEDNO 2. OSEBA ko govoriš stranki – piši "delaš prav", "narediš", "zadeneš", NIKOLI 3. oseba "dela prav", "naredi", "zadene". Piši tekoče, brez oklepajev in vezajev. Nikoli ne uporabi alinej ali bullet točk v uvodnem tekstu – samo tekoči odstavki.
 ODSTAVKI: Uvodni tekst OBVEZNO razdeli na 4 ali več ločenih odstavkov, ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši enega velikega bloka.
 
-INTRO (12–16 povedi v tekočih odstavkih): Začni z "Ta trening program je pripravljen glede na...". Obvezno vključi:
+INTRO (12–16 povedi v tekočih odstavkih): Začni z "Ta trening program sem ti sestavil glede na...". Obvezno vključi:
 - Kontekst: starost, telesna masa, aktivnost, cilj
 - Opis strukture programa (koliko dni, kakšne enote, zakaj ta razporeditev)
 - Ogrevanje: specifično za vsak tip dneva (upper/lower/itd.), 5–10 minut dinamičnega ogrevanja, 1–2 pripravljalni seriji z nižjo težo za prvo vajo
@@ -327,14 +329,11 @@ function detectGenderFromName(fullName) {
   // Znane izjeme – moška imena, ki se končajo na -a
   const maleExceptions = [
     "luka", "matija", "miha", "jaka", "saša", "sasa",
-    "aljaža", "aljaza", "nika" /* pogosto žensko, ampak ok */,
-    "andrea", "uroš", "ilija", "nikita", "joža", "joza",
+    "aljaža", "aljaza", "nikola", "nikita",
+    "andrea", "ilija", "joža", "joza",
   ];
-  // Odstrani "nika" iz izjem – je pretežno žensko
-  const actualMaleExceptions = maleExceptions.filter((n) => n !== "nika");
-  if (actualMaleExceptions.includes(firstName)) return "moški";
-  // Končnice, ki kažejo na žensko ime
-  if (/[aeou]$/i.test(firstName) && firstName.endsWith("a")) return "ženska";
+  if (maleExceptions.includes(firstName)) return "moški";
+  if (firstName.endsWith("a")) return "ženska";
   return "moški";
 }
 
@@ -372,11 +371,8 @@ function parseCombinedTallyData(body) {
     trainingNotes: get("sestave treninga"),
     whey:          getChoice("whey") || get("whey"),
   };
-  // Spol: prioriteta – eksplicitno polje v formi, nato avtomatska zaznava iz imena
-  const genderFromForm = getChoice("spol") !== "ni podatka" ? getChoice("spol") : get("spol");
-  data.gender = (genderFromForm && genderFromForm !== "ni podatka")
-    ? genderFromForm
-    : detectGenderFromName(data.name);
+  // Spol: VEDNO zaznava iz imena stranke
+  data.gender = detectGenderFromName(data.name);
   console.log("Parsed:", JSON.stringify(data));
   return data;
 }
@@ -388,7 +384,8 @@ async function generateMealPlan(userData) {
   const age = parseFloat(userData.age) || 25;
   const name = userData.name !== "ni podatka" ? userData.name : "stranka";
   // Mifflin-St Jeor — ločena formula za moške in ženske (calculator.net)
-  const genderOffset = (userData.gender === "ženska" || userData.gender === "ženski" || userData.gender === "zenska") ? -161 : 5;
+  const genderNorm = norm(userData.gender);
+  const genderOffset = (genderNorm.includes("zensk")) ? -161 : 5;
   const bmr = (10 * weight) + (6.25 * height) - (5 * age) + genderOffset;
   // Activity multipliers po korakih (po calculator.net + tvoja korelacija)
   // Sedentary 1.2 | Light 1.375 | Moderate 1.55 | Active 1.725 | Very Active 1.9 | Extra Active 1.95
@@ -444,7 +441,7 @@ async function generateMealPlan(userData) {
   const calRange = `${calBase - 50}–${calBase + 50}`;
   const protBase = Math.round(targetProtein / 10) * 10;
   const protRange = `${protBase - 10}–${protBase + 10}`;
-  const isFemale = userData.gender === "ženska" || userData.gender === "ženski" || userData.gender === "zenska";
+  const isFemale = genderNorm.includes("zensk");
   const genderLabel = isFemale ? "ženski" : "moški";
   // Aktivnost za prikaz v promptu (da Claude ne piše "nima podatkov")
   const activityLabel = act.includes("0-3k") ? "0–3k korakov/dan (sedeč)" :
@@ -508,11 +505,11 @@ async function generateTrainingPlan(userData) {
   const days = parseInt(userData.frequency) || 3;
   let splitType, splitDesc;
   if (days <= 2) { splitType = "FULL BODY"; splitDesc = "2 dni na teden"; }
-  else if (days === 3) { splitType = "PUSH / PULL / LEGS"; splitDesc = "3 dni na teden"; }
+  else if (days === 3) { splitType = "UPPER / LOWER ali PUSH / PULL / LEGS"; splitDesc = "3 dni na teden"; }
   else if (days === 4) { splitType = "UPPER / LOWER"; splitDesc = "4 dni na teden"; }
   else if (days === 5) { splitType = "UPPER / LOWER / ARMS + SHOULDERS"; splitDesc = "5 dni na teden"; }
-  else { splitType = "PUSH / PULL / LEGS"; splitDesc = days + " dni na teden"; }
-  const isFemale = userData.gender === "ženska" || userData.gender === "ženski" || userData.gender === "zenska";
+  else { splitType = "PUSH / PULL / LEGS x2"; splitDesc = days + " dni na teden"; }
+  const isFemale = norm(userData.gender).includes("zensk");
   const genderLabel = isFemale ? "ženski" : "moški";
   const prompt = `Ustvari personaliziran trening program. Vrni SAMO čisti JSON.
 STRANKA: ${name}, ${userData.age} let, ${userData.weight} kg, spol: ${isFemale ? "ženska" : "moški"}, aktivnost: ${userData.activity}, cilj: ${userData.goal}, lokacija: ${userData.location}, oprema: ${userData.equipment}
@@ -523,11 +520,12 @@ JEZIK IN SLOG (OBVEZNO):
 - Nobenih oklepajev v sredini povedi.
 Ne mara vaj: ${userData.exDislikes} | Ima rad: ${userData.exLikes}
 Treningov/teden: ${days} | Poškodbe: ${userData.injuries} | Opombe: ${userData.trainingNotes}
-PREDLAGAN SPLIT: ${splitType} (prilagodi glede na cilj, nivo, opremo in opombe stranke po pravilih iz sistema)
+Prehranske preference (za kontekst): Rad je: ${userData.likes} | Ne mara: ${userData.dislikes}
+PREDLAGAN SPLIT: ${splitType} (prilagodi glede na cilj, nivo, opremo in OPOMBE stranke – opombe imajo VEDNO prednost pred predlaganim splitom)
 JSON struktura:
 {
   "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
-  "intro": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne, brez dolgih razlag. BREZ emojijev in posebnih znakov. NE piši kot uradni dokument. Brez alinej ali bullet točk. Začni z 'Ta trening program je sestavljen glede na...'. Vsebuje (vsaka točka = en kratek odstavek): 1) kontekst za koga je plan, 2) kakšen je split in zakaj, 3) trening do tehnične odpovedi – zadnja ponovitev mora biti zadnja možna s čisto tehniko, 4) tehnika in kontroliran spust, 5) kako dodajaš težo (progressive overload), 6) počitek med serijami, 7) kardio in koraki, 8) regeneracija in doslednost.",
+  "intro": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne, brez dolgih razlag. BREZ emojijev in posebnih znakov. NE piši kot uradni dokument. Brez alinej ali bullet točk. Začni z 'Ta trening program sem ti sestavil glede na...'. Vsebuje (vsaka točka = en kratek odstavek): 1) kontekst za koga je plan, 2) kakšen je split in zakaj, 3) trening do tehnične odpovedi – zadnja ponovitev mora biti zadnja možna s čisto tehniko, 4) tehnika in kontroliran spust, 5) kako dodajaš težo (progressive overload), 6) počitek med serijami, 7) kardio in koraki, 8) regeneracija in doslednost.",
   "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Počitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Četrtek", "workout": "Počitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Počitek" }, { "day": "Nedelja", "workout": "Počitek" }],
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
