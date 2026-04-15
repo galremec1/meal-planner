@@ -913,11 +913,8 @@ function exerciseCard(ex, idx) {
   const bg = idx % 2 === 0 ? DARK_CARD : DARK_ROW;
   const lW = 2800, rW = CW - lW;
   const rightChildren = [
-    new Paragraph({ spacing: { before: 0, after: ex.note ? 80 : 0 }, children: [new TextRun({ text: sanitizeText(ex.sets_reps), bold: true, size: 34, color: WHITE, font: "Arial" })] }),
+    new Paragraph({ spacing: { before: 0, after: 0 }, children: [new TextRun({ text: sanitizeText(ex.sets_reps), bold: true, size: 34, color: WHITE, font: "Arial" })] }),
   ];
-  if (ex.note) {
-    rightChildren.push(new Paragraph({ spacing: { before: 0, after: 0 }, children: [new TextRun({ text: postProcessText(sanitizeText(ex.note)), size: 18, color: GRAY, font: "Arial" })] }));
-  }
   return new Table({
     width: { size: CW, type: WidthType.DXA },
     columnWidths: [lW, rW],
@@ -985,13 +982,36 @@ function generateMealDocx(userData, plan) {
 
   // Adaptations (glavno uvodno besedilo) – razdeljeno na odstavke, font 12pt (size 24)
   // keepLines: true zagotovi, da se odstavek ne razpolovi čez stran
+  // Če je odstavek predolg za eno stran (>800 znakov), ga razbij na dva dela pri koncu stavka
   const adaptationParagraphs = splitParagraphs(plan.adaptations);
   adaptationParagraphs.forEach((para, idx) => {
-    children.push(new Paragraph({
-      spacing: { before: idx === 0 ? 0 : 200, after: 200, line: 340 },
-      keepLines: true,
-      children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
-    }));
+    const maxLen = 800;
+    const parts = [];
+    if (para.length > maxLen) {
+      const mid = Math.floor(para.length / 2);
+      let breakPoint = -1;
+      for (let i = mid; i < Math.min(mid + 200, para.length); i++) {
+        if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+          breakPoint = i + 1; break;
+        }
+      }
+      if (breakPoint === -1) {
+        for (let i = mid; i > Math.max(mid - 200, 0); i--) {
+          if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+            breakPoint = i + 1; break;
+          }
+        }
+      }
+      if (breakPoint > 0) { parts.push(para.substring(0, breakPoint).trim()); parts.push(para.substring(breakPoint).trim()); }
+      else { parts.push(para); }
+    } else { parts.push(para); }
+    parts.forEach((part, pIdx) => {
+      children.push(new Paragraph({
+        spacing: { before: (idx === 0 && pIdx === 0) ? 0 : 200, after: 200, line: 340 },
+        keepLines: true,
+        children: [new TextRun({ text: part, size: 24, color: LIGHT, font: "Arial" })],
+      }));
+    });
   });
 
   // Day pages – vsak dan na svoji strani (od strani 3 naprej)
@@ -1022,11 +1042,33 @@ function generateMealDocx(userData, plan) {
     }));
     const closingParagraphs = splitParagraphs(plan.intro);
     closingParagraphs.forEach((para, idx) => {
-      children.push(new Paragraph({
-        spacing: { before: idx === 0 ? 0 : 200, after: 200, line: 340 },
-        keepLines: true,
-        children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
-      }));
+      const maxLen = 800;
+      const parts = [];
+      if (para.length > maxLen) {
+        const mid = Math.floor(para.length / 2);
+        let breakPoint = -1;
+        for (let i = mid; i < Math.min(mid + 200, para.length); i++) {
+          if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+            breakPoint = i + 1; break;
+          }
+        }
+        if (breakPoint === -1) {
+          for (let i = mid; i > Math.max(mid - 200, 0); i--) {
+            if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+              breakPoint = i + 1; break;
+            }
+          }
+        }
+        if (breakPoint > 0) { parts.push(para.substring(0, breakPoint).trim()); parts.push(para.substring(breakPoint).trim()); }
+        else { parts.push(para); }
+      } else { parts.push(para); }
+      parts.forEach((part, pIdx) => {
+        children.push(new Paragraph({
+          spacing: { before: (idx === 0 && pIdx === 0) ? 0 : 200, after: 200, line: 340 },
+          keepLines: true,
+          children: [new TextRun({ text: part, size: 24, color: LIGHT, font: "Arial" })],
+        }));
+      });
     });
   }
 
@@ -1064,24 +1106,52 @@ function generateTrainingDocx(userData, plan) {
   children.push(sp(280));
   children.push(redRule(4, 200));
 
-  // Intro text – razdeljen na odstavke, font 12pt (size 24), teče naravno na drugo stran
+  // Intro text – razdeljen na odstavke, font 12pt (size 24)
   // keepLines: true zagotovi, da se noben odstavek ne razpolovi čez stran
   const trainingIntroParagraphs = splitParagraphs(plan.intro);
   trainingIntroParagraphs.forEach((para, idx) => {
-    children.push(new Paragraph({
-      spacing: { before: idx === 0 ? 200 : 200, after: 200, line: 340 },
-      keepLines: true,
-      children: [new TextRun({ text: para, size: 24, color: LIGHT, font: "Arial" })],
-    }));
+    // Če je odstavek predolg za eno stran (>800 znakov), ga razbij na dva dela
+    const maxLen = 800;
+    const parts = [];
+    if (para.length > maxLen) {
+      // Najdi najboljšo točko za prelom (konec stavka blizu sredine)
+      const mid = Math.floor(para.length / 2);
+      let breakPoint = -1;
+      // Išči konec stavka (. ! ?) najbližje sredini
+      for (let i = mid; i < Math.min(mid + 200, para.length); i++) {
+        if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+          breakPoint = i + 1;
+          break;
+        }
+      }
+      if (breakPoint === -1) {
+        for (let i = mid; i > Math.max(mid - 200, 0); i--) {
+          if ((para[i] === '.' || para[i] === '!' || para[i] === '?') && i + 1 < para.length && para[i + 1] === ' ') {
+            breakPoint = i + 1;
+            break;
+          }
+        }
+      }
+      if (breakPoint > 0) {
+        parts.push(para.substring(0, breakPoint).trim());
+        parts.push(para.substring(breakPoint).trim());
+      } else {
+        parts.push(para);
+      }
+    } else {
+      parts.push(para);
+    }
+    parts.forEach((part) => {
+      children.push(new Paragraph({
+        spacing: { before: 200, after: 200, line: 340 },
+        keepLines: true,
+        children: [new TextRun({ text: part, size: 24, color: LIGHT, font: "Arial" })],
+      }));
+    });
   });
 
-  // Gray divider
-  children.push(new Paragraph({
-    spacing: { before: 200, after: 200 },
-    border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: GRAY, space: 1 } },
-    children: [],
-    keepNext: true,
-  }));
+  // Schedule na svoji strani
+  children.push(new Paragraph({ children: [new PageBreak()] }));
 
   // Schedule section header – drži skupaj s tabelo
   children.push(new Paragraph({
