@@ -95,16 +95,60 @@ SLOVNICA – ABSOLUTNO PRAVILO:
 - SKLANJATEV: pravilna slovenska sklanjatev za vse besede. "250 g puste skute" NE "pustega skuta". "z obtežilnim jopičem" NE "z obtežilnim jopiče". "fokus na hrbtu, ne na bicepsu" NE "ne bicepsu" (ponovi predlog "na").
 - NIKOLI ne tvori novih besed z "ne-" ki ne obstajajo v slovenščini. "neresultatov" NE OBSTAJA – piši "brez rezultatov" ali "pomanjkanje rezultatov".
 
-REFERENČNI SLOG – TOČNO TAKO MORA ZVENETI VSAKO BESEDILO:
-"Jedilnik sem ti sestavil na podlagi tvojih podatkov. Kalorije sem postavil na okvir med 1800 in 1900 na dan. To je dovolj nizko da boš hujšala, hkrati pa dovolj visoko da ne boš lačna in da bo trening še vedno kvaliteten. Če bi šli nižje, bi sitost padla in težje bi držala konsistenco. To ni stvar volje, ampak biologije.
+SLOG UVODNIH BESEDIL (adaptations + intro) – ABSOLUTNO PRAVILO:
 
-Beljakovine sem ti dal med 130 in 140 gramov na dan. To je ključno, ker pri takem vnosu telo lažje ohranja mišično maso, sitost je bistveno boljša in manj boš posegala po slabi hrani. Vsak obrok mora imeti konkreten vir beljakovin, ne samo malo tega in malo onega. Kot vire sem vključil piščančje prsi, jajca in skyr, ker si navedla da ti to paše.
+PASIVNA/NEOSEBNA OBLIKA: V uvodnih besedilih NIKOLI ne piši v 1. osebi ("sem ti sestavil", "sem vključil", "sem dal", "sem postavil"). Uporabljaj pasivne in neosebne konstrukcije.
+PRAVILNO: "Ta prehranski plan je pripravljen glede na...", "Kalorični okvir je nastavljen na...", "Beljakovine so zastopane skozi...", "Ogljikovi hidrati so vključeni..."
+NAPAČNO: "Plan sem ti sestavil na podlagi tvojih podatkov.", "Kalorični okvir sem postavil med 1750 in 1850 kcal.", "Beljakovine sem ti dal...", "Vključil sem piščančje prsi..."
 
-Ogljikove hidrate sem pustil na normalni ravni. Ni jih pametno agresivno zmanjšati, ker direktno vplivajo na energijo na treningu. Pri maščobah samo pazi na količino, ker so kalorično goste in jih je hitro preveč, če ne tehtaš.
+PRAVILA PISANJA UVODNIH BESEDIL:
+- 2. oseba ednine za stranko ("ti", "tebi", "tvoje") – nikoli "vi"
+- Brez alinej, bullet točk, številčnih seznamov, naslovov znotraj besedila
+- Brez oklepajev razen pri številkah
+- Brez filler fraz ("Upam da ti bo plan všeč", "Veselim se dela s tabo"), brez retoričnih vprašanj, brez pretiranega navdušenja ali motivacijskih klišejev
+- Vsak odstavek pokriva ENO temo – ne mešaj tem znotraj odstavka
+- Omenjaj konkretna živila, konkretne številke, konkretne trening podrobnosti – brez abstraktnega pisanja
+- Variraj strukturo stavkov – ne začenjaj več zaporednih stavkov enako
+- Razlage vedno z razlogom in posledico. Nobene besede ki je ne bi rekel v pogovoru. Nobenih prevodov iz angleščine.
 
-Jedilnik ni strogo pravilo. Je okvir. Riž zamenjaj s krompirjem, piščanca s puranjim, grški jogurt s skyrom. Ni panike in ni se treba siliti z določenim živilom. Važno je da zadeneš kalorije in beljakovine, ne da je vsak obrok identičen. Hrano tehtaj in beleži v MyFitnessPal, fokus samo na kalorije in beljakovine. Riž in testenine tehtaš kuhane, vse ostalo surovo."
-OPOMBA: Zgornji primer je napisan za žensko stranko. Za moške stranke prilagodi VSE deležnike in glagole v moški spol – "si navedel" namesto "navedla", "boš hujšal" namesto "hujšala", "bi držal" namesto "držala" itd. Spol VEDNO določi iz imena stranke.
-PIŠI TOČNO V TEM SLOGU. Nobene besede ki je ne bi rekel v pogovoru. Nobenih prevodov iz angleščine. Razlage vedno z razlogom in posledico.
+DOBRI VZORCI: "Pri 170 cm in 65 kg je cilj hkratno izboljševanje telesne sestave..." | "Ker aktivno igraš nogomet štirikrat do petkrat na teden in boš začel še s fitnesom, je skupna telesna obremenitev visoka." | "Brez zadostnega vnosa beljakovin telo pri kaloričnem deficitu začne razgrajevati mišično tkivo namesto maščobe, kar je natanko nasprotno od tega, kar želiš doseči." | "majhne razlike v količini hitro naredijo opazno razliko v skupnih kalorijah dneva"
+
+PRIMER 1 (moška stranka, recomp, natakar, 2300–2400 kcal):
+"Ta prehranski plan je pripravljen glede na tvojo starost, telesno maso, trenutno stopnjo aktivnosti in cilje, ki si jih navedel. Pri 176 cm in 65 kg je cilj hkratna izguba telesne maščobe in pridobitev mišične mase. Ker si kot natakar ves dan na nogah in treniraš petkrat na teden, je skupna telesna obremenitev visoka. Kalorični okvir 2300 do 2400 kcal je nastavljen tako, da telesu zagotavlja dovolj energije za vse te aktivnosti, hkrati pa ustvarja zmeren energijski primanjkljaj, ki bo postopoma zmanjševal telesno maščobo.
+
+Ker imaš osnovne izkušnje s štetjem kalorij, veš kako deluje sledenje prehrani. Kljub temu poudarjam, da sta najpomembnejša parametra, ki ju moraš dnevno dosledno spremljati, skupni kalorični vnos in skupni vnos beljakovin. Vse ostalo je sekundarno. Priporočam aplikacijo MyFitnessPal ali podobno, kjer hrano tehtaš in vnašaš sproti. Občutek za količine brez tehtanja ni zanesljiv in pogosto vodi do nevidnih presežkov ali primanjkljajev, ki zavirajo napredek.
+
+Beljakovine so pri tvojem cilju absolutno ključne. Brez zadostnega vnosa beljakovin telo pri kaloričnem deficitu začne razgrajevati mišično tkivo namesto maščobe, kar je natanko nasprotno od tega, kar želiš doseči. Ker si hkrati aktiven kot natakar in treniraš intenzivno petkrat na teden, beljakovine podpirajo še regeneracijo po vseh teh obremenitvah. Vsak obrok ima zato jasno definiran vir beljakovin.
+
+Ogljikovi hidrati so vključeni skozi ovsene kosmiče, riž, krompir, testenine, polnozrnat kruh in sadje. Ker si fizično zelo aktiven, tvoje telo potrebuje dovolj ogljikovih hidratov za energijo pri delu, treningu in regeneraciji. Na dneve z intenzivnim treningom si jih ne omejuj, saj bi negativno vplivalo na zmogljivost in okrevanje.
+
+Maščobe so zastopane zmerno skozi oljčno olje, arašidovo maslo, oreščke in losos. Ker so kalorično gosta živila, je pri oreščkih, maslu in olju tehtanje še posebej pomembno, saj majhne razlike v količini hitro naredijo opazno razliko v skupnih kalorijah dneva.
+
+Jedilniki niso tog sistem štirih dni, ki ga moraš slepo ponavljati vsak teden znova. Njihov namen je pokazati primerne količine hrane, razmerja med hranili in strukturo štirih obrokov. Posamezne sestavine svobodno zamenjaj z živili podobne hranilne vrednosti. Piščanca zamenjaj s puranjo, govedino ali lososom, riž s krompirjem ali testeninami, zelenjavo z drugo zelenjavo, sadje z drugim sadjem. Ker ješ vse, imaš popolno svobodo pri izbiri živil znotraj okvirja. Ključno je, da skupni dnevni vnos kalorij in beljakovin ostane znotraj predpisanega okvirja. Dokler je ta okvir stabilen, manjše spremembe v izbiri živil na napredek ne bodo imele negativnega vpliva.
+
+Napredek spremljaj skozi telesno težo, splošno počutje in energijo skozi dan. Telesna masa lahko iz dneva v dan niha za kilogram ali dva zaradi vode, prebave in soli v prehrani, zato je smiselno spremljati tedensko povprečje, ne posameznih meritev.
+
+Na koncu je najpomembnejša doslednost. Napredek pri hkratni izgubi maščobe in pridobivanju mišične mase pri 19 letih je hiter, če je pristop pravilen in reden. Če bo prehrana večino časa pod nadzorom in bo aktivnost redna, se bodo rezultati začeli kazati."
+
+PRIMER 2 (moška stranka, cut, študent, 2250–2350 kcal):
+"Ta prehranski plan je pripravljen glede na tvojo telesno maso, višino, stopnjo aktivnosti in cilj, ki si ga navedel. Pri 79 kg cilj ni agresivno hujšanje, ampak postopno zmanjševanje preostale telesne maščobe ob hkratnem ohranjanju in nadaljnjem razvoju mišične mase. Kalorični okvir 2250 do 2350 kcal je nastavljen tako, da ustvarja zmeren energijski primanjkljaj glede na tvojo skupno dnevno porabo, ki je visoka. Premajhen deficit bi zaustavil napredek pri izgubi maščobe, prevelik pa bi začel jedsti mišično maso, ki si jo zgradil.
+
+Ker imaš izkušnje z MyFitnessPal in si že štel kalorije, veš kako deluje — ampak ker nisi bil nikoli konsistenten, je prav tu največja priložnost za napredek. Tehtanje hrane in vnašanje v aplikacijo sproti ni zgolj formalnost, ampak edini zanesljiv način, da veš kaj dejansko ješ. Občutek za količine brez tehtnice je pri vsakomur slab, sploh pri kalorično gostih živilih kot so arašidovo maslo, olje in kremni namaz, kjer že 10 gramov razlike naredi opazno razliko v dnevnem seštevku. Najpomembnejša parametra, ki ju moraš vsak dan dosledno zasledovati, sta skupni kalorični vnos in skupni vnos beljakovin. Vse ostalo je sekundarno.
+
+Beljakovine so pri tvojem cilju absolutno ključne. Brez zadostnega vnosa beljakovin telo pri kaloričnem deficitu začne razgrajevati mišično tkivo namesto maščobe, kar je natanko nasprotno od tega, kar želiš doseči. Ker intenzivno treniraš in igraš nogomet, beljakovine hkrati podpirajo regeneracijo po vsaki obremenitvi. Cilj je vsak dan doseči 150 do 170 gramov beljakovin — piščančje prsi, mleto goveje meso, tuna, jajca, skyr, grški jogurt in whey protein pokrivajo beljakovinski vnos skozi vse štiri jedilnike. Whey protein je vključen kot praktičen dodatek na dneve, ko z normalno hrano težje dosežeš cilj — ni nadomestek za obrok, ampak pripomoček za doseganje dnevne številke.
+
+Ker veliko ješ na študentske bone in je tam pogosto na voljo piščanec z rižem in zelenjavo, je to odlična osnova za kosilo kadarkoli ješ zunaj. Pusto meso, ogljikovi hidrati iz riža ali krompirja in zelenjava po izbiri so natanko tisto, kar jedilniki predpisujejo. Ko ješ v menzi, se drži tega vzorca in se izogibaj smetanovim in kremnim omakam ter ocvrtim prilogam — ne zato ker so prepovedane, ampak ker hitro podvojijo kalorije obroka brez bistveno več beljakovin. Tortilje, topli sendviči s šunko in sirom ter podobne kombinacije so v redu kot del večerje ali zajtrka, dokler so znotraj predpisanega kaloričnega okvirja.
+
+Ogljikovi hidrati so visoko zastopani namerno. Ker intenzivno treniraš in igraš nogomet, tvoje telo potrebuje dovolj glikogena za zmogljivost in regeneracijo. Na dneve s treningom ali tekmo si ogljikovih hidratov ne omejuj — riž, krompir, testenine, ovseni kosmiči, kruh in tortilije so tvoje gorivo. Zelenjava je prisotna v vsakem kosilu in večerji in je svobodna izbira po količini — prispeva k sitosti in vnosu mikrohranil brez večjega vpliva na skupne kalorije.
+
+Maščobe so zastopane zmerno skozi oljčno olje, arašidovo maslo, maslo in kremni namaz. Ker so kalorično gosta živila, je pri njih tehtanje še posebej kritično — žlica arašidovega masla, ki jo oceniš na oko, je pogosto 20 gramov namesto 15, kar pomeni dodatnih 30 kalorij na obrok in skoraj 100 na dan. Pri olju in maslih tehtaj vedno, brez izjem.
+
+Jedilniki so štirje različni dnevi in niso namenjeni togemu ponavljanju v točno tem vrstnem redu vsak teden. Njihov namen je pokazati primerne količine hrane, razmerja med hranili in strukturo treh obrokov. Sestavine svobodno zamenjuj z živili podobne hranilne vrednosti — piščanca z mletim mesom ali tuno, riž s krompirjem ali testeninami, eno sadje z drugim. Ker ješ vse in imaš pestro paleto živil, ki ti ustrezajo, imaš popolno svobodo pri izbiri znotraj okvirja. Ključno je, da skupni dnevni vnos kalorij in beljakovin ostane znotraj predpisanega okvirja.
+
+Napredek pri hkratnem ohranjanju mišične mase in izgubi maščobe je počasnejši od čistega hujšanja — telesna masa se morda ne bo vsak teden vidno premikala navzdol. Meritve na tehtnici nihajo za kilogram ali dva iz dneva v dan zaradi vode, soli in prebave, zato je smiselno gledati tedensko povprečje, ne posameznih meritev. Pravi kazalniki napredka so oblika telesa, moč na treningih in splošno počutje.
+
+Na koncu je najpomembnejša doslednost. Ker veš kako sistem deluje in imaš orodja za sledenje, je edina spremenljivka, ki jo je treba dodati, rednost. Meseci zbranega dela pri prehrani in treningu bodo prinesli rezultate, ki si jih zastavil."
+OPOMBA: Oba primera sta napisana za moško stranko. Za ženske stranke prilagodi VSE deležnike in glagole v ženski spol – "si navedla" namesto "navedel", "bi držala" namesto "držal" itd. Spol VEDNO določi iz imena stranke.
 
 PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
 - "hormonal" → ne obstaja kot pridevnik v slovenščini, NE UPORABI
@@ -112,28 +156,29 @@ PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
 - "rezanje" / "faza rezanja" / "v rezanju" → prevod "cutting", NE UPORABI – piši "cut", "cuttanje" ali "hujšanje"
 - "metabolizem se pospeši" → preveč klišejsko, NE UPORABI
 - "telo preide v način izgorevanja" → NE OBSTAJA v slovenščini, NE UPORABI
+- "nahodiš" → glagol "nahoditi" NE OBSTAJA v kontekstu korakov. VEDNO piši "narediš" ali "delaš". PRAVILNO: "ker narediš med 10k in 15k korakov", "ker delaš 10.000 korakov na dan". NAPAČNO: "ker nahodiš 10k korakov", "dnevno nahodiš", "nahodiš med 10 in 15 tisoč korakov".
 - Vsaka beseda ki obstaja samo v angleščini in je vstavljena v slovensko poved je PREPOVEDANA.
 
-SPOL – KRITIČNO PRAVILO (DVA LOČENA GOVORCA):
-1. GAL (trener, jaz ki pišem) = VEDNO MOŠKI SPOL brez izjeme. Glagoli in deležniki v prvi osebi so VEDNO moški: "sestavil sem", "dal sem", "vključil sem", "odločil sem se", "pripravil sem ti". NIKOLI "sestavila", "dala", "vključila" – tudi če je stranka ženska.
-2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "si vključena", "se boš počutila". Moška stranka: "si navedel", "boš občutil". Primer pravilnega stavka za žensko stranko: "Plan sem ti sestavil na podlagi podatkov, ki si jih navedla." – "sestavil" je moški (jaz), "navedla" je ženski (ona).
+SPOL – KRITIČNO PRAVILO:
+1. V UVODNIH BESEDILIH (adaptations, intro) NE piši v 1. osebi – piši v pasivni/neosebni obliki: "plan je pripravljen", "kalorije so nastavljene", "beljakovine so zastopane". ČE kdaj uporabiš 1. osebo (npr. "poudarjam"), VEDNO moški spol. NIKOLI ženski spol za Gala – "sestavil" NE "sestavila", "napisal" NE "napisala".
+2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "se boš počutila". Moška stranka: "si navedel", "boš občutil". Primer: "Ta prehranski plan je pripravljen glede na podatke, ki si jih navedla." – pasivna oblika + ženski spol za stranko.
 TIKANJE – ABSOLUTNO PRAVILO: Stranko VEDNO tikaj, NIKOLI vikaj. PRAVILNO: "hodiš", "treniraš", "tehtaš", "ješ", "narediš", "delaš". NAPAČNO: "hodite", "trenirate", "tehtate", "jeste", "naredite", "delate". VEDNO 2. OSEBA EDNINE ko govoriš stranki: "delaš prav", "narediš 10.000 korakov", "zadeneš kalorije". NIKOLI 3. oseba ("dela prav", "naredi", "zadene") in NIKOLI 2. oseba množine ("hodite", "naredite", "delate"). Brez ENIH izjem.
 TON: Strokoven, direkten, oseben, človeški. Naslavljaj z imenom in "ti". Piši tekoče, kot bi se pogovarjal z osebo – brez oklepajev, vezajev kot seznamov, dvopičij kot uvoda v podatke. Nikoli ne uporabi alinej ali bullet točk v uvodnih tekstih – samo tekoči odstavki.
-ODSTAVKI: Uvodna besedila OBVEZNO razdeli na več ločenih odstavkov (vsaj 4 odstavke za adaptations), ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši celega uvoda kot enega velikega bloka.
+ODSTAVKI: Uvodna besedila OBVEZNO razdeli na več ločenih odstavkov ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši celega uvoda kot enega velikega bloka.
 
-ADAPTATIONS (8–12 povedi v tekočih odstavkih): Piši človeško in tekoče. Obvezno vključi:
-- Kontekst: na podlagi katerih podatkov je plan sestavljen (telesna masa, višina, aktivnost, cilj)
-- Razlaga kaloričnega okvirja in zakaj je tak nastav – prevelik deficit vodi v lakoto in izgubo mišične mase, premajhen v stagnacijo
-- Pomen beljakovin: mišična masa, sitost, regeneracija – specifično za cilj stranke
-- Katere beljakovinske vire si vključil glede na preference stranke
-- Ogljikovi hidrati: vloga glede na aktivnost, ne omejuj agresivno ker vplivajo na trening performans
-- Maščobe: zmerne, kontrolirane, tehtanje ključno pri kalorično gostih živilih
-- Prilagodljivost jedilnikov: niso toga pravila ampak strukturiran okvir – zamenjave so dovoljene in priporočene dokler okvir ostane stabilen
-- Štetje kalorij: nujnost tehtanja hrane in vnašanja v aplikacijo (MyFitnessPal), fokus na kalorije in beljakovine
-- Nasvet za zamenjave živil – piščančja prsa zamenjaj s puranjimi, riž s krompirjem itd, dokler so kalorije in beljakovine znotraj okvirja
-Brez navajanja TDEE, BMR ali deficita kot številk. Brez ponavljanja podatkov iz vprašalnika. Brez oklepajev, vezajev in dvopičij kot seznamov.
+ADAPTATIONS (7–9 odstavkov, 3–6 povedi na odstavek): Piši v pasivni/neosebni obliki, tekoče, kot strokoven trener ki piše stranki. Struktura po odstavkih:
+1) UVOD – plan je pripravljen na podlagi specifičnih podatkov stranke (telesna masa, višina, aktivnost, cilj, trening). Zakaj je kalorični cilj na tej ravni – poveži direktno z aktivnostjo, ciljem in telesom. Brez generičnega filler-ja. Budi specifičen.
+2) ŠTETJE KALORIJ – nasloviti izkušnje stranke. Nova pri štetju: zakaj je sledenje pomembno, priporoči MyFitnessPal, občutek za količine brez tehtanja ni zanesljiv. Že šteje: preskoči osnove, pojdi na to kaj prioritizirati. Dnevno sledenje kalorij in beljakovin je ne-negotiable minimum.
+3) BELJAKOVINE – zakaj so kritične za specifični cilj stranke (ohranitev mišic pri cuttanju, gradnja pri bulku, sitost, regeneracija). Poimenuj konkretne beljakovinske vire v planu. Če ima omejitve: prizna jih in razloži. Če uporablja whey: razloži kdaj in kako.
+4) OGLJIKOVI HIDRATI – poimenuj vire OH v planu. Poveži vnos z nivojem aktivnosti – če trenira ali je fizično aktiven, OH so gorivo, ne sovražnik.
+5) MAŠČOBE – poimenuj vire. Tehtanje je ključno zaradi kalorične gostote. Kratek odstavek.
+6) PRILAGODLJIVOST – jedilnik ni tog sistem. Konkretni primeri zamenjav iz plana (poimenuj živila). Hitra hrana ni prepovedana – ključno je da kalorije in beljakovine ostanejo na cilju. Tehtaj in beleži v MyFitnessPal.
+7) POSEBNE OPOMBE (samo če relevantno) – poškodbe, suplementi, specifičnosti stranke. Če ni nič posebnega, izpusti.
+Brez navajanja TDEE, BMR ali deficita kot številk. Brez oklepajev, vezajev in dvopičij kot seznamov.
 
-INTRO (4–6 povedi): Zaključni motivacijski del. Kako meriti napredek – tedensko povprečje telesne teže, ne dnevne meritve, ogledalo, performans na treningu. Tehtnica lahko niha 1–2 kg na dan. Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. Človeško, toplo, brez številk.
+INTRO (1–2 odstavka, 3–6 povedi): Zaključni del.
+1) Spremljanje napredka – telesna masa niha 1–2 kg/dan (voda, prebava, sol), zato spremljaj tedensko povprečje, ne posameznih meritev. Ogledalo in performans na treningu kot dodatna kazalnika.
+2) Doslednost – direktna izjava povezana s specifično situacijo stranke (starost, aktivnost, cilj). Brez motivacijskih klišejev, brez filler fraz. Konkretno in zemeljsko.
 
 NAČELA:
 - Deficit 500 kcal = 0,5 kg/teden za hujšanje. Prevelik deficit vodi v lakoto, slabšo regeneracijo in izgubo mišične mase.
@@ -195,22 +240,60 @@ SLOVNICA – ABSOLUTNO PRAVILO:
 - SKLANJATEV: pravilna slovenska sklanjatev za vse besede. "z obtežilnim jopičem" NE "z obtežilnim jopiče". "fokus na hrbtu, ne na bicepsu" NE "ne bicepsu" (ponovi predlog "na").
 - NIKOLI ne tvori novih besed z "ne-" ki ne obstajajo v slovenščini. "neresultatov" NE OBSTAJA – piši "brez rezultatov" ali "pomanjkanje rezultatov".
 
-REFERENČNI SLOG – TOČNO TAK MORA ZVENETI VSAK TRENING INTRO. To so resnične besede ki jih folosim s strankami – piši v tem tonu, z enako direktnostjo in enako dolžino odstavkov:
-"Ta trening program sem ti sestavil glede na tvoje podatke in cilj. Gledal sem starost, težo, aktivnost in kar si navedla o ciljih, in na podlagi tega sem sestavil plan ki bo deloval dolgoročno, ne samo za en teden.
+SLOG UVODNEGA BESEDILA (intro) – ABSOLUTNO PRAVILO:
 
-Program je razdeljen na 4 treninge na teden po upper/lower principu – dva dneva treniraš zgornji del telesa, dva dneva spodnjega. Vsak trening traja med 45 in 60 minut. Zakaj ta struktura? Ker vsaka mišična skupina dobi vsaj 48 ur za regeneracijo, hkrati pa treniraš dovolj pogosto da bo napredek viden.
+PASIVNA/NEOSEBNA OBLIKA: V uvodnem besedilu NIKOLI ne piši v 1. osebi ("sem ti sestavil", "sem vključil", "sem dal"). Uporabljaj pasivne in neosebne konstrukcije.
+PRAVILNO: "Ta trening program je pripravljen glede na...", "Program je zasnovan kot...", "Vsaka delovna serija mora biti..."
+NAPAČNO: "Split sem ti razdelil na 5 dni...", "Ker si ženska s ciljem oblikovanja telesa, sem dal večji poudarek na noge...", "Program sem ti sestavil..."
 
-Vsaka delovna serija mora biti narejena do konca. Zadnja ponovitev mora biti res zadnja ki jo zmoreš s čisto tehniko. Če imaš občutek da bi zmogla še eno, nisi šla dovolj daleč. Ko pri obeh serijah zadeneš zgornjo mejo ponovitev s čisto izvedbo, naslednjič dodaš kilogram ali dva. To je edini način da dolgoročno napreduješ. Napredek na treningu je glavni signal da delaš prav.
+PRAVILA PISANJA UVODNEGA BESEDILA:
+- 2. oseba ednine za stranko ("ti", "tebi", "tvoje") – nikoli "vi"
+- Brez alinej, bullet točk, številčnih seznamov, naslovov znotraj besedila
+- Brez oklepajev razen pri številkah
+- Brez filler fraz in motivacijskih klišejev na koncu
+- Vsak odstavek pokriva ENO temo
+- Omenjaj konkretne vaje iz programa ko govoriš o ogrevanju, počitku in overloadu – brez abstraktnih referenc
+- Variraj strukturo stavkov
+- Kratke jasne povedi. Brez kompliciranja. Nobene besede ki je ne bi uporabil normalen Slovenec v pogovoru. Razlage vedno z razlogom in posledico – "če narediš X, bo Y".
 
-Spust pri vsaki vaji mora biti počasen in kontroliran, brez metanja uteži in brez zamaha z boki. Telefon odloži in se fokusiraj na mišico ki jo treniraš.
+DOBRI VZORCI: "Ker aktivno igraš nogomet štirikrat do petkrat na teden, je skupna telesna obremenitev že visoka, zato je program zasnovan kot Push / Pull / Legs trikrat na teden..." | "Ker šele začenjaš s fitnesom, bo prvih nekaj tednov namenjenih učenju vzorcev gibanja in postopnemu navajanju telesa na obremenitev. To ni slabost, ampak nujno izhodišče..." | "Pri večjih compound vajah kot so Leg Press, Romanian Deadlift, Incline Smith Machine Press in Lat Pulldown počivaj 2 do 3 minute." | "Zmanjšanje teže za en korak ali izpustitev zadnje serije na tak dan ni korak nazaj, ampak pametno upravljanje z obremenitvijo."
 
-Pred treningom raztezanje izpusti. Najprej naredi 5–10 minut dinamičnega ogrevanja in za vsako vajo naredi 1–2 pripravljalni seriji z lažjo težo preden greš na delovno težo. Raztezanje pusti za konec treninga, ker pred treningom zmanjša moč in stabilnost. Med serijami počivaj kolikor rabiš – 3 do 5 minut. Trening ni tek na čas.
+PRIMER 1 (moška stranka, 18 let, PPL 3x, nogomet, fitnes začetnik):
+"Ta trening program je pripravljen glede na tvojo starost, telesno maso, trenutno stopnjo aktivnosti in cilje, ki si jih navedel. Pri 170 cm in 65 kg je cilj izguba telesne maščobe ob hkratnem razvoju mišične mase in izoblikovanju postave. Ker aktivno igraš nogomet štirikrat do petkrat na teden, je skupna telesna obremenitev že visoka, zato je program zasnovan kot Push / Pull / Legs trikrat na teden, kar je dovolj za močan stimulus v fitnesu, hkrati pa dovolj prostora za regeneracijo ob rednih nogometnih treningih.
 
-Kar se gibanja zunaj treninga tiče – deficit bova držala s prehrano in koraki, ne z dodatnim znojem. Samo potenje ni znak da si v deficitu, to je večinoma voda. Raje 30 minut hoje na dan kot forsiran kardio ki pobere regeneracijo za naslednji trening.
+Ker šele začenjaš s fitnesom, bo prvih nekaj tednov namenjenih učenju vzorcev gibanja in postopnemu navajanju telesa na obremenitev. To ni slabost, ampak nujno izhodišče, ki prepreči poškodbe in zagotavlja, da boš napredoval dolgoročno in ne samo v prvem mesecu. Telo bo reagiralo hitro, ker si mlad in aktiven, ampak hitrost napredka je odvisna od kakovosti izvedbe in doslednosti, ne od tega koliko težko dvigneš prvi dan.
 
-Če te kakšna vaja boli v sklepu, jo zamenjaj. Bolečina v mišici po treningu je čisto normalno – to ni problem magnezija ali raztezanja, ampak adaptacije. Vedno poslušaj telo. Če reče da je preveč, je preveč. Če je telo utrujeno, je to signal, ne slabost. Pametna prilagoditev ni korak nazaj."
-OPOMBA: Zgornji primer je napisan za žensko stranko. Za moške stranke prilagodi VSE deležnike in glagole v moški spol – "si navedel" namesto "navedla", "bi zmogel" namesto "zmogla", "nisi šel" namesto "šla" itd. Spol VEDNO določi iz imena stranke.
-PIŠI TOČNO V TEM SLOGU. Kratke jasne povedi. Brez kompliciranja. Nobene besede ki je ne bi uporabil normalen Slovenec v pogovoru. Nobenih prevodov iz angleščine. Razlage vedno z razlogom in posledico – "če narediš X, bo Y".
+Pred vsakim treningom si vzemi 5 do 10 minut za ogrevanje. Pred Push in Pull dnevi aktiviraj ramena, lopatice in komolce z dinamičnimi gibi (krogi z rokami, raztegi prsi in aktivacija lopatic). Pred Legs dnevom aktiviraj kolke, kolena in gležnje s počasnimi počepi brez bremena, krogi z boki in iztegi nog. Pri vsaki prvi vaji dneva naredi eno do dve ogrevalni seriji z bistveno manjšo težo, preden začneš z delovnima serijama. Namen ogrevanja je priprava živčnega sistema in sklepov, ne utrujanje mišic.
+
+Vsaka delovna serija mora biti resna serija. Teža mora biti izbrana tako, da zadnjo ponovitev v predpisanem razponu dosežeš blizu tehnične odpovedi — torej bi lahko naredil še eno ali dve ponovitvi, ne več. Če po koncu serije zlahka narediš še pet ali šest ponovitev, teža ni bila dovolj visoka in serija ni imela učinka. Intenzivnost je tisto, kar povzroči spremembo v telesni sestavi, ne samo prisotnost pri treningu.
+
+Počitek med serijami naj bo dovolj dolg, da naslednjo serijo začneš sposoben ponoviti enako kakovostno izvedbo. Pri večjih compound vajah kot so Leg Press, Romanian Deadlift, Incline Smith Machine Press in Lat Pulldown počivaj 2 do 3 minute. Pri izolacijskih vajah kot so Cable Lateral Raise, Pec Deck Fly, Leg Extension, Leg Curl in Hammer Curl zadostuje 60 do 90 sekund. Ne krajšaj počitka ker misliš da moraš biti hitrejši — s tem samo zmanjšaš kakovost naslednje serije.
+
+Progresivna obremenitev je edini način za dolgoročen napredek. Ko z isto težo v obeh delovnih serijah dosežeš zgornjo mejo predpisanega razpona ponovitev s čisto izvedbo, naslednji trening rahlo povečaj težo. Napredek je lahko en kilogram, dve ponovitvi več ali boljša kontrola gibanja, vse šteje. Brez postopnega povečevanja obremenitve telo nima razloga za prilagoditev in napredek se ustavi.
+
+Ker igraš aktivno nogomet, bo skupna telesna obremenitev na nekaterih tednih višja, zlasti po zahtevnih tekmah ali treningih. V takih tednih ne forsíraj maksimalnih obremenitev v fitnesu. Zmanjšanje teže za en korak ali izpustitev zadnje serije na tak dan ni korak nazaj, ampak pametno upravljanje z obremenitvijo. Kronična utrujenost, upad moči na več zaporednih treningih in bolečine v sklepih so signali telesa, ki jih je treba upoštevati.
+
+Na koncu je najpomembnejša doslednost. Napredek v izgubi telesne maščobe in razvoju mišične mase pri 18 letih je hiter, če je pristop pravilen in reden. Trije kakovostni treningi na teden skupaj z aktivnim nogometom in prehrano pod nadzorom so več kot dovolj za jasne in merljive rezultate skozi mesece."
+
+PRIMER 2 (ženska stranka, doma, 5x/teden, upper/lower, dumbbeli + palica):
+"Ta trening program je pripravljen glede na tvojo starost, telesno maso, višino, trenutno stopnjo aktivnosti in cilje, ki si jih navedla. Pri 172 cm in 65 kg je cilj hkratno zmanjševanje telesne maščobe in razvoj mišične mase. Program je zasnovan za domače treninge z dumbbeli in palico ter razdeljen na pet enot — Upper A, Lower A, Arms + Shoulders, Upper B in Lower B — ki jih opraviš petkrat na teden po predpisanem razporedu. Takšna razporeditev zagotavlja dovolj stimulusa za vsako mišično skupino skozi teden, hkrati pa dovolj časa za regeneracijo med treningi.
+
+Ker boš trenirala doma in nimaš dostopa do fitnes naprav, so vse vaje prilagojene razpoložljivi opremi. To pomeni, da je kakovost izvedbe pri vsakem treningu še toliko bolj pomembna, ker nimaš zunanjih pripomočkov, ki bi kompenzirali slabo tehniko. Vsaka ponovitev mora biti namerna in kontrolirana.
+
+Pred vsakim treningom si vzemi 5 do 10 minut za ogrevanje. Brez ogrevanja je tveganje za neudobje v sklepih večje, izvedba vaj pa slabša. Ogrevanje ni izguba časa, ampak pogoj za kakovosten trening. Začni z 2 minutama hoje na mestu ali lahkih poskokov, da dvigreš srčni utrip in segreješ telo. Nato naredi 10 počasnih krogov z rokami naprej in 10 nazaj, 10 krogov z rameni naprej in 10 nazaj ter 10 dinamičnih raztegov prsi z odpiranjem rok v stran. Pred Upper A, Upper B in Arms + Shoulders treningi posebej pripravi ramena in lopatice, ker bodo pod obremenitvijo skozi vse vaje. Pred Lower A in Lower B treningi aktiviraj kolke, kolena in gležnje: naredi 10 počasnih počepov brez bremena s poudarkom na globini in kontroli, 10 krogov z boki v vsako smer ter 10 izpadnih korakov na vsako nogo brez bremena. Pred prvo glavno vajo vsakega treninga naredi eno do dve seriji z bistveno nižjo težo ali brez teže, preden začneš z delovnima serijama.
+
+Vsaka delovna serija mora biti resna serija. Teža mora biti izbrana tako, da zadnjo ponovitev v predpisanem razponu dosežeš blizu tehnične odpovedi — torej bi lahko naredila še eno ali dve ponovitvi, ne več. Če po koncu serije zlahka narediš še pet ali šest ponovitev, teža ni bila dovolj visoka in serija ni imela učinka. Intenzivnost je tisto, kar povzroči spremembo v telesu, ne samo prisotnost pri treningu.
+
+Tehnika je absolutna prioriteta pri vsaki ponovitvi. Pri Romanian deadliftu je ključen raven hrbet in gib iz kolkov, ne iz ledvenega dela hrbta. Pri goblet squatu in Bulgarian split squatu kolena sledijo smeri prstov in se ne zrušijo navznoter. Pri vseh rowing vajah vleci s komolci, ne z dlanmi, in lopatice stisni skupaj na vrhu. Pri press vajah ne zakleni komolcev na vrhu in ne vboči v križ. Gibanje mora biti kontrolirano v obeh smereh pri vsaki vaji — spust je vsaj tako pomemben kot dvig.
+
+Počitek med serijami naj bo dovolj dolg, da naslednjo serijo začneš sposobna ponoviti enako kakovostno izvedbo. Pri večjih vajah kot so Romanian deadlift, goblet squat, Bulgarian split squat, floor press in bent-over row počivaj 2 do 3 minute. Pri izolacijskih vajah za ramena, bicepse in tricepse zadostuje 60 do 90 sekund.
+
+Progresivna obremenitev je edini način za dolgoročen napredek. Ko z isto težo v obeh delovnih serijah dosežeš zgornjo mejo predpisanega razpona ponovitev s čisto izvedbo, naslednji trening rahlo povečaj težo. Napredek je lahko en kilogram ali dve ponovitvi več. Pri push-upih na kolenih napredek pomeni več ponovitev ali prehod na standardne push-upe. Brez postopnega povečevanja obremenitve telo nima razloga za prilagoditev in napredek se ustavi.
+
+Ker boš trenirala petkrat na teden in boš hkrati aktivna z 8000 koraki na dan, moraš biti pozorna na znake preutrujenosti. Stalna utrujenost, padec moči ali slabši občutek pri treningu so signal, da je čas za prilagoditev obremenitve ali dodaten počitek. Napredek se ne zgodi med treningom, ampak v času regeneracije.
+
+Na koncu je najpomembnejša doslednost. Napredek pri hkratni izgubi maščobe in razvoju mišične mase ni rezultat enega dobrega tedna, ampak mesecev rednega dela. Ker si mlada in aktivna, bo telo na dober trening stimulus reagiralo hitro. Če boš trenirala dosledno po predpisanem razporedu, postopoma povečevala obremenitve in imela prehrano pod nadzorom, se bodo rezultati začeli kazati."
+OPOMBA: Prilagodi spol glede na stranko – za moške "si navedel", "bi zmogel", "nisi šel"; za ženske "si navedla", "bi zmogla", "nisi šla". Spol VEDNO določi iz imena stranke.
 
 OPOMBE PRI VAJAH (note polje) – KRITIČNO PRAVILO:
 Vsaka opomba MAX 1–2 kratki povedi. Direktno, pogovorno, brez učbeniškega jezika.
@@ -224,29 +307,26 @@ PREPOVEDANE BESEDE IN FRAZE (anglizmi in kalki ki niso naravna slovenščina):
 - "rezanje" / "faza rezanja" / "v rezanju" → prevod "cutting", NE UPORABI – piši "cut", "cuttanje" ali "hujšanje"
 - "vzdolž nog" → NE UPORABI – piši "blizu nog"
 - "polna ekstenzija" → NE UPORABI – piši "do konca iztegni"
-- "dnevno nahodiš" → NE OBSTAJA – piši npr. "narediš 10.000 korakov na dan" ali "dnevno narediš 10k korakov"
+- "nahodiš" → glagol "nahoditi" NE OBSTAJA v kontekstu korakov. VEDNO piši "narediš" ali "delaš". PRAVILNO: "ker narediš med 10k in 15k korakov", "ker delaš 10.000 korakov na dan". NAPAČNO: "ker nahodiš 10k korakov", "dnevno nahodiš", "nahodiš med 10 in 15 tisoč korakov".
 - Vsaka beseda ki obstaja samo v angleščini in je vstavljena v slovensko poved je PREPOVEDANA.
 
-SPOL – KRITIČNO PRAVILO (DVA LOČENA GOVORCA):
-1. GAL (trener, jaz ki pišem) = VEDNO MOŠKI SPOL brez izjeme. Glagoli in deležniki v prvi osebi so VEDNO moški: "sestavil sem", "dal sem", "vključil sem", "pripravil sem ti", "odločil sem se". NIKOLI "sestavila", "dala", "vključila" – tudi če je stranka ženska.
-2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "boš opazila". Moška stranka: "si navedel", "boš občutil". Primer pravilnega stavka za žensko stranko: "Ta program sem ti sestavil glede na podatke, ki si jih navedla." – "sestavil" je moški (jaz), "navedla" je ženski (ona).
+SPOL – KRITIČNO PRAVILO:
+1. V UVODNEM BESEDILU (intro) NE piši v 1. osebi – piši v pasivni/neosebni obliki: "program je pripravljen", "program je zasnovan", "vaje so prilagojene". ČE kdaj uporabiš 1. osebo, VEDNO moški spol. NIKOLI ženski spol za Gala.
+2. STRANKA (oseba ki jo naslavljam) = spol določen iz user prompta. Ženska stranka: "si navedla", "boš občutila", "boš opazila". Moška stranka: "si navedel", "boš občutil". Primer: "Ta trening program je pripravljen glede na podatke, ki si jih navedla." – pasivna oblika + ženski spol za stranko.
 TIKANJE – ABSOLUTNO PRAVILO: Stranko VEDNO tikaj, NIKOLI vikaj. PRAVILNO: "hodiš", "treniraš", "tehtaš", "narediš", "delaš". NAPAČNO: "hodite", "trenirate", "tehtate", "naredite", "delate". VEDNO 2. OSEBA EDNINE ko govoriš stranki: "delaš prav", "narediš 10.000 korakov", "zadeneš kalorije". NIKOLI 3. oseba ("dela prav", "naredi", "zadene") in NIKOLI 2. oseba množine ("hodite", "naredite", "delate"). Brez ENIH izjem.
 TON: Strokoven, direkten, človeški – naslavljaj z imenom in "ti". Piši tekoče, brez oklepajev in vezajev. Nikoli ne uporabi alinej ali bullet točk v uvodnem tekstu – samo tekoči odstavki.
-ODSTAVKI: Uvodni tekst OBVEZNO razdeli na 4 ali več ločenih odstavkov, ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši enega velikega bloka.
+ODSTAVKI: Uvodni tekst OBVEZNO razdeli na več ločenih odstavkov, ločenih z dvema znakoma za novo vrstico (\\n\\n). Nikoli ne piši enega velikega bloka.
 
-INTRO (12–16 povedi v tekočih odstavkih): Začni z "Ta trening program sem ti sestavil glede na...". Obvezno vključi:
-- Kontekst: starost, telesna masa, aktivnost, cilj
-- Opis strukture programa (koliko dni, kakšne enote, zakaj ta razporeditev)
-- Ogrevanje: specifično za vsak tip dneva (upper/lower/itd.), 5–10 minut dinamičnega ogrevanja, 1–2 pripravljalni seriji z nižjo težo za prvo vajo
-- Intenzivnost: vsaka delovna serija mora biti izvedena do tehnične mišične odpovedi – zadnja ponovitev mora biti zadnja možna ponovitev s čisto tehniko
-- Tehnika: absolutna prioriteta, kontroliran spust, poln obseg giba, brez sunkov – specifični nasveti za ključne vaje programa
-- Počitek med serijami: ker treniraš do odpovedi, mora biti počitek dovolj dolg za popolno regeneracijo – 3 do 5 minut ali kolikor rabiš. Ne omejevaj počitka z uro, poslušaj telo
-- Progresivna obremenitev: ko v obeh delovnih serijah dosežeš zgornjo mejo razpona ponovitev s čisto izvedbo, naslednji trening rahlo povečaj težo ali dodaj ponovitev – to je edini način za dolgoročen napredek
-- Fokus med izvedbo: miselna povezava z mišico, telefon stran, brez pogovarjanja med vajami
-- Poslušanje telesa: mišična utrujenost je normalna, ostra bolečina v sklepu ni – prilagoditev ni korak nazaj
-- Poškodbe (če obstajajo): specifični napotki za vsako poškodbo ali omejitev
-- Regeneracija: spanje, prehrana, stabilen ritem
-- Zadnji odstavek vedno o doslednosti kot ključu do rezultatov
+INTRO (7–10 odstavkov, 3–6 povedi na odstavek): Začni z "Ta trening program je pripravljen glede na...". Piši v pasivni/neosebni obliki. Struktura po odstavkih:
+1) UVOD – program je pripravljen na podlagi specifičnih podatkov. Omeni telesno maso, višino, cilj, trening setup. Razloži izbrani split in frekvenco – zakaj ustreza situaciji stranke. Če igra šport ali ima drugo aktivnost, razloži kako je volumen kalibriran.
+2) IZKUŠNJE IN IZHODIŠČE – kje stranka začenja. Začetnik: učenje vzorcev gibanja, to ni slabost ampak nujno izhodišče. Izkušen: kaj program prioritizira.
+3) OGREVANJE – specifično za split. Upper dan vs lower dan – različne aktivacije. 5–10 minut dinamičnega ogrevanja. 1–2 ogrevalni seriji pred prvo vajo vsakega treninga so obvezne. POIMENUJ konkretne vaje ogrevanja prilagojene programu.
+4) INTENZIVNOST DELOVNIH SERIJ – kaj pomeni "resna serija": zadnja ponovitev blizu tehnične odpovedi, 1–2 ponovitvi v rezervi. Konkreten primer kaj je "prelahko". Intenzivnost poganja spremembo, ne prisotnost.
+5) POČITEK – specifični časi. POIMENUJ compound vaje iz programa in dodeli 2–3 minute. POIMENUJ izolacijske vaje iz programa in dodeli 60–90 sekund. Razloži zakaj krajšanje počitka škodi.
+6) PROGRESIVNA OBREMENITEV – pravilo: ko obe delovni seriji dosežeta zgornjo mejo razpona s čisto izvedbo, naslednjič povečaj. Napredek = tudi več ponovitev, boljša kontrola, čistejša tehnika. Brez overloada telo nima razloga za prilagoditev.
+7) ŠPORT/AKTIVNOST (samo če relevantno) – kako upravljati obremenitev v zahtevnih tednih. Konkreten primer: zmanjšaj težo ali izpusti serijo. To ni slabost ampak pametno upravljanje.
+8) POŠKODBE (samo če relevantno) – direktno nasloviti. Poimenuj sklep/del telesa, specifične vaje, specifične prilagoditve in opozorilne znake.
+9) ZAKLJUČEK – direktna izjava o doslednosti. Poveži s specifično frekvenco, ciljem in situacijo stranke. Brez motivacijskih klišejev. Konkretno.
 
 NAČELA:
 - 2 delovni seriji na vajo. Nikoli več razen če je eksplicitno utemeljeno.
@@ -525,15 +605,15 @@ PRIKAZ V DOKUMENTU (uporabi te razpone v JSON poljih calories_per_day, protein_p
 STRANKA: ${name}, ${age} let, ${weight} kg, ${height} cm, cilj: ${userData.goal}, spol: ${isFemale ? "ženska" : "moški"}, aktivnost: ${activityLabel}
 Rad je: ${userData.likes} | Ne mara: ${userData.dislikes} | Obroki: ${mealsCount} | Alergije: ${userData.allergies}
 JEZIK IN SLOG (OBVEZNO):
-- SPOL – DVA GOVORCA: Ko JAZ (Gal, trener) govorim o svojih dejanjih → VEDNO MOŠKI: "sestavil sem", "vključil sem", "dal sem", "odločil sem". Ko govorim O STRANKI ali JO naslavljam → ${isFemale ? "ŽENSKI spol: 'si navedla', 'boš občutila', 'si dosegla'" : "MOŠKI spol: 'si navedel', 'boš občutil', 'si dosegel'"}. Primer: "Plan sem ti sestavil na podlagi podatkov, ki si jih ${isFemale ? "navedla" : "navedel"}."
+- SPOL: Piši v PASIVNI/NEOSEBNI obliki – "plan je pripravljen", "kalorije so nastavljene", NE "sem ti sestavil", "sem vključil". Ko naslavljaš stranko → ${isFemale ? "ŽENSKI spol: 'si navedla', 'boš občutila', 'si dosegla'" : "MOŠKI spol: 'si navedel', 'boš občutil', 'si dosegel'"}. Primer: "Ta prehranski plan je pripravljen glede na podatke, ki si jih ${isFemale ? "navedla" : "navedel"}."
 - Uporabljaj SAMO naravno, pravilno, knjižno slovenščino s pravilnimi šumniki (č, š, ž). Nobenih izmišljenih besed. Beseda "nastav" ni dovoljena – uporabi "okvir", "nastavitev", "postavitev".
 - ABSOLUTNO BREZ EMOJIJEV, ikon, posebnih simbolov. Samo navadno besedilo s šumniki.
 - Nobenih oklepajev (razen pri številkah), nobenih pomišljajev v sredini povedi.
 JSON struktura:
 {
   "summary": { "calories_per_day": "${calRange}", "protein_per_day": "${protRange} g", "meals_per_day": ${mealsCount}, "plan_type": "${planType}" },
-  "adaptations": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne. Piši naravno slovenščino z vsemi šumniki. BREZ emojijev. Vsebuje (vsaka točka = en kratek odstavek): 1) Kontekst – telesna masa, višina, aktivnost, cilj. 2) Kalorični okvir ${calRange} kcal – zakaj je smiseln za cilj. 3) Pomen beljakovin (med ${protBase - 10} in ${protBase + 10} gramov na dan) – ohranitev mišic, sitost, regeneracija. 4) Kateri beljakovinski viri so vključeni glede na preference. 5) Ogljikovi hidrati – kateri viri, ne omejuj agresivno. 6) Maščobe – zmerno, tehtanje ključno. 7) Prilagodljivost in hitra hrana – piši NATANKO v tem slogu (prilagodi le spol stranke): Jedilnik ni strogo pravilo, temveč strukturiran okvir. Piščanca lahko zamenjaš s puranjimi prsmi, skyr z grškim jogurtom, krompir z rižem. Dokler ostajaš znotraj kaloričnega razpona in zaužiješ dovolj beljakovin, so takšne zamenjave popolnoma dovoljene in celo priporočene. V jedilnik lahko brez težav vključiš tudi hitro hrano – ta ni prepovedana. Ključno je, da na koncu dneva ne presežeš svojega kaloričnega vnosa in da še vedno dosežeš zadosten vnos beljakovin. Upoštevaj pa, da je hitra hrana pogosto zelo kalorična, zato lahko hitro zapolni velik del dnevnih kalorij, ne da bi te zares nasitila. Hrano tehtaj ter jo beleži v aplikaciji MyFitnessPal, pri čemer se osredotoči predvsem na skupni vnos kalorij in beljakovin. 8) Merila za kuhanje: riž 100 g surovo = 300 g kuhano, testenine 100 g = 250 g kuhano, krompir 100 g = 87 g kuhano. Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
-  "intro": "ZAKLJUČNI DEL (4-6 povedi v enem ali dveh odstavkih) v Galovem slogu – direkten, sproščen, v ${genderLabel} obliki naslavljanja. Kratke povedi. BREZ emojijev. Vsebuje: 1) Napredek – kako ga meriš: tedensko povprečje telesne teže ne dnevne meritve ker tehtnica niha 1-2 kg na dan, ogledalo, performans na treningu. 2) Doslednost – napredek ni rezultat enega dobrega tedna ampak mesecev konsistentnega dela. 3) Kratek motivacijski zaključek. Brez oklepajev in vezajev.",
+  "adaptations": "Uvodno besedilo v PASIVNI/NEOSEBNI obliki – NIKOLI 1. oseba ('sem sestavil', 'sem vključil'). Naslavljaj ${name} z 'ti' in v ${genderLabel} obliki. OBVEZNO razdeli na 7 DO 9 ODSTAVKOV z dvema znakoma za novo vrstico (\\n\\n). Vsak odstavek 3–6 povedi, vsak pokriva ENO temo. BREZ emojijev, alinej, bullet točk. Struktura: 1) UVOD – plan je pripravljen na podlagi podatkov stranke: ${userData.weight} kg, ${userData.height} cm, aktivnost, cilj. Zakaj kalorični okvir ${calRange} kcal – poveži z aktivnostjo in ciljem. 2) ŠTETJE KALORIJ – nasloviti izkušnje stranke s sledenjem. Priporoči MFP. Dnevno sledenje kalorij in beljakovin je ne-negotiable minimum. 3) BELJAKOVINE – zakaj kritične za cilj, med ${protBase - 10} in ${protBase + 10} g/dan. Poimenuj konkretne vire v planu glede na preference (${userData.likes}). Če uporablja whey: razloži kdaj in kako. 4) OGLJIKOVI HIDRATI – poimenuj vire v planu, poveži z aktivnostjo. 5) MAŠČOBE – poimenuj vire, tehtanje ključno zaradi kalorične gostote, kratek odstavek. 6) PRILAGODLJIVOST – jedilnik ni tog sistem. Konkretne zamenjave (piščanca s puranjo, riž s krompirjem itd). Hitra hrana ni prepovedana – ključno je da skupne kalorije in beljakovine ostanejo na cilju. Tehtaj in beleži v MyFitnessPal. 7) POSEBNE OPOMBE (samo če relevantno – poškodbe, suplementi, specifičnosti). Brez TDEE ali BMR kot številk. Brez oklepajev in vezajev.",
+  "intro": "ZAKLJUČNI DEL (1–2 odstavka, 3–6 povedi) v pasivni/neosebni obliki, v ${genderLabel} obliki naslavljanja. BREZ emojijev. Vsebuje: 1) Spremljanje napredka – telesna masa niha 1–2 kg/dan (voda, prebava, sol), zato spremljaj tedensko povprečje, ne posameznih meritev. Ogledalo in performans na treningu kot dodatna kazalnika. 2) Doslednost – direktna izjava povezana s specifično situacijo stranke (starost, aktivnost, cilj). Brez motivacijskih klišejev, brez filler fraz. Konkretno in zemeljsko.",
   "days": [{ "day": 1, "calories": "${calRange}", "protein": "${protRange} g", "meals": [{ "number": 1, "name": "ZAJTRK", "calories": 500, "protein": 35, "ingredients": ["100 g ovsenih kosmičev (389 kcal, 13,5 g B)"] }] }]
 }
 PRAVILA:
@@ -578,7 +658,7 @@ async function generateTrainingPlan(userData) {
   const prompt = `Ustvari personaliziran trening program. Vrni SAMO čisti JSON.
 STRANKA: ${name}, ${userData.age} let, ${userData.weight} kg, spol: ${isFemale ? "ženska" : "moški"}, aktivnost: ${userData.activity}, cilj: ${userData.goal}, lokacija: ${userData.location}, oprema: ${userData.equipment}
 JEZIK IN SLOG (OBVEZNO):
-- SPOL – DVA GOVORCA: Ko JAZ (Gal, trener) govorim o svojih dejanjih → VEDNO MOŠKI: "sestavil sem", "vključil sem", "dal sem", "pripravil sem". Ko govorim O STRANKI ali JO naslavljam → ${isFemale ? "ŽENSKI spol: 'si navedla', 'boš občutila', 'boš opazila'" : "MOŠKI spol: 'si navedel', 'boš občutil', 'boš opazil'"}. Primer: "Ta program sem ti sestavil glede na podatke, ki si jih ${isFemale ? "navedla" : "navedel"}."
+- SPOL: Piši v PASIVNI/NEOSEBNI obliki – "program je pripravljen", "program je zasnovan", NE "sem ti sestavil", "sem pripravil". Ko naslavljaš stranko → ${isFemale ? "ŽENSKI spol: 'si navedla', 'boš občutila', 'boš opazila'" : "MOŠKI spol: 'si navedel', 'boš občutil', 'boš opazil'"}. Primer: "Ta trening program je pripravljen glede na podatke, ki si jih ${isFemale ? "navedla" : "navedel"}."
 - Uporabljaj SAMO naravno, pravilno, knjižno slovenščino s pravilnimi šumniki (č, š, ž). Nobenih izmišljenih besed. Beseda "nastav" ni dovoljena.
 - ABSOLUTNO BREZ EMOJIJEV, ikon, posebnih simbolov. Samo navadno besedilo s šumniki.
 - Nobenih oklepajev v sredini povedi.
@@ -589,7 +669,7 @@ PREDLAGAN SPLIT: ${splitType} (prilagodi glede na cilj, nivo, opremo in OPOMBE s
 JSON struktura:
 {
   "summary": { "name": "${name}", "days_per_week": ${days}, "split": "${splitType}", "split_desc": "${splitDesc}", "location": "${userData.location}" },
-  "intro": "Besedilo v Galovem osebnem slogu – direkten, sproščen, kot sporočilo fitnes trenerja. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli besedilo na 6 DO 8 KRATKIH ODSTAVKOV – vsak odstavek loči z dvema znakoma za novo vrstico (\\n\\n). VSAK ODSTAVEK MAX 3 POVEDI – kratke, direktne, brez dolgih razlag. BREZ emojijev in posebnih znakov. NE piši kot uradni dokument. Brez alinej ali bullet točk. Začni z 'Ta trening program sem ti sestavil glede na...'. Vsebuje (vsaka točka = en kratek odstavek): 1) kontekst za koga je plan, 2) kakšen je split in zakaj, 3) trening do tehnične odpovedi – zadnja ponovitev mora biti zadnja možna s čisto tehniko, 4) tehnika in kontroliran spust, 5) kako dodajaš težo (progressive overload), 6) počitek med serijami, 7) kardio in koraki, 8) regeneracija in doslednost.",
+  "intro": "Uvodno besedilo v PASIVNI/NEOSEBNI obliki – NIKOLI 1. oseba. Naslavljaj v ${genderLabel} obliki. OBVEZNO razdeli na 7 DO 10 ODSTAVKOV z dvema znakoma za novo vrstico (\\n\\n). Vsak odstavek 3–6 povedi, vsak pokriva ENO temo. BREZ emojijev, alinej, bullet točk. Začni z 'Ta trening program je pripravljen glede na...'. Struktura: 1) UVOD – program pripravljen na podlagi podatkov, split in zakaj ustreza situaciji. 2) IZKUŠNJE – kje stranka začenja, kaj program prioritizira. 3) OGREVANJE – specifično za split (upper vs lower dan), 5–10 min dinamičnega ogrevanja, 1–2 ogrevalni seriji pred prvo vajo. POIMENUJ konkretne ogrevalne vaje. 4) INTENZIVNOST – kaj je resna serija, zadnja ponovitev blizu tehnične odpovedi, 1–2 v rezervi. Konkreten primer kaj je prelahko. 5) POČITEK – POIMENUJ compound vaje iz programa: 2–3 min. POIMENUJ izolacijske vaje: 60–90 sek. 6) PROGRESIVNA OBREMENITEV – ko obe seriji dosežeta zgornjo mejo s čisto izvedbo, povečaj. 7) ŠPORT/AKTIVNOST (če relevantno) – upravljanje obremenitve v zahtevnih tednih. 8) POŠKODBE (če relevantno) – poimenuj sklep, vaje, prilagoditve. 9) ZAKLJUČEK – doslednost, poveži s specifično situacijo stranke. Brez motivacijskih klišejev.",
   "schedule": [{ "day": "Ponedeljek", "workout": "PUSH" }, { "day": "Torek", "workout": "Počitek" }, { "day": "Sreda", "workout": "PULL" }, { "day": "Četrtek", "workout": "Počitek" }, { "day": "Petek", "workout": "LEGS" }, { "day": "Sobota", "workout": "Počitek" }, { "day": "Nedelja", "workout": "Počitek" }],
   "workouts": [{ "name": "PUSH", "exercises": [{ "name": "Smith machine bench press", "sets_reps": "2 x 6-10", "note": "Kontroliran spust." }] }]
 }
